@@ -1,44 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Welcome to Developer Jeff's website 🚀");
-});
+  console.log("Jeff Creations - SambaNova AI Test 🚀");
 
-async function generateImage() {
-  const prompt = document.getElementById("prompt").value;
-  const imageUpload = document.getElementById("imageUpload").files[0];
-  const resultDiv = document.getElementById("result");
+  const generateBtn = document.getElementById("generate-btn");
+  const promptInput = document.getElementById("prompt");
+  const resultBox = document.getElementById("result");
+  const loading = document.getElementById("loading");
 
-  if (!prompt) {
-    resultDiv.innerHTML = "<p>Please enter a prompt.</p>";
-    return;
-  }
-
-  resultDiv.innerHTML = "<p>⏳ Generating... please wait</p>";
-
-  const formData = new FormData();
-  formData.append("text", prompt);
-  if (imageUpload) {
-    formData.append("image", imageUpload);
-  }
-
-  try {
-    const res = await fetch("https://api.deepai.org/api/text2img", {
-      method: "POST",
-      headers: {
-        "Api-Key": "a7f22572-4f0f-4bc5-b137-782a90e50c5e"
-      },
-      body: formData
-    });
-
-    const data = await res.json();
-    if (data.output_url) {
-      resultDiv.innerHTML = `
-        <img src="${data.output_url}" alt="Generated Image" class="generated-img"/>
-        <a href="${data.output_url}" download="jeff-ai-image.png" class="download-btn">⬇ Download Image</a>
-      `;
-    } else {
-      resultDiv.innerHTML = `<p>⚠️ Error: ${JSON.stringify(data)}</p>`;
+  generateBtn.addEventListener("click", async () => {
+    const prompt = promptInput.value.trim();
+    if (!prompt) {
+      alert("Please enter a prompt!");
+      return;
     }
-  } catch (err) {
-    resultDiv.innerHTML = `<p>❌ Error: ${err.message}</p>`;
-  }
-}
+
+    loading.style.display = "block";
+    resultBox.style.display = "none";
+
+    try {
+      const response = await fetch("https://api.sambanova.ai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer a7f22572-4f0f-4bc5-b137-782a90e50c5e",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "Meta-Llama-3.1-8B-Instruct", // or your vision model if available
+          messages: [
+            { role: "system", content: "You are an assistant that responds creatively to prompts." },
+            { role: "user", content: prompt }
+          ]
+        })
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      if (data.choices && data.choices[0]?.message?.content) {
+        resultBox.textContent = data.choices[0].message.content;
+        resultBox.style.display = "block";
+      } else {
+        resultBox.textContent = "No response received.";
+        resultBox.style.display = "block";
+      }
+    } catch (err) {
+      resultBox.textContent = "Error: " + err.message;
+      resultBox.style.display = "block";
+    } finally {
+      loading.style.display = "none";
+    }
+  });
+});
