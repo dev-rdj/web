@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Jeff Creations - AI Generator Test 🚀");
+  console.log("Jeff Creations - AI Chat Assistant 🚀");
 
   const generateBtn = document.getElementById("generate-btn");
   const promptInput = document.getElementById("prompt-input");
@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Show loading and hide previous result
     loading.style.display = "block";
     resultText.textContent = ""; 
     resultText.style.display = "none";
@@ -31,11 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         body: JSON.stringify({
           model: "Meta-Llama-3.1-8B-Instruct", 
+          // 💡 NEW, Professional System Prompt: 
           messages: [
-            { role: "system", content: "You are an assistant that responds creatively to prompts. Respond with only a creative paragraph." },
+            { role: "system", content: "You are a concise, professional, and technical AI assistant. Answer questions directly, provide clear explanations, and offer code when requested. Avoid flowery or overly creative language." },
             { role: "user", content: prompt }
           ],
-          max_tokens: 150
+          max_tokens: 250 // Increased tokens for better responses
         })
       });
 
@@ -49,12 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (data.choices && data.choices[0]?.message?.content) {
         resultText.textContent = data.choices[0].message.content;
       } else {
-        resultText.textContent = "No response received. Check the console for API details.";
+        resultText.textContent = "No response received. Please check your API key and endpoint.";
       }
       resultText.style.display = "block";
 
     } catch (err) {
-      resultText.textContent = "Error: " + err.message;
+      resultText.textContent = "Connection Error: " + err.message;
       resultText.style.display = "block";
     } finally {
       loading.style.display = "none";
