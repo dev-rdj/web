@@ -1,191 +1,130 @@
-/* Global Styles */
-body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif; /* Changed primary font for a cleaner look */
-  background: linear-gradient(to bottom right, #0F172A, #1E293B); /* Dark blue/navy background */
-  color: #E2E8F0;
-  scroll-behavior: smooth;
-}
-
-header {
-  text-align: center;
-  padding: 3rem 1rem 2rem;
-  background: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(5px);
-  border-bottom: 3px solid #3B82F6; /* Professional blue primary color */
-}
-
-nav h1 {
-  font-size: 2.5rem;
-  color: #3B82F6;
-  margin: 0;
-  font-weight: 700;
-}
-
-.hero {
-  margin-top: 2rem;
-}
-
-.profile-img {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  box-shadow: 0 0 0 6px #3B82F6; /* Thick border effect */
-  margin-bottom: 1.5rem;
-  transition: transform 0.3s ease;
-}
-.profile-img:hover {
-    transform: scale(1.05);
-}
-
-.hero h2 {
-  font-size: 2rem;
-  margin: 0.5rem 0 0.2rem;
-  color: #F8FAFC;
-}
-
-.hero p {
-  font-size: 1.1rem;
-  color: #94A3B8;
-}
-
-/* Section Styles */
-section {
-  padding: 4rem 1rem;
-  max-width: 900px;
-  margin: auto;
-  text-align: center;
-}
-
-section h3 {
-  font-size: 1.8rem;
-  color: #3B82F6; 
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
-section p {
-  font-size: 1rem;
-  color: #CBD5E1;
-  line-height: 1.7;
-}
-
-/* Buttons (Socials & Generate) */
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  margin-top: 2rem;
-}
-
-.btn {
-  padding: 0.9rem 2rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  text-decoration: none;
-  color: white;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  opacity: 0.95;
-}
-
-.instagram {
-  background: linear-gradient(to right, #C13584, #E1306C, #FCAF45);
-}
-
-.github {
-  background-color: #4B5563; /* Darker gray */
-}
-
-.primary-btn {
+/* --- Floating Button Styles --- */
+#open-chat-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     background-color: #3B82F6;
-    font-weight: 600;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    z-index: 1000; /* Ensure it stays above other content */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
-.primary-btn:hover {
+
+#open-chat-btn:hover {
     background-color: #2563EB;
+    transform: scale(1.1);
 }
 
-/* Generator Box (Chat Assistant) */
-.generator-box {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.generator-box input[type="text"], 
-.generator-box input[type="file"] {
-  padding: 1rem;
-  border-radius: 6px;
-  border: 1px solid #475569;
-  background-color: #1F2937;
-  color: #F8FAFC;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.generator-box input[type="text"]:focus {
-  border-color: #3B82F6; 
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
-}
-
-#result-container {
-  margin-top: 2rem;
-  text-align: left;
-}
-
-.result-box {
-    padding: 1.5rem;
-    border-radius: 8px;
-    background: #1E293B; /* Slightly lighter box background */
-    border-left: 5px solid #3B82F6; /* Professional left border highlight */
-    color: #CBD5E1;
-    white-space: pre-wrap; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    line-height: 1.6;
-}
-
-.loading {
-  display: none;
-  margin-top: 1rem;
-  color: #3B82F6;
-  font-weight: 500;
-  animation: pulse 1.5s infinite;
-}
-
-/* Footer */
-footer {
-  padding: 1.5rem;
-  text-align: center;
-  font-size: 0.85rem;
-  color: #64748B;
-  border-top: 1px solid #334155;
-}
-
-/* Animations */
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-@media (max-width: 600px) {
-  nav h1 {
-    font-size: 1.8rem;
-  }
-  .btn {
+/* --- Modal Styles --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1001; /* Above the button */
+    left: 0;
+    top: 0;
     width: 100%;
-    justify-content: center;
-  }
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark backdrop */
+    backdrop-filter: blur(3px);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #0F172A; /* Same dark theme as body */
+    margin: 10% auto; /* Center vertically and horizontally */
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%; 
+    max-width: 700px; /* Max width for the chat window */
+    box-shadow: 0 5px 25px rgba(59, 130, 246, 0.4);
+    position: relative;
+    animation: fadeIn 0.3s;
+}
+
+/* Modal Header Styling */
+#modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #334155;
+}
+#modal-header h3 {
+    margin: 0;
+    color: #3B82F6;
+    font-size: 1.8rem;
+}
+#modal-header p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #94A3B8;
+}
+
+/* Close button */
+.close-btn {
+    color: #94A3B8;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #3B82F6;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* --- Chat box/History inside the modal --- */
+#chat-box {
+    max-width: none; /* Remove max-width from the previous style */
+    margin: 0 0 20px 0; /* Adjust margin */
+    padding: 1rem;
+    background-color: #1F2937;
+    max-height: 300px; /* Reduced height for modal context */
+}
+
+/* --- Input/Button styles for modal (Minor adjustments) --- */
+.generator-box {
+    max-width: none; /* Remove max-width from the previous style */
+    margin-top: 20px;
+}
+
+/* --- Other existing styles remain below this line --- */
+/* ... (Keep all the remaining professional styles from the previous step) ... */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 5% auto;
+        padding: 20px;
+    }
+}
+@media (max-width: 600px) {
+    /* Style the modal to take up the full screen on mobile */
+    .modal-content {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        border-radius: 0;
+        padding: 15px;
+    }
+    #open-chat-btn {
+        bottom: 20px;
+        right: 20px;
+    }
 }
