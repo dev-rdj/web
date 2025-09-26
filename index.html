@@ -42,20 +42,20 @@
       </div>
     </section>
 
-    <!-- 🖼️ Image Generator Section -->
     <section id="generator">
-      <h3>AI Image Generator</h3>
-      <p>Type a prompt and optionally upload an image to generate art.</p>
+      <h3>AI Text Generator (Creative Assistant)</h3>
+      <p>Type a prompt to get a creative response from the AI model.</p>
 
       <div class="generator-box">
-        <input type="text" id="prompt" placeholder="Enter your prompt..."/>
-        <input type="file" id="imageUpload" accept="image/*"/>
+        <input type="text" id="prompt-input" placeholder="Enter your prompt..."/> 
+        <input type="file" id="imageUpload" accept="image/*" disabled title="Image upload is currently disabled for this text-only demo."/>
         <button id="generate-btn" class="btn">Generate</button>
       </div>
 
       <div id="loading" class="loading">Generating... Please wait ⏳</div>
-      <div id="result-box">
-        <img id="result" alt="Generated result will appear here"/>
+      
+      <div id="result-container">
+        <p id="result-text" class="result-box" style="display: none;">Generated result will appear here</p>
       </div>
     </section>
   </main>
