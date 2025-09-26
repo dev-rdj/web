@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jeff Creations</title>
+  <title>Dev Jeff Space</title>
   <link rel="stylesheet" href="style.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/a2e00e9f03.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
     <nav>
-      <h1>Jeff Creations</h1>
+      <h1>Dev Jeff Space</h1>
     </nav>
     <div class="hero">
       <img src="https://files.catbox.moe/mr4ieb.jpeg" alt="Developer Jeff Logo" class="profile-img"/>
@@ -42,16 +42,21 @@
       </div>
     </section>
 
-    <!-- 🆕 AI Image Generator Section -->
+    <!-- 🖼️ Image Generator Section -->
     <section id="generator">
       <h3>AI Image Generator</h3>
-      <p>Enter a prompt and optionally upload an image to generate unique art.</p>
+      <p>Type a prompt and optionally upload an image to generate art.</p>
+
       <div class="generator-box">
         <input type="text" id="prompt" placeholder="Enter your prompt..."/>
-        <input type="file" id="imageUpload"/>
-        <button onclick="generateImage()">Generate</button>
+        <input type="file" id="imageUpload" accept="image/*"/>
+        <button id="generate-btn" class="btn">Generate</button>
       </div>
-      <div id="result"></div>
+
+      <div id="loading" class="loading">Generating... Please wait ⏳</div>
+      <div id="result-box">
+        <img id="result" alt="Generated result will appear here"/>
+      </div>
     </section>
   </main>
 
@@ -59,7 +64,6 @@
     <p>© 2018-25 Developer Jeff.</p>
   </footer>
 
-  <script src="https://kit.fontawesome.com/a2e00e9f03.js" crossorigin="anonymous"></script>
   <script src="script.js"></script>
 </body>
 </html>
