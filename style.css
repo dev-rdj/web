@@ -99,7 +99,6 @@ section p {
 }
 
 .instagram { 
-    /* Keep Instagram gradient as it is standard branding */
     background: linear-gradient(to right, #C13584, #E1306C, #FCAF45); 
 }
 .github { 
@@ -111,7 +110,7 @@ section p {
     color: #FFFFFF; 
     font-weight: bold;
 }
-.primary-btn:hover { background-color: #003060; } /* Darker Navy on Hover */
+.primary-btn:hover { background-color: #003060; } 
 
 /* --- Footer --- */
 footer {
@@ -124,9 +123,10 @@ footer {
 }
 
 
-/* --- Floating Button & Modal (Navy Accent) --- */
+/* --- FLOATING BUTTON & MODAL (FIXED POSITIONING) --- */
+
 #open-chat-btn {
-    position: fixed;
+    position: fixed; /* Must be fixed */
     bottom: 25px;
     right: 25px;
     width: 55px;
@@ -138,80 +138,109 @@ footer {
 }
 
 .modal {
+    display: none;
+    position: fixed; /* CRITICAL: This makes it overlay the entire page */
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.5); 
     backdrop-filter: blur(5px);
 }
 
 .modal-content {
     background-color: #FFFFFF; 
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    padding: 15px; /* Reduced padding on mobile */
     box-shadow: none;
+    display: flex; 
+    flex-direction: column;
 }
 
 #modal-header {
     border-bottom: 1px solid #DDDDDD;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    flex-shrink: 0; 
 }
-#modal-header h3 { color: #004080; } /* Navy Header */
-#modal-header p { color: #666666; }
+#modal-header h3 { color: #004080; font-size: 1.4rem; } 
+#modal-header p { color: #666666; font-size: 0.85rem; }
 
 .close-btn { 
     color: #444444; 
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    cursor: pointer;
 }
 
 /* Chat Box */
 #chat-box {
-    background-color: #F8F8F8; /* Light Gray Chat Box Background */
+    background-color: #F8F8F8; 
+    flex-grow: 1; 
+    max-height: 100%; 
+    overflow-y: auto;
+    padding: 10px;
+    margin: 0 0 10px 0;
 }
 
-/* Input/Send Message Area */
+/* Input/Send Message Area - FIXED MOBILE LAYOUT */
 .generator-box {
+    display: flex; /* Use flexbox for simple horizontal alignment */
+    align-items: center; 
+    gap: 8px;
+    padding-top: 10px;
     border-top: 1px solid #DDDDDD;
+    flex-shrink: 0; 
 }
 .generator-box input[type="text"] {
     background-color: #FFFFFF; 
     border: 1px solid #CCCCCC;
     color: #333333;
+    padding: 8px; /* Adjusted padding */
+    border-radius: 4px;
+    flex-grow: 1; 
+    min-width: 0;
+}
+
+.generator-box button {
+    width: 90px; 
+    flex-shrink: 0; 
+    padding: 8px 5px; 
+    font-size: 0.8rem; 
 }
 
 /* Message Bubbles - Navy/Light Scheme */
+.message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 85%;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
 .user-message {
     background-color: #004080; /* Navy User Bubble */
     color: #FFFFFF;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
 }
 
 .assistant-message {
-    background-color: #EEEEEE; /* Very Light Gray Assistant Bubble */
+    background-color: #EEEEEE; /* Light Gray Assistant Bubble */
     color: #333333;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
 }
 
 .loading {
     color: #004080;
-}
-
-/* --- Mobile Layout Fixes (Crucial for the input area) --- */
-@media (max-width: 767px) {
-    .modal-content {
-        padding: 15px; /* Slightly reduced padding on mobile */
-    }
-    
-    .generator-box {
-        display: flex;
-        align-items: center; 
-        gap: 8px; /* Slightly reduced gap */
-        padding: 10px 0; 
-    }
-    
-    .generator-box input[type="text"] {
-        flex-grow: 1; 
-        min-width: 0;
-        padding: 8px; /* Adjusted padding */
-    }
-    
-    .generator-box button {
-        width: 90px; /* Consistent button width */
-        flex-shrink: 0; 
-        padding: 8px 5px; 
-        font-size: 0.8rem; /* Smaller text on button */
-    }
+    margin: 10px 0 0 5px;
 }
 
 
@@ -221,5 +250,31 @@ footer {
         grid-template-columns: 1fr 1fr; 
         max-width: 500px;
     }
-    /* Rest of the desktop modal layout overrides from previous step */
+    
+    .modal-content {
+        width: 90%;
+        max-width: 650px;
+        height: auto;
+        max-height: 70vh; 
+        margin: 15vh auto;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15); 
+    }
+    
+    #chat-box {
+        max-height: 400px; 
+    }
+    
+    .generator-box {
+        display: grid;
+        grid-template-columns: 1fr auto;
+    }
+    .generator-box input[type="text"] {
+        padding: 1rem;
+    }
+    .generator-box button {
+        width: 140px;
+        padding: 1rem;
+    }
 }
