@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif; 
-  background: #F8F8F8; /* Very Light Gray/White Background */
+  background: #FFFFFF; /* Crisp White Background */
   color: #333333; /* Dark Text */
   scroll-behavior: smooth;
   line-height: 1.6;
@@ -16,8 +16,8 @@ main {
 header {
   text-align: center;
   padding: 3rem 1rem 2rem;
-  background: #FFFFFF; /* White Header */
-  border-bottom: 3px solid #00CED1; /* Teal Accent Divider */
+  background: #FFFFFF;
+  border-bottom: 3px solid #004080; /* Navy Blue Accent Divider */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -37,7 +37,7 @@ nav h1 {
   width: 100px; 
   height: 100px;
   border-radius: 50%;
-  box-shadow: 0 0 0 4px #00CED1; /* Teal border */
+  box-shadow: 0 0 0 4px #004080; /* Navy Blue border */
   margin-bottom: 1rem;
 }
 
@@ -49,7 +49,7 @@ nav h1 {
 
 .hero p {
   font-size: 0.9rem;
-  color: #666666; /* Medium Gray Subtext */
+  color: #666666;
   max-width: 350px;
   margin: 0.5rem auto 0;
 }
@@ -64,7 +64,7 @@ section {
 
 section h3 {
   font-size: 1.5rem; 
-  color: #00CED1; /* Teal Accent Color for Headings */
+  color: #004080; /* Navy Blue Accent for Headings */
   margin-bottom: 1.5rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -90,24 +90,28 @@ section p {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   font-weight: 500;
   text-transform: uppercase;
-  /* General button text color */
-  color: #FAFAFA; 
+  color: #FFFFFF; 
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
 }
 
 .instagram { 
+    /* Keep Instagram gradient as it is standard branding */
     background: linear-gradient(to right, #C13584, #E1306C, #FCAF45); 
 }
 .github { 
     background-color: #444444; 
     border: 1px solid #777777;
-    color: #FAFAFA;
 }
 .primary-btn { 
-    background-color: #00CED1; /* Teal Primary Button */
+    background-color: #004080; /* Navy Primary Button */
     color: #FFFFFF; 
     font-weight: bold;
 }
-.primary-btn:hover { background-color: #00A3A6; }
+.primary-btn:hover { background-color: #003060; } /* Darker Navy on Hover */
 
 /* --- Footer --- */
 footer {
@@ -120,37 +124,37 @@ footer {
 }
 
 
-/* --- Floating Button & Modal (Light Theme Adjustments) --- */
+/* --- Floating Button & Modal (Navy Accent) --- */
 #open-chat-btn {
     position: fixed;
     bottom: 25px;
     right: 25px;
     width: 55px;
     height: 55px;
-    background-color: #00CED1; /* Teal Accent */
-    color: #FFFFFF; /* White Icon */
-    z-index: 1000;
+    background-color: #004080; /* Navy Accent */
+    color: #FFFFFF;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
 
 .modal {
-    background-color: rgba(0, 0, 0, 0.5); /* Lighter backdrop */
+    background-color: rgba(0, 0, 0, 0.5); 
     backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    background-color: #FFFFFF; /* White Modal Content */
+    background-color: #FFFFFF; 
     box-shadow: none;
 }
 
 #modal-header {
     border-bottom: 1px solid #DDDDDD;
 }
-#modal-header h3 { color: #00CED1; }
+#modal-header h3 { color: #004080; } /* Navy Header */
 #modal-header p { color: #666666; }
 
 .close-btn { 
-    color: #444444; /* Dark close button */
+    color: #444444; 
 }
 
 /* Chat Box */
@@ -163,14 +167,14 @@ footer {
     border-top: 1px solid #DDDDDD;
 }
 .generator-box input[type="text"] {
-    background-color: #FFFFFF; /* White Input */
+    background-color: #FFFFFF; 
     border: 1px solid #CCCCCC;
     color: #333333;
 }
 
-/* Message Bubbles - Light Theme Scheme */
+/* Message Bubbles - Navy/Light Scheme */
 .user-message {
-    background-color: #00CED1; /* Teal User Bubble */
+    background-color: #004080; /* Navy User Bubble */
     color: #FFFFFF;
 }
 
@@ -180,17 +184,42 @@ footer {
 }
 
 .loading {
-    color: #00CED1;
+    color: #004080;
 }
+
+/* --- Mobile Layout Fixes (Crucial for the input area) --- */
+@media (max-width: 767px) {
+    .modal-content {
+        padding: 15px; /* Slightly reduced padding on mobile */
+    }
+    
+    .generator-box {
+        display: flex;
+        align-items: center; 
+        gap: 8px; /* Slightly reduced gap */
+        padding: 10px 0; 
+    }
+    
+    .generator-box input[type="text"] {
+        flex-grow: 1; 
+        min-width: 0;
+        padding: 8px; /* Adjusted padding */
+    }
+    
+    .generator-box button {
+        width: 90px; /* Consistent button width */
+        flex-shrink: 0; 
+        padding: 8px 5px; 
+        font-size: 0.8rem; /* Smaller text on button */
+    }
+}
+
 
 /* --- DESKTOP OVERRIDES --- */
 @media (min-width: 768px) {
-    /* (Desktop styles remain largely structural and are not copied here for brevity, 
-        but ensure they are included from the previous version, only replacing colors.) */
     .social-links {
         grid-template-columns: 1fr 1fr; 
+        max-width: 500px;
     }
-    .modal-content {
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15); /* Lighter desktop shadow */
-    }
+    /* Rest of the desktop modal layout overrides from previous step */
 }
