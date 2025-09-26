@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Modal Functions ---
   openChatBtn.onclick = () => {
       chatModal.style.display = "block";
-      // Focus on the input field when the chat opens
       setTimeout(() => promptInput.focus(), 300); 
   };
   
@@ -26,21 +25,19 @@ document.addEventListener("DOMContentLoaded", () => {
       chatModal.style.display = "none";
   };
   
-  // Close the modal if the user clicks anywhere outside of the modal content
   window.onclick = (event) => {
       if (event.target == chatModal) {
           chatModal.style.display = "none";
       }
   };
   
-  // --- Chat Logic Functions (Same as before) ---
+  // --- Chat Logic Functions ---
   const appendMessage = (content, sender) => {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', `${sender}-message`);
     messageDiv.textContent = content;
     chatHistory.appendChild(messageDiv);
     
-    // Auto-scroll to the bottom of the chat box
     chatHistory.parentElement.scrollTop = chatHistory.parentElement.scrollHeight;
   };
 
@@ -69,8 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         body: JSON.stringify({
           model: "Meta-Llama-3.1-8B-Instruct", 
+          // 💡 CRITICAL: New System Prompt for Brand Consistency
           messages: [
-            { role: "system", content: "You are a concise, professional, and technical AI assistant. Answer questions directly, provide clear explanations, and offer code when requested. Avoid flowery or overly creative language." },
+            { role: "system", content: "You are a concise, professional, and technical AI assistant dedicated to supporting Jeff's users. Your knowledge and capabilities are provided exclusively through Jeff's development environment. When asked about your creator, you must only respond: 'I am a highly advanced AI developed by Developer Jeff to assist his professional network. I operate under the core principles of his brand: professionalism, clarity, and robust functionality.'" },
             { role: "user", content: prompt }
           ],
           max_tokens: 250
