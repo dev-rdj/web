@@ -42,26 +42,42 @@
       </div>
     </section>
 
-    <section id="generator">
-      <h3>Ask Me Anything?</h3>
-      <p>Ask a question from the assistant.</p>
-
-      <div class="generator-box">
-        <input type="text" id="prompt-input" placeholder="What is the meaning of life?"/>
-        <button id="generate-btn" class="btn primary-btn">Ask Assistant</button>
-      </div>
-
-      <div id="loading" class="loading">Assistant is thinking... ⏳</div>
-      
-      <div id="result-container">
-        <p id="result-text" class="result-box" style="display: none;">Your assistant's response will appear here.</p>
-      </div>
-    </section>
-  </main>
+    </main>
 
   <footer>
     <p>© 2018-25 Developer Jeff. All Rights Reserved.</p>
   </footer>
+
+  <button id="open-chat-btn" title="Open Chat Assistant">
+    <i class="fas fa-comment-dots"></i>
+  </button>
+  
+  <div id="chat-modal" class="modal">
+      <div class="modal-content">
+          <span class="close-btn" id="close-chat-btn">&times;</span>
+          
+          <div id="modal-header">
+              <h3>AI Chat Assistant</h3>
+              <p>Ask a question or request a coding snippet from the assistant.</p>
+          </div>
+          
+          <div id="chat-box">
+              <div id="chat-history">
+                  <div class="message assistant-message">
+                      Hello! I'm Jeff's professional assistant. How can I help you today?
+                  </div>
+              </div>
+              
+              <div id="loading" class="loading" style="display:none;">Assistant is thinking... ⏳</div>
+          </div>
+          
+          <div class="generator-box">
+              <input type="text" id="prompt-input" placeholder="What is the meaning of life?"/> 
+              <input type="file" id="imageUpload" accept="image/*" disabled title="File upload not supported in this version."/>
+              <button id="generate-btn" class="btn primary-btn">Send Message</button>
+          </div>
+      </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
