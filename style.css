@@ -2,14 +2,13 @@
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif; 
-  background: #0F172A; /* Solid dark navy background for performance */
-  color: #E2E8F0;
+  background: #0A0A0A; /* Deep Charcoal/Black */
+  color: #FAFAFA; /* Crisp White Text */
   scroll-behavior: smooth;
   line-height: 1.6;
 }
-/* Ensure the main content doesn't stretch too wide on desktop */
 main {
-    max-width: 1000px;
+    max-width: 1200px; /* Wider desktop main content */
     margin: 0 auto;
 }
 
@@ -17,15 +16,16 @@ main {
 header {
   text-align: center;
   padding: 3rem 1rem 2rem;
-  background: #1E293B; /* Slightly lighter background for the header */
-  border-bottom: 5px solid #3B82F6; /* Thicker, cleaner divider */
+  background: #111111; /* Dark header bar */
+  border-bottom: 3px solid #00CED1; /* Teal Accent Divider */
 }
 
 nav h1 {
-  font-size: 1.5rem; /* Smaller font on mobile/default */
-  color: #3B82F6;
+  font-size: 1.5rem; 
+  color: #FAFAFA;
   margin: 0;
   font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .hero {
@@ -33,10 +33,10 @@ nav h1 {
 }
 
 .profile-img {
-  width: 100px; /* Slightly smaller for mobile aesthetic */
+  width: 100px; 
   height: 100px;
   border-radius: 50%;
-  box-shadow: 0 0 0 4px #3B82F6; 
+  box-shadow: 0 0 0 4px #00CED1; /* Teal border */
   margin-bottom: 1rem;
   transition: transform 0.3s ease;
 }
@@ -44,204 +44,178 @@ nav h1 {
 .hero h2 {
   font-size: 1.5rem;
   margin: 0.5rem 0 0.2rem;
-  color: #F8FAFC;
+  color: #FAFAFA;
 }
 
 .hero p {
   font-size: 0.9rem;
-  color: #94A3B8;
-  max-width: 300px;
+  color: #A0A0A0; /* Light Gray Subtext */
+  max-width: 350px;
   margin: 0.5rem auto 0;
 }
 
 /* --- Section Styles --- */
 section {
-  padding: 3rem 1rem; /* Reduced padding for mobile space */
-  max-width: 700px;
+  padding: 3rem 1rem;
+  max-width: 800px;
   margin: auto;
   text-align: center;
 }
 
 section h3 {
   font-size: 1.5rem; 
-  color: #3B82F6; 
+  color: #00CED1; /* Teal Accent Color */
   margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 section p {
   font-size: 1rem;
-  color: #CBD5E1;
-  text-align: left; /* Align body text left for readability */
+  color: #E0E0E0;
+  text-align: left;
 }
 
-
-/* --- Social Buttons (Crucial for Mobile) --- */
+/* --- Social Buttons (High Contrast) --- */
 .social-links {
-  display: grid; /* Use grid for professional layout */
-  grid-template-columns: 1fr; /* Stacked on mobile */
+  display: grid; 
+  grid-template-columns: 1fr;
   gap: 15px;
   margin-top: 2rem;
 }
 
 .btn {
-  padding: 1rem; /* Increased padding for better tap target */
-  border-radius: 6px;
-  justify-content: center; /* Center content */
-  width: 100%; /* Full width */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  border-radius: 4px; /* Sharper corners for professionalism */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
 
 .instagram { background: linear-gradient(to right, #C13584, #E1306C, #FCAF45); }
-.github { background-color: #4B5563; }
-.primary-btn { background-color: #3B82F6; }
-.primary-btn:hover { background-color: #2563EB; }
+.github { 
+    background-color: #333333; 
+    border: 1px solid #555555;
+}
+.primary-btn { 
+    background-color: #00CED1; 
+    color: #111111; /* Dark text on bright button */
+    font-weight: bold;
+}
+.primary-btn:hover { background-color: #00A3A6; }
 
-/* --- Floating Button & Modal (Mobile Adjustments) --- */
+
+/* --- Floating Button & Modal --- */
 #open-chat-btn {
-    bottom: 20px;
-    right: 20px;
-    width: 55px; /* Slightly smaller */
+    bottom: 25px; /* Slightly more space */
+    right: 25px;
+    width: 55px;
     height: 55px;
-    font-size: 1.3rem;
+    background-color: #00CED1; /* Teal accent */
+    z-index: 1000; 
 }
 
+/* Modal Content (Full-screen on Mobile) */
 .modal-content {
-    /* Full screen modal on mobile for best experience */
+    background-color: #111111; 
     width: 100%;
     height: 100%;
     margin: 0;
     border-radius: 0;
-    padding: 15px;
+    padding: 20px;
     box-shadow: none;
-    display: flex; /* Use flex for internal layout */
+    display: flex; 
     flex-direction: column;
 }
 
+#modal-header {
+    border-bottom: 1px solid #333333;
+}
+#modal-header h3 { color: #00CED1; font-size: 1.4rem; }
+#modal-header p { color: #A0A0A0; font-size: 0.85rem; }
+
+.close-btn { color: #E0E0E0; top: 15px; right: 20px; }
+
+/* Chat Box */
 #chat-box {
-    flex-grow: 1; /* Allows chat history to fill available space */
-    max-height: none; /* Let flex control the height */
-    overflow-y: auto;
+    background-color: #111111;
     margin: 0 0 10px 0;
 }
 
+/* Input/Send Message Area */
 .generator-box {
-    display: flex; /* Simple flex row for input and button on mobile */
+    display: flex;
     gap: 10px;
-    padding-top: 10px; /* Space above input */
-    border-top: 1px solid #334155;
+    padding-top: 10px;
+    border-top: 1px solid #333333;
 }
 .generator-box input[type="text"] {
-    flex-grow: 1; /* Input takes up most of the space */
-    width: auto;
-}
-.generator-box button {
-    width: 120px; /* Fixed width for the button */
-}
-
-/* Close button positioning adjustment for full screen modal */
-.close-btn {
-    top: 15px;
-    right: 15px;
+    background-color: #1F1F1F;
+    border: 1px solid #333333;
+    color: #FAFAFA;
+    padding: 12px;
+    border-radius: 4px;
+    flex-grow: 1;
 }
 
-/* --- DESKTOP/TABLET OVERRIDES (For screens wider than 600px) --- */
-@media (min-width: 600px) {
-    /* Main layout improvements */
-    header {
-        padding: 5rem 1rem 3rem;
-    }
-    nav h1 {
-        font-size: 2.5rem;
-    }
-    .hero h2 {
-        font-size: 2.2rem;
-    }
+/* Message Bubbles */
+.message {
+    font-size: 0.9rem;
+}
+
+.user-message {
+    background-color: #00CED1; /* Teal User Bubble */
+    color: #111111;
+    border-bottom-right-radius: 4px;
+}
+
+.assistant-message {
+    background-color: #222222; /* Darker Assistant Bubble */
+    color: #E0E0E0;
+    border-bottom-left-radius: 4px;
+}
+
+.loading {
+    color: #00CED1;
+    font-weight: 500;
+}
+
+
+/* --- DESKTOP OVERRIDES --- */
+@media (min-width: 768px) {
     .hero p {
-        font-size: 1.1rem;
         max-width: none;
     }
-    
-    /* Socials side-by-side */
     .social-links {
         grid-template-columns: 1fr 1fr; 
-        max-width: 600px;
-        margin: 2rem auto;
+        max-width: 500px;
     }
     
     /* Modal reverts to centered window */
     .modal-content {
         width: 90%;
-        max-width: 700px;
+        max-width: 650px; /* Slightly narrower professional chat window */
         height: auto;
-        max-height: 80vh; /* Don't cover the whole screen */
-        margin: 10vh auto;
+        max-height: 70vh; 
+        margin: 15vh auto;
         padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 5px 25px rgba(59, 130, 246, 0.4);
-    }
-    #chat-box {
-        max-height: 400px; /* Set max height for desktop chat scroll */
+        border-radius: 8px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
     }
     
     .generator-box {
         display: grid;
         grid-template-columns: 1fr auto;
-        max-width: none;
     }
     .generator-box input[type="text"] {
         grid-column: 1 / 2;
     }
     .generator-box button {
         grid-column: 2 / 3;
-        width: auto;
+        width: 140px;
     }
-}
-
-
-/* --- Remaining Chat and Utility Styles --- */
-
-#modal-header {
-    text-align: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #334155;
-    flex-shrink: 0; /* Prevents header from shrinking */
-}
-#modal-header h3 { margin: 0; color: #3B82F6; font-size: 1.5rem; }
-#modal-header p { margin: 5px 0 0; font-size: 0.85rem; color: #94A3B8; }
-
-
-#chat-history {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.message {
-    padding: 10px 15px;
-    border-radius: 18px;
-    max-width: 85%;
-    font-size: 0.9rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.user-message {
-    align-self: flex-end;
-    background-color: #3B82F6;
-    color: white;
-    border-bottom-right-radius: 4px;
-}
-
-.assistant-message {
-    align-self: flex-start;
-    background-color: #33415E;
-    color: #CBD5E1;
-    border-bottom-left-radius: 4px;
-}
-
-.loading {
-    margin: 10px 0 0 5px;
-    align-self: flex-start;
-    color: #3B82F6;
-    font-weight: 500;
 }
