@@ -24,7 +24,7 @@ async function generateImage() {
     const res = await fetch("https://api.deepai.org/api/text2img", {
       method: "POST",
       headers: {
-        "Api-Key": "e4e7b194-f102-4660-ad88-7e46e1f75334"
+        "Api-Key": "a7f22572-4f0f-4bc5-b137-782a90e50c5e"
       },
       body: formData
     });
