@@ -17,9 +17,18 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // 1. Initial State: Show standard loading message
+    loading.textContent = "Assistant is thinking... ⏳";
     loading.style.display = "block";
     resultText.textContent = ""; 
     resultText.style.display = "none";
+    
+    // Set a timeout to briefly display the custom message while the API is working
+    // This runs in parallel with the fetch request.
+    const customMessageTimeout = setTimeout(() => {
+        // 2. Transition State: Display custom message
+        loading.textContent = "Assistant made with love by Jeff ❤️"; 
+    }, 1500); // Display the custom message after 1.5 seconds
 
     try {
       const response = await fetch(API_ENDPOINT, {
@@ -30,14 +39,16 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         body: JSON.stringify({
           model: "Meta-Llama-3.1-8B-Instruct", 
-          // 💡 NEW, Professional System Prompt: 
           messages: [
             { role: "system", content: "You are a concise, professional, and technical AI assistant. Answer questions directly, provide clear explanations, and offer code when requested. Avoid flowery or overly creative language." },
             { role: "user", content: prompt }
           ],
-          max_tokens: 250 // Increased tokens for better responses
+          max_tokens: 250
         })
       });
+
+      // Clear the timeout to prevent the custom message from interfering if the API is very slow
+      clearTimeout(customMessageTimeout);
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -54,9 +65,12 @@ document.addEventListener("DOMContentLoaded", () => {
       resultText.style.display = "block";
 
     } catch (err) {
+      // Clear the timeout on error as well
+      clearTimeout(customMessageTimeout);
       resultText.textContent = "Connection Error: " + err.message;
       resultText.style.display = "block";
     } finally {
+      // 3. Final State: Hide loading indicator
       loading.style.display = "none";
     }
   });
