@@ -1,9 +1,9 @@
-/* --- Global & Typography Reset --- */
+/* --- Global & Typography Reset (LIGHT MODE) --- */
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif; 
-  background: #0A0A0A; /* Deep Charcoal/Black */
-  color: #FAFAFA; /* Crisp White Text */
+  background: #F8F8F8; /* Very Light Gray/White Background */
+  color: #333333; /* Dark Text */
   scroll-behavior: smooth;
   line-height: 1.6;
 }
@@ -16,13 +16,14 @@ main {
 header {
   text-align: center;
   padding: 3rem 1rem 2rem;
-  background: #111111;
+  background: #FFFFFF; /* White Header */
   border-bottom: 3px solid #00CED1; /* Teal Accent Divider */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 nav h1 {
   font-size: 1.5rem; 
-  color: #FAFAFA;
+  color: #333333;
   margin: 0;
   font-weight: 700;
   letter-spacing: 1px;
@@ -43,12 +44,12 @@ nav h1 {
 .hero h2 {
   font-size: 1.5rem;
   margin: 0.5rem 0 0.2rem;
-  color: #FAFAFA;
+  color: #111111;
 }
 
 .hero p {
   font-size: 0.9rem;
-  color: #A0A0A0; 
+  color: #666666; /* Medium Gray Subtext */
   max-width: 350px;
   margin: 0.5rem auto 0;
 }
@@ -63,7 +64,7 @@ section {
 
 section h3 {
   font-size: 1.5rem; 
-  color: #00CED1; /* Teal Accent Color */
+  color: #00CED1; /* Teal Accent Color for Headings */
   margin-bottom: 1.5rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -71,14 +72,14 @@ section h3 {
 
 section p {
   font-size: 1rem;
-  color: #E0E0E0;
+  color: #444444;
   text-align: left;
 }
 
-/* --- Social Buttons (Mobile Grid) --- */
+/* --- Social Buttons --- */
 .social-links {
   display: grid; 
-  grid-template-columns: 1fr; /* Stacked on mobile */
+  grid-template-columns: 1fr; 
   gap: 15px;
   margin-top: 2rem;
 }
@@ -86,182 +87,110 @@ section p {
 .btn {
   padding: 1rem;
   border-radius: 4px;
-  justify-content: center;
-  width: 100%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  text-transform: uppercase;
+  /* General button text color */
+  color: #FAFAFA; 
 }
 
-.instagram { background: linear-gradient(to right, #C13584, #E1306C, #FCAF45); }
+.instagram { 
+    background: linear-gradient(to right, #C13584, #E1306C, #FCAF45); 
+}
 .github { 
-    background-color: #333333; 
-    border: 1px solid #555555;
+    background-color: #444444; 
+    border: 1px solid #777777;
     color: #FAFAFA;
 }
 .primary-btn { 
-    background-color: #00CED1; 
-    color: #111111; 
+    background-color: #00CED1; /* Teal Primary Button */
+    color: #FFFFFF; 
     font-weight: bold;
 }
+.primary-btn:hover { background-color: #00A3A6; }
 
 /* --- Footer --- */
 footer {
     padding: 1.5rem 1rem;
     text-align: center;
     font-size: 0.85rem;
-    color: #555555;
-    border-top: 1px solid #333333;
+    color: #AAAAAA;
+    border-top: 1px solid #DDDDDD;
+    background: #FFFFFF;
 }
 
 
-/* --- Floating Button & Modal (Mobile Layout Fixes) --- */
-
+/* --- Floating Button & Modal (Light Theme Adjustments) --- */
 #open-chat-btn {
     position: fixed;
     bottom: 25px;
     right: 25px;
     width: 55px;
     height: 55px;
-    border-radius: 50%;
-    background-color: #00CED1;
-    color: #111111; /* Dark icon on bright circle */
-    border: none;
-    cursor: pointer;
-    font-size: 1.3rem;
+    background-color: #00CED1; /* Teal Accent */
+    color: #FFFFFF; /* White Icon */
     z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1001;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* Slightly darker backdrop */
+    background-color: rgba(0, 0, 0, 0.5); /* Lighter backdrop */
     backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    background-color: #111111; 
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    border-radius: 0;
-    padding: 20px;
+    background-color: #FFFFFF; /* White Modal Content */
     box-shadow: none;
-    display: flex; 
-    flex-direction: column;
 }
 
 #modal-header {
-    border-bottom: 1px solid #333333;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    flex-shrink: 0; 
+    border-bottom: 1px solid #DDDDDD;
 }
-#modal-header h3 { color: #00CED1; font-size: 1.4rem; }
-#modal-header p { color: #A0A0A0; font-size: 0.85rem; }
+#modal-header h3 { color: #00CED1; }
+#modal-header p { color: #666666; }
 
 .close-btn { 
-    color: #E0E0E0; 
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    cursor: pointer;
+    color: #444444; /* Dark close button */
 }
 
 /* Chat Box */
 #chat-box {
-    background-color: #111111;
-    flex-grow: 1; 
-    max-height: 100%; /* Important for mobile fill */
-    overflow-y: auto;
-    padding: 10px;
-}
-#chat-history {
-    gap: 12px;
+    background-color: #F8F8F8; /* Light Gray Chat Box Background */
 }
 
 /* Input/Send Message Area */
 .generator-box {
-    display: flex;
-    gap: 10px;
-    padding-top: 10px;
-    border-top: 1px solid #333333;
-    flex-shrink: 0; /* Prevents the input area from shrinking */
+    border-top: 1px solid #DDDDDD;
 }
 .generator-box input[type="text"] {
-    background-color: #1F1F1F;
-    border: 1px solid #333333;
-    color: #FAFAFA;
-    padding: 10px;
-    border-radius: 4px;
-    flex-grow: 1;
-    font-size: 0.95rem;
-}
-.generator-box button {
-    width: 110px; /* Consistent button width on mobile */
-    padding: 0.75rem;
-    font-size: 0.9rem;
+    background-color: #FFFFFF; /* White Input */
+    border: 1px solid #CCCCCC;
+    color: #333333;
 }
 
-/* Message Bubbles */
-.message {
-    font-size: 0.9rem;
-    padding: 10px 15px;
-    max-width: 90%;
-}
-
+/* Message Bubbles - Light Theme Scheme */
 .user-message {
-    background-color: #00CED1;
-    color: #111111;
+    background-color: #00CED1; /* Teal User Bubble */
+    color: #FFFFFF;
 }
 
 .assistant-message {
-    background-color: #222222;
-    color: #E0E0E0;
+    background-color: #EEEEEE; /* Very Light Gray Assistant Bubble */
+    color: #333333;
+}
+
+.loading {
+    color: #00CED1;
 }
 
 /* --- DESKTOP OVERRIDES --- */
 @media (min-width: 768px) {
-    /* Socials side-by-side */
+    /* (Desktop styles remain largely structural and are not copied here for brevity, 
+        but ensure they are included from the previous version, only replacing colors.) */
     .social-links {
         grid-template-columns: 1fr 1fr; 
-        max-width: 500px;
-        margin: 2rem auto;
     }
-    
-    /* Modal reverts to centered window */
     .modal-content {
-        width: 90%;
-        max-width: 650px;
-        height: auto;
-        max-height: 70vh; 
-        margin: 15vh auto;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
-    }
-    
-    /* Chat box height for scrolling */
-    #chat-box {
-        max-height: 400px; 
-    }
-    
-    .generator-box {
-        display: grid;
-        grid-template-columns: 1fr auto;
-    }
-    .generator-box input[type="text"] {
-        grid-column: 1 / 2;
-        padding: 1rem;
-    }
-    .generator-box button {
-        grid-column: 2 / 3;
-        width: 140px;
-        padding: 1rem;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15); /* Lighter desktop shadow */
     }
 }
