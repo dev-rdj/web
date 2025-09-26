@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const loading = document.getElementById("loading");
 
   const API_ENDPOINT = "https://api.sambanova.ai/v1/chat/completions"; 
-  // IMPORTANT: REPLACE WITH YOUR ACTUAL API KEY
   const API_KEY = "a7f22572-4f0f-4bc5-b137-782a90e50c5e"; 
 
   // --- Modal Control ---
@@ -39,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     messageDiv.textContent = content;
     chatHistory.appendChild(messageDiv);
     
-    // Auto-scroll to the bottom
     chatHistory.parentElement.scrollTop = chatHistory.parentElement.scrollHeight;
   };
 
@@ -55,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loading.textContent = "Assistant is thinking... ⏳";
     loading.style.display = "block";
 
-    // Set a timeout for the custom message
     const customMessageTimeout = setTimeout(() => {
         loading.textContent = "Assistant made with love by Jeff ❤️"; 
     }, 1500);
@@ -69,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         body: JSON.stringify({
           model: "Meta-Llama-3.1-8B-Instruct", 
-          // System prompt ensures professional tone and Jeff-only creator response
           messages: [
             { role: "system", content: "You are a concise, professional, and technical AI assistant dedicated to supporting Jeff's users. Your knowledge and capabilities are provided exclusively through Jeff's development environment. When asked about your creator, you must only respond: 'I am a highly advanced AI developed by Developer Jeff to assist his professional network. I operate under the core principles of his brand: professionalism, clarity, and robust functionality.'" },
             { role: "user", content: prompt }
