@@ -7,12 +7,12 @@
   <link rel="stylesheet" href="style.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script> <!-- optional if you want icon kit -->
+  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
     <nav>
-      <h1></h1>
+      <h1>Jeff Creations</h1>
     </nav>
     <div class="hero">
       <img src="https://files.catbox.moe/mr4ieb.jpeg" alt="Developer Jeff Logo" class="profile-img"/>
@@ -40,6 +40,18 @@
           <i class="fab fa-github"></i> GitHub
         </a>
       </div>
+    </section>
+
+    <!-- 🆕 AI Image Generator Section -->
+    <section id="generator">
+      <h3>AI Image Generator</h3>
+      <p>Enter a prompt and optionally upload an image to generate unique art.</p>
+      <div class="generator-box">
+        <input type="text" id="prompt" placeholder="Enter your prompt..."/>
+        <input type="file" id="imageUpload"/>
+        <button onclick="generateImage()">Generate</button>
+      </div>
+      <div id="result"></div>
     </section>
   </main>
 
