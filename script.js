@@ -1,21 +1,46 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Jeff Creations - AI Chat Assistant Initialized 🚀");
+  
+  // ------------------------------------------------
+  // --- TEMPLATE MENU CONTROL (Hamburger Icon) ---
+  // ------------------------------------------------
+  const menuToggle = document.querySelector(".menu-toggle");
+  const closeMenuBtn = document.querySelector(".close-btn");
+  const menuOverlay = document.getElementById("menu-overlay");
 
-  // --- Modal Elements ---
+  menuToggle.addEventListener("click", () => {
+    menuOverlay.classList.add("open");
+  });
+
+  closeMenuBtn.addEventListener("click", () => {
+    menuOverlay.classList.remove("open");
+  });
+
+  // Close menu when a link is clicked
+  const menuLinks = menuOverlay.querySelectorAll("a");
+  menuLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        menuOverlay.classList.remove("open");
+    });
+  });
+
+  // ------------------------------------
+  // --- AI CHAT ELEMENTS & API SETUP ---
+  // ------------------------------------
   const openChatBtn = document.getElementById("open-chat-btn");
   const closeChatBtn = document.getElementById("close-chat-btn");
   const chatModal = document.getElementById("chat-modal");
 
-  // --- Chat Elements ---
   const generateBtn = document.getElementById("generate-btn");
   const promptInput = document.getElementById("prompt-input");
   const chatHistory = document.getElementById("chat-history");
   const loading = document.getElementById("loading");
 
+  // YOUR API KEY AND ENDPOINT
   const API_ENDPOINT = "https://api.sambanova.ai/v1/chat/completions"; 
   const API_KEY = "a7f22572-4f0f-4bc5-b137-782a90e50c5e"; 
 
-  // --- Modal Control ---
+  // --- AI CHAT MODAL CONTROL ---
   openChatBtn.onclick = () => {
       chatModal.style.display = "block";
       setTimeout(() => promptInput.focus(), 300); 
@@ -31,14 +56,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   };
   
-  // --- Chat Functions ---
+  // --- AI CHAT API FUNCTIONS ---
   const appendMessage = (content, sender) => {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', `${sender}-message`);
     messageDiv.textContent = content;
     chatHistory.appendChild(messageDiv);
     
-    chatHistory.parentElement.scrollTop = chatHistory.parentElement.scrollHeight;
+    chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll to bottom
   };
 
   const handleChat = async () => {
@@ -50,18 +75,18 @@ document.addEventListener("DOMContentLoaded", () => {
     promptInput.value = ''; 
 
     // 2. Initial Loading State
-    loading.textContent = "Assistant is thinking... ⏳";
+    loading.textContent = "Aura is thinking... ⏳";
     loading.style.display = "block";
 
     const customMessageTimeout = setTimeout(() => {
-        loading.textContent = "Assistant made with love by Jeff ❤️"; 
+        loading.textContent = "Aura made with love by Jeff ❤️"; 
     }, 1500);
 
     try {
       const response = await fetch(API_ENDPOINT, {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${API_KEY}`,
+          "Authorization": `Bearer ${API_KEY}`, 
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
