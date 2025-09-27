@@ -3,57 +3,66 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Developer Jeff</title>
+  <title>Developer Jeff | Modern Dev & Design</title>
   <link rel="stylesheet" href="style.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a2e00e9f03.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
-    <nav>
-      <h1>Developer Jeff</h1>
-    </nav>
-    <div class="hero">
-      <img src="https://files.catbox.moe/mr4ieb.jpeg" alt="Developer Jeff Profile" class="profile-img"/>
-      <h2>Hi, I'm Jeff</h2>
-      <p>A passionate developer crafting functional and professional digital experiences.</p>
-    </div>
-  </header>
+  <div class="site-wrapper">
+    
+    <header class="main-header">
+      <h1 class="logo">Jeff</h1>
+      <button class="menu-toggle" aria-label="Open Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </header>
 
-  <main>
-    <section id="about">
-      <h3>About Me</h3>
-      <p>
-        I specialize in building sleek, functional web interfaces with a focus on robust UI/UX. 
-        From deployment to managing complex codebases, I am committed to improving web standards and delivering high-quality projects.
-      </p>
-    </section>
-
-    <section id="socials">
-      <h3>Connect with Me</h3>
-      <div class="social-links">
-        <a href="https://www.instagram.com/sxy.d3v1l" target="_blank" class="btn instagram">
-          <i class="fab fa-instagram"></i> Instagram
-        </a>
-        <a href="https://github.com/dev-rdj" target="_blank" class="btn github">
-          <i class="fab fa-github"></i> GitHub
-        </a>
+    <main class="content-area">
+      <div class="main-image-container">
+        <img src="https://files.catbox.moe/mr4ieb.jpeg" alt="Developer Jeff Profile" class="main-image"/>
       </div>
-    </section>
-  </main>
+      
+      <section class="intro-section">
+        <h2 class="main-title">
+          Jeff,<br>Modern Dev & Design
+        </h2>
+      </section>
+    </main>
+    
+    <div id="menu-overlay" class="menu-overlay">
+      <button class="close-btn" aria-label="Close Menu">&times;</button>
+      <nav class="main-menu">
+        <a href="#portfolio">Portfolio</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">The Unknown Land</a>
+        <a href="#contact">Chill Pill</a>
+        <a href="#value">Absolute Value</a>
+        <a href="#bio">Bio</a>
+      </nav>
+    </div>
 
-  <footer>
-    <p>© 2018-25 Developer Jeff. All Rights Reserved.</p>
-  </footer>
-
-  <button id="open-chat-btn" title="Open Chat Assistant">
-    Aura Ai
-</button>
+    <footer class="main-footer">
+      <div class="copyright">
+        &copy; 2018-25 by Aura Ai. Powered and secured by <a href="Jeff" target="_blank">Dev-RDJ</a>
+      </div>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/sxy.d3v1l" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://github.com/dev-rdj" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </footer>
+    
+  </div>
   
+  <button id="open-chat-btn" title="Open Chat Assistant">
+      Aura Ai
+  </button>
+    
   <div id="chat-modal" class="modal">
       <div class="modal-content">
-          <span class="close-btn" id="close-chat-btn">&times;</span>
+          <button class="close-btn-chat" id="close-chat-btn" aria-label="Close Chat">&times;</button>
           
           <div id="modal-header">
               <h3>I'm Aura</h3>
@@ -72,7 +81,7 @@
           
           <div class="generator-box">
               <input type="text" id="prompt-input" placeholder="Ask a technical question..." aria-label="Chat input field"/> 
-              <button id="generate-btn" class="btn primary-btn">Send</button>
+              <button id="generate-btn" class="primary-btn">Send</button>
           </div>
       </div>
   </div>
