@@ -75,11 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
     promptInput.value = ''; 
 
     // 2. Initial Loading State
-    loading.textContent = "Aura is thinking... ⏳";
+    loading.textContent = "Soul Providing Info... ⏳";
     loading.style.display = "block";
 
     const customMessageTimeout = setTimeout(() => {
-        loading.textContent = "Aura made with love by Jeff ❤️"; 
+        loading.textContent = "Soul made with love by Jeff ❤️"; 
     }, 1500);
 
     try {
