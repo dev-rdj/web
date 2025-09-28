@@ -27,10 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // ------------------------------------
   // --- AI CHAT ELEMENTS & API SETUP ---
   // ------------------------------------
-  const openChatBtn = document.getElementById("open-chat-btn");
-  const closeChatBtn = document.getElementById("close-chat-btn");
-  const chatModal = document.getElementById("chat-modal");
-
   const generateBtn = document.getElementById("generate-btn");
   const promptInput = document.getElementById("prompt-input");
   const chatHistory = document.getElementById("chat-history");
@@ -40,22 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const API_ENDPOINT = "https://api.sambanova.ai/v1/chat/completions"; 
   const API_KEY = "a7f22572-4f0f-4bc5-b137-782a90e50c5e"; 
 
-  // --- AI CHAT MODAL CONTROL ---
-  openChatBtn.onclick = () => {
-      chatModal.style.display = "block";
-      setTimeout(() => promptInput.focus(), 300); 
-  };
-  
-  closeChatBtn.onclick = () => {
-      chatModal.style.display = "none";
-  };
-  
-  window.onclick = (event) => {
-      if (event.target === chatModal) {
-          chatModal.style.display = "none";
-      }
-  };
-  
   // --- AI CHAT API FUNCTIONS ---
   const appendMessage = (content, sender) => {
     const messageDiv = document.createElement('div');
@@ -133,4 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
       handleChat();
     }
   });
+
+  // Automatically focus on the input when the page loads
+  promptInput.focus();
 });
