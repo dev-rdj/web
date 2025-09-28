@@ -7,10 +7,34 @@
   --primary-accent: #004080; /* Navy Blue */
 }
 
+/* ---------------------------------------------------------------- */
+/* --- NEW BACKGROUND & LAYERING STYLES --- */
+/* ---------------------------------------------------------------- */
+/* 1. BLURRED BACKGROUND LAYER */
+#background-image-layer {
+    position: fixed; /* Covers the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Pushes the background behind ALL content */
+    
+    /* ADDED: Image URL and properties */
+    background-image: url('https://files.catbox.moe/ah5hoi.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* ADDED: Apply the blur effect */
+    filter: blur(3px); 
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); /* Subtle dark overlay */
+}
+
 body {
   margin: 0;
   font-family: var(--secondary-font);
-  background: var(--bg-color);
+  /* The background image is now on the separate layer, keep body background white for content readability */
+  background: var(--bg-color); 
   color: var(--text-color);
   line-height: 1.6;
   text-rendering: optimizeLegibility;
@@ -22,7 +46,7 @@ a {
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
-
+/* ... (rest of your original CSS follows) ... */
 a:hover {
   opacity: 0.6;
 }
@@ -32,6 +56,12 @@ a:hover {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  /* CRITICAL: Ensure the entire wrapper is above the background layer */
+  position: relative; 
+  z-index: 0;
+  /* Use a slightly transparent white background for the whole site 
+     to make text more readable over the blurred image */
+  background-color: rgba(255, 255, 255, 0.85); 
 }
 
 /* ---------------------------------------------------------------- */
@@ -39,15 +69,15 @@ a:hover {
 /* ---------------------------------------------------------------- */
 .top-bar {
     padding: 0.5rem 1rem;
-    text-align: right; /* Align icons to the right */
+    text-align: right; 
     border-bottom: 1px solid #EEEEEE;
 }
 
 /* Social Icon Styling - Adjusted for the top bar */
 .social-icons a {
-    color: var(--primary-accent); /* Use primary color for visibility */
-    font-size: 1.2rem; /* Slightly smaller than footer size for a top bar */
-    margin-left: 1rem; /* Space between icons */
+    color: var(--primary-accent); 
+    font-size: 1.2rem; 
+    margin-left: 1rem; 
     display: inline-block;
     transition: color 0.2s ease;
     text-decoration: none; 
@@ -128,7 +158,8 @@ a:hover {
     right: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--bg-color);
+    /* Keep overlay background white */
+    background-color: var(--bg-color); 
     z-index: 1000;
     padding: 20px;
     box-sizing: border-box;
@@ -277,7 +308,7 @@ a:hover {
 
 
 /* ---------------------------------------------------------------- */
-/* --- Footer (Cleaned up now that icons are gone) --- */
+/* --- Footer --- */
 /* ---------------------------------------------------------------- */
 .main-footer {
     padding: 1.5rem 1rem;
