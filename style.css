@@ -1,10 +1,14 @@
 /* --- Global & Typography Reset --- */
 :root {
+  /* Anya-Inspired Color Palette */
   --primary-font: 'Playfair Display', serif; 
   --secondary-font: 'Outfit', sans-serif; 
-  --text-color: #000000;
+  --text-color: #333333; /* Darker text for readability */
   --bg-color: #FFFFFF;
-  --primary-accent: #004080; /* Navy Blue */
+  --anya-pink: #FFC0CB; /* Soft Pink Accent */
+  --anya-green: #4E806D; /* Muted Green (Uniform) */
+  --primary-accent: var(--anya-pink); /* Replacing Navy Blue with Pink */
+  --secondary-accent: var(--anya-green); /* New secondary color */
 }
 
 /* ---------------------------------------------------------------- */
@@ -12,28 +16,25 @@
 /* ---------------------------------------------------------------- */
 /* 1. BLURRED BACKGROUND LAYER */
 #background-image-layer {
-    position: fixed; /* Covers the entire viewport */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Pushes the background behind ALL content */
+    z-index: -1; 
     
-    /* ADDED: Image URL and properties */
     background-image: url('https://files.catbox.moe/ah5hoi.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     
-    /* ADDED: Apply the blur effect */
     filter: blur(3px); 
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); /* Subtle dark overlay */
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); 
 }
 
 body {
   margin: 0;
   font-family: var(--secondary-font);
-  /* The background image is now on the separate layer, keep body background white for content readability */
   background: var(--bg-color); 
   color: var(--text-color);
   line-height: 1.6;
@@ -46,7 +47,7 @@ a {
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
-/* ... (rest of your original CSS follows) ... */
+
 a:hover {
   opacity: 0.6;
 }
@@ -56,16 +57,13 @@ a:hover {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* CRITICAL: Ensure the entire wrapper is above the background layer */
   position: relative; 
   z-index: 0;
-  /* Use a slightly transparent white background for the whole site 
-     to make text more readable over the blurred image */
-  background-color: rgba(255, 255, 255, 0.85); 
+  background-color: rgba(255, 255, 255, 0.90); /* Increased transparency for color pop */
 }
 
 /* ---------------------------------------------------------------- */
-/* --- NEW TOP BAR AND SOCIAL ICONS STYLES --- */
+/* --- HEADER AND SOCIAL STYLES (Softened) --- */
 /* ---------------------------------------------------------------- */
 .top-bar {
     padding: 0.5rem 1rem;
@@ -73,8 +71,8 @@ a:hover {
     border-bottom: 1px solid #EEEEEE;
 }
 
-/* Social Icon Styling - Adjusted for the top bar */
 .social-icons a {
+    /* Use the new pink accent color */
     color: var(--primary-accent); 
     font-size: 1.2rem; 
     margin-left: 1rem; 
@@ -85,11 +83,10 @@ a:hover {
 }
 
 .social-icons a:hover {
-    color: #003060; 
+    color: #E68FAC; /* Darker pink on hover */
 }
 
 
-/* --- Header/Navigation --- */
 .main-header {
   display: flex;
   justify-content: space-between;
@@ -101,8 +98,9 @@ a:hover {
 .logo {
   font-family: var(--primary-font);
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 700; /* Bolder logo */
   margin: 0;
+  color: var(--secondary-accent); /* Green logo text */
 }
 
 .menu-toggle {
@@ -126,7 +124,9 @@ a:hover {
   max-width: 400px; 
   margin: 2rem auto 3rem;
   overflow: hidden;
-  background-color: #000000; 
+  background-color: var(--secondary-accent); /* Green background for image */
+  border-radius: 10px; /* Softened corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .main-image {
@@ -143,14 +143,17 @@ a:hover {
 
 .main-title {
   font-family: var(--primary-font);
-  font-size: 1.5rem; 
+  font-size: 1.8rem; /* Slightly larger title */
   line-height: 1.2;
-  font-weight: 400;
+  font-weight: 700;
   margin: 0;
   padding-bottom: 1rem;
+  color: var(--secondary-accent); /* Green title text */
+  /* Text shadow for a more playful, anime look */
+  text-shadow: 1px 1px 0px var(--primary-accent); 
 }
 
-/* --- Menu Overlay Styling (Template Nav) --- */
+/* --- Menu Overlay Styling (No major changes) --- */
 .menu-overlay {
     display: none; 
     position: fixed;
@@ -158,7 +161,6 @@ a:hover {
     right: 0;
     width: 100%;
     height: 100%;
-    /* Keep overlay background white */
     background-color: var(--bg-color); 
     z-index: 1000;
     padding: 20px;
@@ -195,11 +197,12 @@ a:hover {
     padding: 10px 0;
     display: block;
     font-weight: 400;
+    color: var(--primary-accent); /* Pink menu links */
 }
 
 
 /* ---------------------------------------------------------------- */
-/* --- EMBEDDED AI CHAT STYLES --- */
+/* --- EMBEDDED AI CHAT STYLES (Themed) --- */
 /* ---------------------------------------------------------------- */
 .embedded-chat-section {
     padding: 0 1rem;
@@ -211,21 +214,22 @@ a:hover {
     background-color: #FFFFFF; 
     width: 100%;
     height: 100%; 
-    border: 1px solid #DDDDDD;
-    border-radius: 4px;
+    border: 3px solid var(--secondary-accent); /* Thicker green border */
+    border-radius: 15px; /* More rounded container */
     padding: 15px; 
     box-sizing: border-box; 
     display: flex; 
     flex-direction: column;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); /* Pronounced shadow */
 }
 
 #modal-header {
-    border-bottom: 1px solid #DDDDDD;
+    border-bottom: 1px solid var(--primary-accent); /* Pink dividing line */
     padding-bottom: 15px;
     margin-bottom: 10px;
     flex-shrink: 0; 
 }
-#modal-header h3 { color: var(--primary-accent); font-size: 1.4rem; margin: 0; } 
+#modal-header h3 { color: var(--secondary-accent); font-size: 1.4rem; margin: 0; } 
 #modal-header p { color: #666666; font-size: 0.85rem; margin: 0; }
 
 /* Chat Box - Needs fixed height for scrolling */
@@ -249,25 +253,25 @@ a:hover {
 }
 .generator-box input[type="text"] {
     background-color: #FFFFFF; 
-    border: 1px solid #CCCCCC;
+    border: 1px solid var(--secondary-accent); /* Green border */
     color: #333333;
     padding: 8px; 
-    border-radius: 4px;
+    border-radius: 8px; /* Slightly rounded input */
     flex-grow: 1; 
     min-width: 0;
 }
 
 .primary-btn { 
-    background-color: var(--primary-accent); 
+    background-color: var(--primary-accent); /* Pink button */
     color: #FFFFFF; 
     font-weight: bold;
     padding: 8px 5px; 
     border: none;
-    border-radius: 4px;
+    border-radius: 8px; /* Rounded button */
     cursor: pointer;
     transition: background-color 0.2s;
 }
-.primary-btn:hover { background-color: #003060; } 
+.primary-btn:hover { background-color: #E68FAC; } /* Darker pink on hover */
 
 .generator-box button {
     width: 90px; 
@@ -287,17 +291,17 @@ a:hover {
 }
 
 .user-message {
-    background-color: var(--primary-accent); 
+    background-color: var(--primary-accent); /* Pink User Bubble */
     color: #FFFFFF;
     margin-left: auto; 
-    border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 8px; /* Softened corner */
 }
 
 .assistant-message {
-    background-color: #EEEEEE; 
-    color: #333333;
+    background-color: var(--secondary-accent); /* Green Assistant Bubble */
+    color: #FFFFFF;
     margin-right: auto; 
-    border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 8px; /* Softened corner */
 }
 
 .loading {
@@ -352,7 +356,7 @@ a:hover {
     
     .chat-container {
         padding: 30px;
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05); 
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15); 
     }
     
     #chat-box {
