@@ -29,7 +29,31 @@
           Introducing,<br>Soul Ai
         </h2>
       </section>
-    </main>
+
+      <section id="embedded-chat-section" class="embedded-chat-section">
+        <div id="embedded-chat-container" class="chat-container">
+            <div id="modal-header">
+                <h3>I'm Soul</h3>
+                <p>Made by Jeff ♥️</p>
+            </div>
+            
+            <div id="chat-box">
+                <div id="chat-history">
+                    <div class="message assistant-message">
+                        Hello! I'm Created by Jeff. How can I help you today?
+                    </div>
+                </div>
+                
+                <div id="loading" class="loading" style="display:none;">Aura is thinking... ⏳</div>
+            </div>
+            
+            <div class="generator-box">
+                <input type="text" id="prompt-input" placeholder="Ask a technical question..." aria-label="Chat input field"/> 
+                <button id="generate-btn" class="primary-btn">Send</button>
+            </div>
+        </div>
+      </section>
+      </main>
     
     <div id="menu-overlay" class="menu-overlay">
       <button class="close-btn" aria-label="Close Menu">&times;</button>
@@ -51,36 +75,6 @@
     
   </div>
   
-  <button id="open-chat-btn" title="Open Chat Assistant">
-      Soul Ai
-  </button>
-    
-  <div id="chat-modal" class="modal">
-      <div class="modal-content">
-          <button class="close-btn-chat" id="close-chat-btn" aria-label="Close Chat">&times;</button>
-          
-          <div id="modal-header">
-              <h3>I'm Soul</h3>
-              <p>Made by Jeff ♥️</p>
-          </div>
-          
-          <div id="chat-box">
-              <div id="chat-history">
-                  <div class="message assistant-message">
-                      Hello! I'm Created by Jeff. How can I help you today?
-                  </div>
-              </div>
-              
-              <div id="loading" class="loading" style="display:none;">Aura is thinking... ⏳</div>
-          </div>
-          
-          <div class="generator-box">
-              <input type="text" id="prompt-input" placeholder="Ask a technical question..." aria-label="Chat input field"/> 
-              <button id="generate-btn" class="primary-btn">Send</button>
-          </div>
-      </div>
-  </div>
-
   <script src="script.js"></script>
 </body>
 </html>
