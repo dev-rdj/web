@@ -5,7 +5,7 @@
   --text-color: #FFFFFF; 
   --bg-color: #FFFFFF;
   --anya-pink: #FFC0CB; 
-  --anya-green: #FFFFFF; 
+  --anya-green: #4E806D; 
   --primary-accent: var(--anya-pink); 
   --secondary-accent: var(--anya-green); 
 }
@@ -139,7 +139,7 @@ a:hover {
   font-weight: 700;
   margin: 0;
   padding-bottom: 1rem;
-  color: var(--secondary-accent); 
+  color: #FFFFFF; 
   text-shadow: 1px 1px 0px var(--primary-accent); 
 }
 
