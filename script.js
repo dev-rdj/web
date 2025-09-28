@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatHistory = document.getElementById("chat-history");
   const loading = document.getElementById("loading");
 
-  // YOUR API KEY AND ENDPOINT
+  // YOUR API KEY AND ENDPOINT (Ensure this key is valid)
   const API_ENDPOINT = "https://api.sambanova.ai/v1/chat/completions"; 
   const API_KEY = "a7f22572-4f0f-4bc5-b137-782a90e50c5e"; 
 
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(`API Error: ${response.status} - ${errorData.detail || errorData.error || 'Server responded with an error.'}`);
+        throw new Error(`API Error: ${response.status} - ${response.statusText} - ${errorData.detail || errorData.error || 'Server responded with an error.'}`);
       }
       
       const data = await response.json();
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } catch (err) {
       clearTimeout(customMessageTimeout);
-      appendMessage(`Error: ${err.message}. Please check your connection and API Key.`, 'assistant');
+      appendMessage(`Error: ${err.message}. Please check your connection, API Key, and the network console.`, 'assistant');
     } finally {
       // 4. Hide Loading State
       loading.style.display = "none";
