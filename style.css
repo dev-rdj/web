@@ -24,8 +24,8 @@
     overflow: hidden; /* Important for clean transitions */
     
     /* Apply the blur and dark overlay to the whole container */
-    filter: blur(0px); 
-    box-shadow: inset 0 0 0 500px rgba(0, 0, 0, 0.4); /* Darker overlay for better contrast */
+    filter: blur(100px); 
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4); /* Darker overlay for better contrast */
 }
 
 /* 2. INDIVIDUAL SLIDE STYLING */
