@@ -1,18 +1,18 @@
 /* --- Global & Typography Reset --- */
 :root {
-  /* Anya-Inspired Color Palette */
+  /* Black & Purple Color Palette */
   --primary-font: 'Playfair Display', serif; 
   --secondary-font: 'Outfit', sans-serif; 
-  --text-color: #333333; /* Default text color set to dark for better contrast on white elements */
-  --bg-color: #FFFFFF;
-  --anya-pink: #FFC0CB; /* Soft Pink Accent */
-  --anya-green: #4E806D; /* Muted Green (Uniform) */
-  --primary-accent: var(--anya-pink); /* Pink for buttons/user messages */
-  --secondary-accent: var(--anya-green); /* Green for titles/assistant messages */
+  --text-color: #F0F0F0; /* Light text for readability on dark backgrounds */
+  --bg-color: #181818; /* Dark base color */
+  --purple-electric: #A335EE; /* Vibrant Electric Purple Accent */
+  --purple-indigo: #2E1A47; /* Deep Indigo/Blackish Purple (Secondary) */
+  --primary-accent: var(--purple-electric); 
+  --secondary-accent: var(--purple-indigo); 
 }
 
 /* ---------------------------------------------------------------- */
-/* --- NEW BACKGROUND SLIDESHOW STYLES --- */
+/* --- BACKGROUND SLIDESHOW STYLES --- */
 /* ---------------------------------------------------------------- */
 /* 1. SLIDESHOW CONTAINER */
 #background-image-layer {
@@ -25,7 +25,8 @@
     overflow: hidden; 
     
     filter: blur(3px);
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4); 
+    /* Dark overlay kept for contrast, but a bit darker now */
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.6); 
 }
 
 /* 2. INDIVIDUAL SLIDE STYLING */
@@ -50,7 +51,7 @@ body {
   margin: 0;
   font-family: var(--secondary-font);
   background: var(--bg-color); 
-  color: #333333; /* Use dark color for text unless specifically overridden */
+  color: var(--text-color); /* Light body text */
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -73,7 +74,8 @@ a:hover {
   flex-direction: column; 
   position: relative; 
   z-index: 0;
-  background-color: rgba(255, 255, 255, 0.90); 
+  /* Now semi-transparent dark background for content visibility */
+  background-color: rgba(0, 0, 0, 0.85); 
 }
 
 /* ---------------------------------------------------------------- */
@@ -82,11 +84,11 @@ a:hover {
 .top-bar {
     padding: 0.5rem 1rem;
     text-align: right; 
-    border-bottom: 1px solid #EEEEEE;
+    border-bottom: 1px solid var(--purple-indigo); /* Dark purple line */
 }
 
 .social-icons a {
-    color: var(--primary-accent); 
+    color: var(--primary-accent); /* Electric Purple Icons */
     font-size: 1.2rem; 
     margin-left: 1rem; 
     display: inline-block;
@@ -96,7 +98,7 @@ a:hover {
 }
 
 .social-icons a:hover {
-    color: #E68FAC; 
+    color: #C87BFF; /* Lighter purple on hover */
 }
 
 
@@ -113,7 +115,7 @@ a:hover {
   font-size: 1.5rem;
   font-weight: 700; 
   margin: 0;
-  color: var(--secondary-accent); 
+  color: var(--primary-accent); /* Electric Purple Logo */
 }
 
 .menu-toggle {
@@ -122,7 +124,7 @@ a:hover {
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.5rem;
-  color: var(--text-color);
+  color: var(--text-color); /* Light text icon */
 }
 
 
@@ -137,9 +139,9 @@ a:hover {
   max-width: 400px; 
   margin: 2rem auto 3rem;
   overflow: hidden;
-  background-color: var(--secondary-accent); 
+  background-color: var(--secondary-accent); /* Deep Indigo background */
   border-radius: 10px; 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Stronger shadow on dark theme */
 }
 
 .main-image {
@@ -150,7 +152,7 @@ a:hover {
 
 .intro-section {
   padding-bottom: 2rem; 
-  border-bottom: 1px solid #DDDDDD; 
+  border-bottom: 1px solid var(--purple-indigo); 
   margin-bottom: 1.5rem;
 }
 
@@ -161,8 +163,8 @@ a:hover {
   font-weight: 700;
   margin: 0;
   padding-bottom: 1rem;
-  color: var(--secondary-accent); 
-  text-shadow: 1px 1px 0px var(--primary-accent); 
+  color: var(--primary-accent); /* Electric Purple Title */
+  text-shadow: 1px 1px 0px var(--secondary-accent); 
 }
 
 /* --- Menu Overlay Styling --- */
@@ -209,7 +211,7 @@ a:hover {
     padding: 10px 0;
     display: block;
     font-weight: 400;
-    color: var(--primary-accent); 
+    color: var(--primary-accent); /* Electric Purple Menu Links */
 }
 
 
@@ -223,16 +225,16 @@ a:hover {
 }
 
 .chat-container {
-    background-color: #FFFFFF; 
+    background-color: #242424; /* Slightly lighter black for chat box */
     width: 100%;
     height: 100%; 
-    border: 3px solid var(--secondary-accent); 
+    border: 3px solid var(--secondary-accent); /* Deep Indigo Border */
     border-radius: 15px; 
     padding: 15px; 
     box-sizing: border-box; 
     display: flex; 
     flex-direction: column;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); 
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); 
 }
 
 #modal-header {
@@ -241,12 +243,12 @@ a:hover {
     margin-bottom: 10px;
     flex-shrink: 0; 
 }
-#modal-header h3 { color: var(--secondary-accent); font-size: 1.4rem; margin: 0; } 
-#modal-header p { color: #666666; font-size: 0.85rem; margin: 0; }
+#modal-header h3 { color: var(--primary-accent); font-size: 1.4rem; margin: 0; } 
+#modal-header p { color: #AAAAAA; font-size: 0.85rem; margin: 0; }
 
 /* Chat Box - Needs fixed height for scrolling */
 #chat-box {
-    background-color: #F8F8F8; 
+    background-color: #111111; /* Even darker background for chat history */
     flex-grow: 1; 
     overflow-y: auto;
     padding: 10px;
@@ -260,24 +262,22 @@ a:hover {
     align-items: center; 
     gap: 8px;
     padding-top: 10px;
-    border-top: 1px solid #DDDDDD;
+    border-top: 1px solid var(--purple-indigo);
     flex-shrink: 0; 
 }
 .generator-box input[type="text"] {
-    background-color: #FFFFFF; 
+    background-color: #333333; /* Darker input field */
     border: 1px solid var(--secondary-accent); 
-    color: #333333;
+    color: var(--text-color); /* Light text input */
     padding: 8px; 
     border-radius: 8px; 
     flex-grow: 1; 
-    
-    /* 💥 FIX FOR BUTTON BEING PUSHED OFF-SCREEN ON MOBILE */
-    min-width: 0; 
+    min-width: 0; /* Fix for button being pushed off-screen */
 }
 
 .primary-btn { 
-    background-color: var(--primary-accent); 
-    color: #FFFFFF; 
+    background-color: var(--primary-accent); /* Electric Purple Button */
+    color: var(--text-color); 
     font-weight: bold;
     padding: 8px 5px; 
     border: none;
@@ -285,7 +285,7 @@ a:hover {
     cursor: pointer;
     transition: background-color 0.2s;
 }
-.primary-btn:hover { background-color: #E68FAC; } 
+.primary-btn:hover { background-color: #C87BFF; } /* Lighter purple on hover */
 
 .generator-box button {
     width: 90px; 
@@ -300,19 +300,19 @@ a:hover {
     border-radius: 18px;
     max-width: 85%;
     font-size: 0.9rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     margin: 5px 0;
 }
 
 .user-message {
-    background-color: var(--primary-accent); 
+    background-color: var(--primary-accent); /* Electric Purple User Bubble */
     color: #FFFFFF;
     margin-left: auto; 
     border-bottom-right-radius: 8px; 
 }
 
 .assistant-message {
-    background-color: var(--secondary-accent); 
+    background-color: var(--secondary-accent); /* Deep Indigo Assistant Bubble */
     color: #FFFFFF;
     margin-right: auto; 
     border-bottom-left-radius: 8px; 
@@ -326,19 +326,20 @@ a:hover {
 
 
 /* ---------------------------------------------------------------- */
-/* --- Footer --- */
+/* --- Footer (Sticky Bottom Fix Included) --- */
 /* ---------------------------------------------------------------- */
 .main-footer {
     padding: 1.5rem 1rem;
     text-align: center;
     font-size: 0.8rem;
-    color: #FFFFFF;
-    border-top: 1px solid #DDDDDD;
-    background-color: rgba(0, 0, 0, 0.7); 
+    color: #FFFFFF; /* White text */
+    border-top: 1px solid var(--purple-indigo); 
+    /* Solid Black background for a clean dark footer */
+    background-color: #000000; 
 }
 
 .copyright a {
-    color: #FFFFFF;
+    color: var(--primary-accent); /* Electric Purple links */
     text-decoration: underline;
 }
 
@@ -360,7 +361,7 @@ a:hover {
     .menu-overlay {
         width: 350px; 
         left: auto;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
     }
     
     .embedded-chat-section {
@@ -370,7 +371,7 @@ a:hover {
     
     .chat-container {
         padding: 30px;
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15); 
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5); 
     }
     
     #chat-box {
