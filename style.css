@@ -229,7 +229,7 @@ a:hover {
     overflow-y: auto;
     padding: 10px;
     margin: 0 0 10px 0;
-    max-height: 300px; 
+    max-height: 600px; 
 }
 
 /* Input/Send Message Area */
@@ -308,12 +308,12 @@ a:hover {
     padding: 1.5rem 1rem;
     text-align: center;
     font-size: 0.8rem;
-    color: #666666;
+    color: #FFFFFF;
     border-top: 1px solid #DDDDDD;
 }
 
 .copyright a {
-    color: #666666;
+    color: #FFFFFF;
     text-decoration: underline;
 }
 
