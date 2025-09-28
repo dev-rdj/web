@@ -82,7 +82,7 @@ a:hover {
 .top-bar {
     padding: 0.5rem 1rem;
     text-align: right; 
-    border-bottom: 1px solid var(--purple-indigo); 
+    border-bottom: 1px solid #FFFFFF; 
 }
 
 .social-icons a {
@@ -113,7 +113,7 @@ a:hover {
   font-size: 1.5rem;
   font-weight: 700; 
   margin: 0;
-  color: var(--primary-accent); 
+  color: #FFFFFF; 
 }
 
 .menu-toggle {
