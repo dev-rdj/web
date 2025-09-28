@@ -1,13 +1,14 @@
 /* --- Global & Typography Reset --- */
 :root {
+  /* Anya-Inspired Color Palette */
   --primary-font: 'Playfair Display', serif; 
   --secondary-font: 'Outfit', sans-serif; 
-  --text-color: #FFFFFF; 
+  --text-color: #333333; /* Default text color set to dark for better contrast on white elements */
   --bg-color: #FFFFFF;
-  --anya-pink: #FFC0CB; 
-  --anya-green: #4E806D; 
-  --primary-accent: var(--anya-pink); 
-  --secondary-accent: var(--anya-green); 
+  --anya-pink: #FFC0CB; /* Soft Pink Accent */
+  --anya-green: #4E806D; /* Muted Green (Uniform) */
+  --primary-accent: var(--anya-pink); /* Pink for buttons/user messages */
+  --secondary-accent: var(--anya-green); /* Green for titles/assistant messages */
 }
 
 /* ---------------------------------------------------------------- */
@@ -21,11 +22,11 @@
     width: 100%;
     height: 100%;
     z-index: -1; 
-    overflow: hidden; /* Important for clean transitions */
+    overflow: hidden; 
     
     /* Apply the blur and dark overlay to the whole container */
-    filter: blur(3px); 
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4); /* Darker overlay for better contrast */
+    filter: blur(3px); /* Set to 3px as per your current code */
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4); 
 }
 
 /* 2. INDIVIDUAL SLIDE STYLING */
@@ -50,16 +51,15 @@ body {
   margin: 0;
   font-family: var(--secondary-font);
   background: var(--bg-color); 
-  color: var(--text-color);
+  /* Using white for body text as per your provided snippet: */
+  color: #FFFFFF; 
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ... (rest of the CSS remains the same from the previous Anya theme) ... */
-
 a {
-  color: var(--text-color);
+  color: var(--text-color); /* Links use the dark text color for contrast */
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
@@ -72,11 +72,36 @@ a:hover {
   max-width: 100%;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* CRITICAL: Stacks header, content, footer vertically */
   position: relative; 
   z-index: 0;
-  background-color: rgba(255, 255, 255, 0.90);
+  /* Semi-transparent white background for content visibility over the blurred slides */
+  background-color: rgba(255, 255, 255, 0.90); 
 }
+
+/* ---------------------------------------------------------------- */
+/* --- HEADER AND SOCIAL STYLES --- */
+/* ---------------------------------------------------------------- */
+.top-bar {
+    padding: 0.5rem 1rem;
+    text-align: right; 
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.social-icons a {
+    color: var(--primary-accent); 
+    font-size: 1.2rem; 
+    margin-left: 1rem; 
+    display: inline-block;
+    transition: color 0.2s ease;
+    text-decoration: none; 
+    opacity: 1; 
+}
+
+.social-icons a:hover {
+    color: #E68FAC; 
+}
+
 
 .main-header {
   display: flex;
@@ -106,7 +131,9 @@ a:hover {
 
 /* --- Main Content Area --- */
 .content-area {
-  flex-grow: 1;
+  /* CRITICAL FIX: This makes the content grow to fill all space, 
+     pushing the footer to the bottom of the page content. */
+  flex-grow: 1; 
   text-align: center;
   padding: 0 1rem;
 }
@@ -139,7 +166,7 @@ a:hover {
   font-weight: 700;
   margin: 0;
   padding-bottom: 1rem;
-  color: #FFFFFF; 
+  color: var(--secondary-accent); /* Use green accent for visibility */
   text-shadow: 1px 1px 0px var(--primary-accent); 
 }
 
@@ -308,12 +335,14 @@ a:hover {
     padding: 1.5rem 1rem;
     text-align: center;
     font-size: 0.8rem;
-    color: #FFFFFF;
+    color: #FFFFFF; /* White text as requested */
     border-top: 1px solid #DDDDDD;
+    /* FIX FOR VISIBILITY: Dark background to make white text readable */
+    background-color: rgba(0, 0, 0, 0.7); 
 }
 
 .copyright a {
-    color: #FFFFFF;
+    color: #FFFFFF; /* White links as requested */
     text-decoration: underline;
 }
 
@@ -364,6 +393,7 @@ a:hover {
         padding: 1rem;
     }
     
+    /* Ensure footer aligns correctly in the center on desktop */
     .main-footer {
         max-width: 1000px;
         margin: 0 auto;
