@@ -1,20 +1,19 @@
 /* --- Global & Typography Reset --- */
 :root {
-  /* Anya-Inspired Color Palette */
   --primary-font: 'Playfair Display', serif; 
   --secondary-font: 'Outfit', sans-serif; 
-  --text-color: #333333; /* Darker text for readability */
+  --text-color: #333333; 
   --bg-color: #FFFFFF;
-  --anya-pink: #FFC0CB; /* Soft Pink Accent */
-  --anya-green: #4E806D; /* Muted Green (Uniform) */
-  --primary-accent: var(--anya-pink); /* Replacing Navy Blue with Pink */
-  --secondary-accent: var(--anya-green); /* New secondary color */
+  --anya-pink: #FFC0CB; 
+  --anya-green: #4E806D; 
+  --primary-accent: var(--anya-pink); 
+  --secondary-accent: var(--anya-green); 
 }
 
 /* ---------------------------------------------------------------- */
-/* --- NEW BACKGROUND & LAYERING STYLES --- */
+/* --- NEW BACKGROUND SLIDESHOW STYLES --- */
 /* ---------------------------------------------------------------- */
-/* 1. BLURRED BACKGROUND LAYER */
+/* 1. SLIDESHOW CONTAINER */
 #background-image-layer {
     position: fixed; 
     top: 0;
@@ -22,14 +21,29 @@
     width: 100%;
     height: 100%;
     z-index: -1; 
+    overflow: hidden; /* Important for clean transitions */
     
-    background-image: url('https://files.catbox.moe/ah5hoi.jpg');
+    /* Apply the blur and dark overlay to the whole container */
+    filter: blur(3px); 
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4); /* Darker overlay for better contrast */
+}
+
+/* 2. INDIVIDUAL SLIDE STYLING */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
-    filter: blur(3px); 
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); 
+    opacity: 0; /* All slides start hidden */
+    transition: opacity 1.5s ease-in-out; /* Fade transition */
+}
+
+.slide.active {
+    opacity: 1; /* The current slide is fully visible */
 }
 
 body {
@@ -41,6 +55,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+
+/* ... (rest of the CSS remains the same from the previous Anya theme) ... */
 
 a {
   color: var(--text-color);
@@ -59,7 +75,7 @@ a:hover {
   flex-direction: column;
   position: relative; 
   z-index: 0;
-  background-color: rgba(255, 255, 255, 0.90); /* Increased transparency for color pop */
+  background-color: rgba(255, 255, 255, 0.90);
 }
 
 /* ---------------------------------------------------------------- */
@@ -72,7 +88,6 @@ a:hover {
 }
 
 .social-icons a {
-    /* Use the new pink accent color */
     color: var(--primary-accent); 
     font-size: 1.2rem; 
     margin-left: 1rem; 
@@ -83,7 +98,7 @@ a:hover {
 }
 
 .social-icons a:hover {
-    color: #E68FAC; /* Darker pink on hover */
+    color: #E68FAC; 
 }
 
 
@@ -98,9 +113,9 @@ a:hover {
 .logo {
   font-family: var(--primary-font);
   font-size: 1.5rem;
-  font-weight: 700; /* Bolder logo */
+  font-weight: 700; 
   margin: 0;
-  color: var(--secondary-accent); /* Green logo text */
+  color: var(--secondary-accent); 
 }
 
 .menu-toggle {
@@ -124,9 +139,9 @@ a:hover {
   max-width: 400px; 
   margin: 2rem auto 3rem;
   overflow: hidden;
-  background-color: var(--secondary-accent); /* Green background for image */
-  border-radius: 10px; /* Softened corners */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: var(--secondary-accent); 
+  border-radius: 10px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
 }
 
 .main-image {
@@ -143,17 +158,16 @@ a:hover {
 
 .main-title {
   font-family: var(--primary-font);
-  font-size: 1.8rem; /* Slightly larger title */
+  font-size: 1.8rem; 
   line-height: 1.2;
   font-weight: 700;
   margin: 0;
   padding-bottom: 1rem;
-  color: var(--secondary-accent); /* Green title text */
-  /* Text shadow for a more playful, anime look */
+  color: var(--secondary-accent); 
   text-shadow: 1px 1px 0px var(--primary-accent); 
 }
 
-/* --- Menu Overlay Styling (No major changes) --- */
+/* --- Menu Overlay Styling --- */
 .menu-overlay {
     display: none; 
     position: fixed;
@@ -197,12 +211,12 @@ a:hover {
     padding: 10px 0;
     display: block;
     font-weight: 400;
-    color: var(--primary-accent); /* Pink menu links */
+    color: var(--primary-accent); 
 }
 
 
 /* ---------------------------------------------------------------- */
-/* --- EMBEDDED AI CHAT STYLES (Themed) --- */
+/* --- EMBEDDED AI CHAT STYLES --- */
 /* ---------------------------------------------------------------- */
 .embedded-chat-section {
     padding: 0 1rem;
@@ -214,17 +228,17 @@ a:hover {
     background-color: #FFFFFF; 
     width: 100%;
     height: 100%; 
-    border: 3px solid var(--secondary-accent); /* Thicker green border */
-    border-radius: 15px; /* More rounded container */
+    border: 3px solid var(--secondary-accent); 
+    border-radius: 15px; 
     padding: 15px; 
     box-sizing: border-box; 
     display: flex; 
     flex-direction: column;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); /* Pronounced shadow */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); 
 }
 
 #modal-header {
-    border-bottom: 1px solid var(--primary-accent); /* Pink dividing line */
+    border-bottom: 1px solid var(--primary-accent); 
     padding-bottom: 15px;
     margin-bottom: 10px;
     flex-shrink: 0; 
@@ -253,25 +267,25 @@ a:hover {
 }
 .generator-box input[type="text"] {
     background-color: #FFFFFF; 
-    border: 1px solid var(--secondary-accent); /* Green border */
+    border: 1px solid var(--secondary-accent); 
     color: #333333;
     padding: 8px; 
-    border-radius: 8px; /* Slightly rounded input */
+    border-radius: 8px; 
     flex-grow: 1; 
     min-width: 0;
 }
 
 .primary-btn { 
-    background-color: var(--primary-accent); /* Pink button */
+    background-color: var(--primary-accent); 
     color: #FFFFFF; 
     font-weight: bold;
     padding: 8px 5px; 
     border: none;
-    border-radius: 8px; /* Rounded button */
+    border-radius: 8px; 
     cursor: pointer;
     transition: background-color 0.2s;
 }
-.primary-btn:hover { background-color: #E68FAC; } /* Darker pink on hover */
+.primary-btn:hover { background-color: #E68FAC; } 
 
 .generator-box button {
     width: 90px; 
@@ -291,17 +305,17 @@ a:hover {
 }
 
 .user-message {
-    background-color: var(--primary-accent); /* Pink User Bubble */
+    background-color: var(--primary-accent); 
     color: #FFFFFF;
     margin-left: auto; 
-    border-bottom-right-radius: 8px; /* Softened corner */
+    border-bottom-right-radius: 8px; 
 }
 
 .assistant-message {
-    background-color: var(--secondary-accent); /* Green Assistant Bubble */
+    background-color: var(--secondary-accent); 
     color: #FFFFFF;
     margin-right: auto; 
-    border-bottom-left-radius: 8px; /* Softened corner */
+    border-bottom-left-radius: 8px; 
 }
 
 .loading {
@@ -330,7 +344,6 @@ a:hover {
 
 /* --- DESKTOP OVERRIDES --- */
 @media (min-width: 768px) {
-    /* Top Bar Desktop Styling */
     .top-bar {
         padding: 0.5rem 2rem;
         max-width: 1000px;
