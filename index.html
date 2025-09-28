@@ -1,122 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Website</title>
-    
-    <style>
-        /* ---------------------------------------------------------
-        CSS STYLES
-        ---------------------------------------------------------
-        This structure places the blurred image in a separate layer 
-        to ensure your website's text and content remain sharp.
-        */
-        
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-            color: #333;
-            /* Hide default scrollbar if the page is short */
-            overflow-x: hidden; 
-        }
-
-        /* 1. BLURRED BACKGROUND LAYER */
-        #background-image-layer {
-            /* Position: fixed ensures it covers the whole browser window */
-            position: fixed; 
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Pushes the background behind the content */
-            
-            /* Background Image Properties */
-            background-image: url('https://files.catbox.moe/ah5hoi.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            
-            /* Apply the slight blur effect */
-            filter: blur(3px); 
-            
-            /* Add an optional subtle overlay for better text contrast */
-            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); 
-        }
-
-        /* 2. MAIN CONTENT LAYER */
-        #main-content {
-            position: relative;
-            z-index: 1; /* Ensures content is on top of the blurred background */
-            min-height: 100vh; /* Ensures the content takes up the full screen height */
-            padding: 50px;
-            /* Example: Semi-transparent container for readability */
-            background-color: rgba(255, 255, 255, 0.85); 
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            border-radius: 10px;
-        }
-
-        h1 {
-            color: #4a2f80; /* Theme color */
-        }
-    </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Developer Jeff</title>
+  
+  <link rel="stylesheet" href="style.css"/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2e00e9f03.js" crossorigin="anonymous"></script>
 </head>
 <body>
     
     <div id="background-image-layer"></div>
 
-    <div id="main-content">
-        <h1>Welcome to My Awesome Website!</h1>
-        <p>This text is sharp and clear, while the background image is blurry.</p>
-        <p>The intro sound will play immediately when you click or tap anywhere on this page.</p>
-        <p>Content goes here...</p>
-        <p style="margin-top: 100px;">...</p>
-        <p style="margin-top: 100px;">...</p>
-        <p style="margin-top: 100px;">...</p>
-        <p style="margin-top: 100px;">...</p>
-    </div>
-
     <audio id="introSFX" preload="auto">
         <source src="/audio/Anya Okay dokey.mp3" type="audio/mpeg">
     </audio>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const audio = document.getElementById('introSFX');
-            
-            // Set volume to half (50%) to make it less intrusive
-            audio.volume = 0.5; 
+    <div class="site-wrapper">
+        
+        <div class="top-bar">
+            <div class="social-icons">
+              <a href="https://github.com/dev-rdj" target="_blank" aria-label="Jeff's GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.instagram.com/sxy.d3v1l" target="_blank" aria-label="Jeff's Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="YOUR_TWITTER_URL" target="_blank" aria-label="Jeff's Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="YOUR_LINKEDIN_URL" target="_blank" aria-label="Jeff's LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <header class="main-header">
+          <h1 class="logo">Jeff Space</h1>
+          <button class="menu-toggle" aria-label="Open Menu">
+            <i class="fas fa-bars"></i>
+          </button>
+        </header>
 
-            // Define the function that plays the sound
-            function playIntroSound() {
-                // Check if the audio is paused (to prevent it from playing on every click)
-                if (audio.paused) {
-                    audio.play()
-                        .then(() => {
-                            // If it starts, set a timer to stop it after 3 seconds
-                            setTimeout(() => {
-                                audio.pause();
-                                audio.currentTime = 0; // Rewind for future use
-                            }, 3000); // 3000 milliseconds = 3 seconds
-                            
-                            // Remove the event listener so it only plays once per page load
-                            document.removeEventListener('click', playIntroSound);
-                            document.removeEventListener('touchstart', playIntroSound);
-                        })
-                        .catch(error => {
-                            // This error usually indicates the browser blocked the auto-play
-                            console.log("Audio play blocked by browser. User interaction is required.");
-                        });
-                }
-            }
+        <main class="content-area">
+          <div class="main-image-container">
+            <img src="https://files.catbox.moe/dinwhj.png" alt="Developer Jeff Profile" class="main-image"/>
+          </div>
+          
+          <section class="intro-section">
+            <h2 class="main-title">
+              Introducing,<br>Soul Ai
+            </h2>
+          </section>
 
-            // Attach the play function to the user's first click or touch
-            document.addEventListener('click', playIntroSound);
-            document.addEventListener('touchstart', playIntroSound);
-        });
-    </script>
+          <section id="embedded-chat-section" class="embedded-chat-section">
+            <div id="embedded-chat-container" class="chat-container">
+                <div id="modal-header">
+                    <h3>I'm Soul</h3>
+                    <p>Made by Jeff ♥️</p>
+                </div>
+                
+                <div id="chat-box">
+                    <div id="chat-history">
+                        <div class="message assistant-message">
+                            Hello! I'm Created by Jeff. How can I help you today?
+                        </div>
+                    </div>
+                    
+                    <div id="loading" class="loading" style="display:none;">Aura is thinking... ⏳</div>
+                </div>
+                
+                <div class="generator-box">
+                    <input type="text" id="prompt-input" placeholder="Ask a technical question..." aria-label="Chat input field"/> 
+                    <button id="generate-btn" class="primary-btn">Send</button>
+                </div>
+            </div>
+          </section>
+        </main>
+        
+        <div id="menu-overlay" class="menu-overlay">
+          <button class="close-btn" aria-label="Close Menu">&times;</button>
+          <nav class="main-menu">
+            <a href="#portfolio">Portfolio</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">The Unknown Land</a>
+            <a href="#contact">Chill Pill</a>
+            <a href="#value">Absolute Value</a>
+            <a href="#bio">Bio</a>
+          </nav>
+        </div>
+
+        <footer class="main-footer">
+            <div class="copyright">
+                &copy; 2018-25 by Soul Ai. Powered and secured by <a href="https://dev-rdj.vercel.app/" target="_blank">Dev-Jeff</a>
+            </div>
+        </footer>
+        
+    </div> <script src="script.js"></script>
 </body>
 </html>
