@@ -34,6 +34,31 @@ a:hover {
   flex-direction: column;
 }
 
+/* ---------------------------------------------------------------- */
+/* --- NEW TOP BAR AND SOCIAL ICONS STYLES --- */
+/* ---------------------------------------------------------------- */
+.top-bar {
+    padding: 0.5rem 1rem;
+    text-align: right; /* Align icons to the right */
+    border-bottom: 1px solid #EEEEEE;
+}
+
+/* Social Icon Styling - Adjusted for the top bar */
+.social-icons a {
+    color: var(--primary-accent); /* Use primary color for visibility */
+    font-size: 1.2rem; /* Slightly smaller than footer size for a top bar */
+    margin-left: 1rem; /* Space between icons */
+    display: inline-block;
+    transition: color 0.2s ease;
+    text-decoration: none; 
+    opacity: 1; 
+}
+
+.social-icons a:hover {
+    color: #003060; 
+}
+
+
 /* --- Header/Navigation --- */
 .main-header {
   display: flex;
@@ -252,32 +277,14 @@ a:hover {
 
 
 /* ---------------------------------------------------------------- */
-/* --- Footer & Social Icons --- */
+/* --- Footer (Cleaned up now that icons are gone) --- */
 /* ---------------------------------------------------------------- */
 .main-footer {
     padding: 1.5rem 1rem;
     text-align: center;
     font-size: 0.8rem;
     color: #666666;
-}
-
-/* Social Icon Styling */
-.social-icons {
-    margin-bottom: 1.5rem; 
-    padding-top: 1rem;
-}
-
-.social-icons a {
-    color: var(--primary-accent); 
-    font-size: 1.5rem; 
-    margin: 0 0.75rem; 
-    display: inline-block;
-    transition: color 0.2s ease;
-}
-
-.social-icons a:hover {
-    color: #003060; 
-    opacity: 1; 
+    border-top: 1px solid #DDDDDD;
 }
 
 .copyright a {
@@ -288,6 +295,13 @@ a:hover {
 
 /* --- DESKTOP OVERRIDES --- */
 @media (min-width: 768px) {
+    /* Top Bar Desktop Styling */
+    .top-bar {
+        padding: 0.5rem 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
     .main-header {
         padding: 3rem 2rem;
         max-width: 1000px;
