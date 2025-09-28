@@ -2,7 +2,43 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("Jeff Creations - AI Chat Assistant Initialized 🚀");
   
   // ------------------------------------------------
-  // --- TEMPLATE MENU CONTROL (Hamburger Icon) ---
+  // --- NEW: AUDIO INTRO LOGIC (3-Second Auto-Play Attempt) ---
+  // ------------------------------------------------
+  const audio = document.getElementById('introSFX');
+  
+  if (audio) {
+    // Set volume to half (50%) to make it less intrusive
+    audio.volume = 0.5; 
+
+    // ⚠️ WARNING: This .play() function will be blocked by most modern browsers
+    // (Chrome, Safari, Firefox) unless the user has already clicked the page.
+    audio.play()
+        .then(() => {
+            console.log("Audio intro successfully started (Auto-Play).");
+            // Stop the audio after 3 seconds
+            setTimeout(() => {
+                audio.pause();
+                audio.currentTime = 0; // Rewind for next reload attempt
+            }, 3000); 
+        })
+        .catch(error => {
+            console.warn("Audio auto-play failed. Browser policy requires user interaction.", error);
+            
+            // Fallback: Add a click listener so the user can hear it on their first interaction.
+            document.addEventListener('click', function fallbackPlay() {
+                if (audio.paused) {
+                    audio.play();
+                    setTimeout(() => { audio.pause(); audio.currentTime = 0; }, 3000);
+                    // Remove listener after first successful play attempt
+                    document.removeEventListener('click', fallbackPlay);
+                }
+            }, { once: true });
+        });
+  }
+
+
+  // ------------------------------------------------
+  // --- ORIGINAL: TEMPLATE MENU CONTROL (Hamburger Icon) ---
   // ------------------------------------------------
   const menuToggle = document.querySelector(".menu-toggle");
   const closeMenuBtn = document.querySelector(".close-btn");
@@ -25,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ------------------------------------
-  // --- AI CHAT ELEMENTS & API SETUP ---
+  // --- ORIGINAL: AI CHAT ELEMENTS & API SETUP ---
   // ------------------------------------
   const generateBtn = document.getElementById("generate-btn");
   const promptInput = document.getElementById("prompt-input");
