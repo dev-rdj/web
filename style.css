@@ -24,7 +24,7 @@
     overflow: hidden; /* Important for clean transitions */
     
     /* Apply the blur and dark overlay to the whole container */
-    filter: blur(3px); 
+    filter: blur(1px); 
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4); /* Darker overlay for better contrast */
 }
 
