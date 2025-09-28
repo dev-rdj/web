@@ -104,8 +104,7 @@ a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* REDUCED PADDING: Use less vertical padding to save space */
-  padding: 1rem 1rem 0.5rem; 
+  padding: 1rem 1rem 0.5rem; /* Minimized vertical padding */
   position: relative; 
 }
 
@@ -129,45 +128,16 @@ a:hover {
 
 /* --- Main Content Area --- */
 .content-area {
-  /* CRITICAL CHANGE: Increased flex-grow and minimized vertical padding */
-  flex-grow: 2; /* Give this area maximum priority to grow */
+  flex-grow: 2; /* Maximum vertical growth priority */
   text-align: center;
   padding: 0 1rem;
 }
 
-.main-image-container {
-  max-width: 400px; 
-  margin: 2rem auto 3rem;
-  overflow: hidden;
-  background-color: var(--secondary-accent); 
-  border-radius: 10px; 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
-}
+/* 🗑️ REMOVED UNUSED IMAGE/INTRO STYLES TO PREVENT INTERFERENCE 🗑️
+.main-image-container, .main-image, .intro-section, .main-title are no longer needed
+*/
 
-.main-image {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.intro-section {
-  padding-bottom: 0; /* Removed padding */
-  border-bottom: none; /* Removed border */
-  margin-bottom: 0; /* Removed margin */
-}
-
-.main-title {
-  font-family: var(--primary-font);
-  font-size: 1.8rem; 
-  line-height: 1.2;
-  font-weight: 700;
-  margin: 0;
-  padding-bottom: 0.5rem; /* Reduced padding */
-  color: var(--primary-accent); 
-  text-shadow: 1px 1px 0px var(--secondary-accent); 
-}
-
-/* --- Menu Overlay Styling (No changes needed here) --- */
+/* --- Menu Overlay Styling --- */
 .menu-overlay {
     display: none; 
     position: fixed;
@@ -224,11 +194,11 @@ a:hover {
     display: flex;
     flex-direction: column;
     justify-content: center; 
-    /* CRITICAL: Removed margin-bottom to allow it to touch the footer */
     margin-bottom: 0; 
 }
 
 .chat-container {
+    /* GLASSMORPHISM EFFECT */
     background-color: rgba(46, 26, 71, 0.6); 
     backdrop-filter: blur(10px); 
     border: 1px solid rgba(163, 53, 238, 0.4); 
@@ -241,9 +211,8 @@ a:hover {
     display: flex; 
     flex-direction: column;
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.6); 
-    /* IMPORTANT: Reduced max height to allow for footer and header space */
     max-height: 85vh; 
-    margin: 0.5rem auto; /* Minimized vertical margin */
+    margin: 0.5rem auto; 
 }
 
 #modal-header {
@@ -364,7 +333,6 @@ a:hover {
 @media (min-width: 768px) {
     
     .main-header {
-        /* Restored original larger padding for desktop */
         padding: 3rem 2rem; 
         max-width: 1000px;
         margin: 0 auto;
