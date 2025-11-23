@@ -9,9 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a2e00e9f03.js" crossorigin="anonymous"></script>
-
-  <!-- Puter.js for txt2img -->
-  <script src="https://js.puter.com/v2/"></script>
 </head>
 <body>
     
@@ -42,6 +39,12 @@
                     <p>Made by Jeff ♥️</p>
                 </div>
                 
+                <!-- New: Chat / Image tabs (keeps everything else untouched) -->
+                <div class="chat-tabs" role="tablist" aria-label="Chat and Image tabs">
+                  <button id="tab-chat" class="tab active" aria-selected="true" onclick="switchTab('chat')">Chat</button>
+                  <button id="tab-image" class="tab" aria-selected="false" onclick="switchTab('image')">Image</button>
+                </div>
+
                 <div id="chat-box">
                     <div id="chat-history">
                         <div class="message assistant-message">
@@ -53,7 +56,8 @@
                 </div>
                 
                 <div class="generator-box">
-                    <input type="text" id="prompt-input" placeholder="Ask a technical question... (use /img your prompt to generate images)" aria-label="Chat input field"/> 
+                    <!-- single input used for both chat and image; behavior depends on active tab -->
+                    <input type="text" id="prompt-input" placeholder="Ask a technical question..." aria-label="Chat input field"/> 
                     <button id="generate-btn" class="primary-btn">Ask</button>
                 </div>
             </div>
