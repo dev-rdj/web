@@ -284,4 +284,120 @@ a:hover {
 .message {
     padding: 10px 15px;
     border-radius: 18px;
-    m
+    max-width: 85%;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    margin: 5px 0;
+}
+
+.user-message {
+    background-color: var(--primary-accent); 
+    color: #FFFFFF;
+    margin-left: auto; 
+    border-bottom-right-radius: 8px; 
+}
+
+.assistant-message {
+    background-color: var(--secondary-accent); 
+    color: #FFFFFF;
+    margin-right: auto; 
+    border-bottom-left-radius: 8px; 
+}
+
+.loading {
+    color: var(--primary-accent);
+    margin: 10px 0 0 5px;
+    font-size: 0.9rem;
+}
+
+
+/* ---------------------------------------------------------------- */
+/* --- Footer --- */
+/* ---------------------------------------------------------------- */
+.main-footer {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #FFFFFF; 
+    border-top: 1px solid var(--purple-indigo); 
+    background-color: #000000; 
+}
+
+.copyright a {
+    color: var(--primary-accent); 
+    text-decoration: underline;
+}
+
+
+/* --- DESKTOP OVERRIDES --- */
+@media (min-width: 768px) {
+    
+    .main-header {
+        padding: 3rem 2rem; 
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .embedded-chat-section {
+        max-width: 650px;
+        margin: 0 auto;
+    }
+    
+    .chat-container {
+        padding: 30px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5); 
+    }
+    
+    #chat-box {
+        max-height: 450px; 
+    }
+    
+    .generator-box {
+        display: grid;
+        grid-template-columns: 1fr auto;
+    }
+    .generator-box input[type="text"] {
+        padding: 1rem;
+    }
+    .generator-box button {
+        width: 140px;
+        padding: 1rem;
+    }
+    
+    .main-footer {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+}
+
+/* === Puter generated image style (keeps images neat in chat) === */
+.generated-img {
+    width: 100%;
+    max-width: 360px;
+    border-radius: 12px;
+    margin-top: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+/* === Chat / Image tabs styling === */
+.chat-tabs {
+  display: inline-flex;
+  gap: 8px;
+  margin: 8px 0 12px 0;
+  justify-content: center;
+}
+.chat-tabs .tab {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-color);
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 6px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.chat-tabs .tab.active {
+  background: var(--primary-accent);
+  color: #fff;
+  border-color: rgba(0,0,0,0.1);
+}
