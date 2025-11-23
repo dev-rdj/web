@@ -1,67 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Buddy Chat</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Developer Jeff</title>
+  
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2e00e9f03.js" crossorigin="anonymous"></script>
 
-    <!-- Puter AI -->
-    <script src="https://js.puter.com/v2/"></script>
+  <!-- Puter.js for txt2img -->
+  <script src="https://js.puter.com/v2/"></script>
 </head>
 <body>
-
-<!-- Background Slideshow -->
-<div class="bg-slideshow">
-    <img id="bg-image" src="images/image1.jpg" alt="Background">
-</div>
-
-<!-- Menu Icon -->
-<div id="menu-icon" class="menu-icon">&#9776;</div>
-
-<!-- Menu Overlay -->
-<div id="menu-overlay" class="menu-overlay">
-    <div class="menu-content">
-        <span id="close-menu" class="close-menu">&times;</span>
-        <h2>Menu</h2>
-        <a href="#">Settings</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-    </div>
-</div>
-
-<!-- Music Controller -->
-<audio id="background-audio" src="audio/arjun.mp3" loop></audio>
-<button id="audio-toggle">🔊</button>
-
-<!-- Chat Container -->
-<div class="container">
-    <div class="chat-container" id="chat-container">
-        <div id="chat-box" class="chat-box"></div>
+    
+    <div id="background-image-layer">
+        <div class="slide" data-url="https://files.catbox.moe/wkujta.jpeg"></div>
+        <div class="slide" data-url="https://files.catbox.moe/9uu5mx.jpeg"></div>
+        <div class="slide" data-url="https://files.catbox.moe/o309g8.jpg"></div>
     </div>
 
-    <div class="input-container">
-        <div id="loading" class="loading">
-            <div class="spinner"></div>
+    <audio id="introSFX" preload="auto">
+        <source src="/audio/Anya Okay dokey.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="site-wrapper"> 
+
+        <header class="main-header">
+          <h1 class="logo">Jeff Space</h1>
+          <button class="menu-toggle" aria-label="Open Menu">
+            <i class="fas fa-bars"></i>
+          </button>
+        </header>
+
+        <main class="content-area">
+          <section id="embedded-chat-section" class="embedded-chat-section">
+            <div id="embedded-chat-container" class="chat-container">
+                <div id="modal-header">
+                    <h3>I'm Soul</h3>
+                    <p>Made by Jeff ♥️</p>
+                </div>
+                
+                <div id="chat-box">
+                    <div id="chat-history">
+                        <div class="message assistant-message">
+                            Hello there! I'm Soul Created by Jeff, and I'm here to help you with information, brainstorming, and conversation.
+                        </div>
+                    </div>
+                    
+                    <div id="loading" class="loading" style="display:none;">Soul is thinking... ⏳</div>
+                </div>
+                
+                <div class="generator-box">
+                    <input type="text" id="prompt-input" placeholder="Ask a technical question... (use /img your prompt to generate images)" aria-label="Chat input field"/> 
+                    <button id="generate-btn" class="primary-btn">Ask</button>
+                </div>
+            </div>
+          </section>
+        </main>
+        
+        <div id="menu-overlay" class="menu-overlay">
+          <button class="close-btn" aria-label="Close Menu">&times;</button>
+          <nav class="main-menu">
+            <a href="#portfolio">Portfolio</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">The Unknown Land</a>
+            <a href="#contact">Chill Pill</a>
+            <a href="#value">Absolute Value</a>
+            <a href="#bio">Bio</a>
+          </nav>
         </div>
 
-        <input 
-            type="text" 
-            id="message" 
-            class="input-field" 
-            placeholder="Type here..." 
-        >
-
-        <button id="mic-btn" class="mic-btn">🎤</button>
-        <button id="send-btn" class="send-btn">Send →</button>
-    </div>
-</div>
-
-<!-- Footer -->
-<div class="footer">
-    Created by <b>You</b> ❤️ — Powered by <b>Your AI</b>
-</div>
-
-<script src="script.js"></script>
+        <footer class="main-footer">
+            <div class="copyright">
+                &copy; 2018-25. Powered and secured by <a href="https://dev-rdj.vercel.app/" target="_blank">Dev-Jeff</a>
+            </div>
+        </footer>
+        
+    </div> <script src="script.js"></script>
 </body>
 </html>
