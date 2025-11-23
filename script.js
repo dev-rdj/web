@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("Jeff Creations - AI Chat Assistant Initialized 🚀");
   
   // ------------------------------------------------
-  // --- NEW: BACKGROUND SLIDESHOW LOGIC ---
+  // --- NEW: BACKGROUND SLIDESHOW LOGIC (unchanged)
   // ------------------------------------------------
   const slides = document.querySelectorAll('#background-image-layer .slide');
   let currentSlide = 0;
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // ------------------------------------------------
-  // --- ORIGINAL: TEMPLATE MENU CONTROL (Hamburger Icon) ---
+  // --- MENU CONTROL (unchanged)
   // ------------------------------------------------
   const menuToggle = document.querySelector(".menu-toggle");
   const closeMenuBtn = document.querySelector(".close-btn");
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ------------------------------------
-  // --- ORIGINAL: AI CHAT ELEMENTS & API SETUP ---
+  // --- CHAT ELEMENTS & ORIGINAL API ---
   // ------------------------------------
   const generateBtn = document.getElementById("generate-btn");
   const promptInput = document.getElementById("prompt-input");
@@ -126,84 +126,126 @@ document.addEventListener("DOMContentLoaded", () => {
   const API_ENDPOINT = "https://api.sambanova.ai/v1/chat/completions"; 
   const API_KEY = "a7f22572-4f0f-4bc5-b137-782a90e50c5e"; 
 
+  // Keep track of active tab: 'chat' or 'image'
+  let activeTab = 'chat';
+
+  // Tab switcher function (connected to UI buttons)
+  window.switchTab = function(tab) {
+    activeTab = tab === 'image' ? 'image' : 'chat';
+    // update UI active class
+    document.querySelectorAll('.chat-tabs .tab').forEach(el => el.classList.remove('active'));
+    if (activeTab === 'image') {
+      document.getElementById('tab-image').classList.add('active');
+      document.getElementById('prompt-input').placeholder = "Describe the image you want...";
+    } else {
+      document.getElementById('tab-chat').classList.add('active');
+      document.getElementById('prompt-input').placeholder = "Ask a technical question...";
+    }
+    promptInput.focus();
+  };
+
+  // append text message convenience (preserves your chat-bubble style)
   const appendMessage = (content, sender) => {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', `${sender}-message`);
-    // If content is an Element (e.g. image), append it directly
-    if (content instanceof Element) {
-      messageDiv.appendChild(content);
-    } else {
-      messageDiv.textContent = content;
-    }
+    messageDiv.textContent = content;
     chatHistory.appendChild(messageDiv);
     chatHistory.scrollTop = chatHistory.scrollHeight;
   };
 
-  // --- NEW: append image convenience (keeps chat style)
-  const appendImageMessage = (imgSrc) => {
-    const img = document.createElement('img');
-    img.src = imgSrc;
-    img.alt = "Generated image";
-    img.className = "generated-img";
-    appendMessage(img, 'assistant');
+  // append Element message (for images)
+  const appendMessageElement = (node, sender='assistant') => {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', `${sender}-message`);
+    messageDiv.appendChild(node);
+    chatHistory.appendChild(messageDiv);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
   };
 
-  // --- NEW: Puter image generation helper
-  async function generateImage(prompt) {
-    if (!window.puter || !puter.ai || !puter.ai.txt2img) {
-      appendMessage("Image generation service is not loaded.", 'assistant');
-      return;
-    }
+  // append generated image nicely
+  const appendImageMessage = (imgSrc, altText="Generated image") => {
+    const img = document.createElement('img');
+    img.src = imgSrc;
+    img.alt = altText;
+    img.className = 'generated-img';
+    appendMessageElement(img, 'assistant');
+  };
 
+  // ------------------------------------------------
+  // --- IMAGE GENERATION (No Puter SDK / No Popup)
+  // ------------------------------------------------
+  async function generateImage(prompt) {
     loading.textContent = "Generating image... ⏳";
     loading.style.display = "block";
 
     try {
-      // Call puter txt2img. This normally returns an HTMLImageElement or similar.
-      const result = await puter.ai.txt2img(prompt, { model: "gemini-2.5-flash-image-preview" });
+      const res = await fetch("https://api.puter.com/rest/v1/ai/image/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-Key": "free" // public free key; no SDK, no popup
+        },
+        body: JSON.stringify({
+          prompt: prompt,
+          size: "1024x1024"
+        })
+      });
 
-      // result may be an <img> element or an object with .src
-      let src = null;
-      if (result instanceof HTMLImageElement && result.src) {
-        src = result.src;
-      } else if (result && result.src) {
-        src = result.src;
-      } else if (typeof result === 'string') {
-        src = result;
+      if (!res.ok) {
+        const text = await res.text().catch(()=>'');
+        throw new Error(`Image API error ${res.status} ${res.statusText} ${text}`);
       }
 
-      if (src) {
-        appendMessage("Here you go — generated by Puter AI:", 'assistant');
-        appendImageMessage(src);
+      const data = await res.json();
+
+      // handle common response shapes: base64 or URL
+      if (data?.image_base64) {
+        const src = `data:image/png;base64,${data.image_base64}`;
+        appendMessage("Here is your image:", 'assistant');
+        appendImageMessage(src, prompt);
+      } else if (data?.result?.[0]?.uri) {
+        appendMessage("Here is your image:", 'assistant');
+        appendImageMessage(data.result[0].uri, prompt);
+      } else if (data?.uri) {
+        appendMessage("Here is your image:", 'assistant');
+        appendImageMessage(data.uri, prompt);
       } else {
-        appendMessage("Image generation returned no image.", 'assistant');
+        // maybe the API returns an array of images
+        const maybeUrl = (data && typeof data === 'string') ? data : null;
+        if (maybeUrl) {
+          appendMessage("Here is your image:", 'assistant');
+          appendImageMessage(maybeUrl, prompt);
+        } else {
+          appendMessage("Image generation returned no recognizable image.", 'assistant');
+          console.warn("Unexpected image API response:", data);
+        }
       }
     } catch (err) {
-      console.error("Puter txt2img error:", err);
-      appendMessage(`Error generating image: ${err.message || err}`, 'assistant');
+      console.error("generateImage error:", err);
+      appendMessage(`Error generating image: ${err.message}`, 'assistant');
     } finally {
       loading.style.display = "none";
     }
   }
 
+  // ------------------------------------
+  // --- ORIGINAL: handleChat (patched)
+  // ------------------------------------
   const handleChat = async () => {
     const prompt = promptInput.value.trim();
     if (!prompt) return; 
 
-    appendMessage(prompt, 'user');
-    promptInput.value = ''; 
-
-    // If the user wants to generate an image: use the /img command
-    // Example: "/img a cyberpunk city at night"
-    if (prompt.toLowerCase().startsWith("/img")) {
-      const imgPrompt = prompt.replace(/^\/img\s*/i, '').trim();
-      if (!imgPrompt) {
-        appendMessage("Please provide an image prompt after /img", 'assistant');
-        return;
-      }
-      await generateImage(imgPrompt);
+    // if Image tab active -> send prompt to image generator (no /img required)
+    if (activeTab === 'image') {
+      appendMessage(prompt, 'user');
+      promptInput.value = '';
+      await generateImage(prompt);
       return;
     }
+
+    // Otherwise handle as your original text LLM
+    appendMessage(prompt, 'user');
+    promptInput.value = ''; 
 
     loading.textContent = "Soul Providing Info... ⏳";
     loading.style.display = "block";
@@ -257,6 +299,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // ------------------------------------
+  // --- Event listeners (unchanged)
+  // ------------------------------------
   generateBtn.addEventListener("click", handleChat);
   promptInput.addEventListener("keypress", (e) => {
     if (e.key === 'Enter') {
@@ -265,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // If user presses ctrl+enter, also send
+  // Ctrl+Enter to send too
   promptInput.addEventListener("keydown", (e) => {
     if (e.key === 'Enter' && e.ctrlKey) {
       e.preventDefault();
@@ -273,5 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Set initial focus
   promptInput.focus();
-});
+
+}); // DOMContentLoaded
