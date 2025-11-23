@@ -1,141 +1,287 @@
-body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    color: white;
+/* --- Global & Typography Reset --- */
+:root {
+  /* Black & Purple Color Palette */
+  --primary-font: 'Playfair Display', serif; 
+  --secondary-font: 'Outfit', sans-serif; 
+  --text-color: #F0F0F0; /* Light text for readability on dark backgrounds */
+  --bg-color: #181818; /* Dark base color */
+  --purple-electric: #A335EE; /* Vibrant Electric Purple Accent */
+  --purple-indigo: #2E1A47; /* Deep Indigo/Blackish Purple (Secondary) */
+  --primary-accent: var(--purple-electric); 
+  --secondary-accent: var(--purple-indigo); 
 }
 
-/* Background Slideshow */
-.bg-slideshow img {
-    position: fixed;
+/* ---------------------------------------------------------------- */
+/* --- BACKGROUND SLIDESHOW STYLES --- */
+/* ---------------------------------------------------------------- */
+/* 1. SLIDESHOW CONTAINER */
+#background-image-layer {
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: opacity 1.5s ease-in-out;
-    z-index: -1;
+    z-index: -1; 
+    overflow: hidden; 
+    
+    filter: blur(3px);
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.6); 
 }
 
-/* Chat UI */
-.container {
+/* 2. INDIVIDUAL SLIDE STYLING */
+.slide {
     position: absolute;
-    bottom: 0;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0; 
+    transition: opacity 1.5s ease-in-out; 
+}
+
+.slide.active {
+    opacity: 1; 
+}
+
+body {
+  margin: 0;
+  font-family: var(--secondary-font);
+  background: var(--bg-color); 
+  color: var(--text-color);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--text-color); 
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.6;
+}
+
+.site-wrapper {
+  max-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; 
+  position: relative; 
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.85); 
+}
+
+/* ---------------------------------------------------------------- */
+/* --- HEADER AND SOCIAL STYLES --- */
+/* ---------------------------------------------------------------- */
+.top-bar {
+    padding: 0.5rem 1rem;
+    text-align: right; 
+    border-bottom: 1px solid #FFFFFF; 
+}
+
+.social-icons a {
+    color: var(--primary-accent); 
+    font-size: 1.2rem; 
+    margin-left: 1rem; 
+    display: inline-block;
+    transition: color 0.2s ease;
+    text-decoration: none; 
+    opacity: 1; 
+}
+
+.social-icons a:hover {
+    color: #C87BFF; 
+}
+
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem 0.5rem; /* Minimized vertical padding */
+  position: relative; 
+}
+
+.logo {
+  font-family: var(--primary-font);
+  font-size: 1.5rem;
+  font-weight: 700; 
+  margin: 0;
+  color: #FFFFFF; 
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--text-color); 
+}
+
+
+/* --- Main Content Area --- */
+.content-area {
+  flex-grow: 2; /* Maximum vertical growth priority */
+  text-align: center;
+  padding: 0 1rem;
+}
+
+/* 🗑️ REMOVED UNUSED IMAGE/INTRO STYLES TO PREVENT INTERFERENCE 🗑️
+.main-image-container, .main-image, .intro-section, .main-title are no longer needed
+*/
+
+/* --- Menu Overlay Styling --- */
+.menu-overlay {
+    display: none; 
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color); 
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.menu-overlay.open {
+    display: block; 
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 80px;
+    padding-left: 20px;
+}
+
+.main-menu a {
+    font-family: var(--primary-font); 
+    font-size: 1.6rem;
+    padding: 10px 0;
+    display: block;
+    font-weight: 400;
+    color: var(--primary-accent); 
+}
+
+
+/* ---------------------------------------------------------------- */
+/* --- EMBEDDED AI CHAT STYLES (GLASSMORPHISM) --- */
+/* ---------------------------------------------------------------- */
+.embedded-chat-section {
+    padding: 0 1rem;
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    margin-bottom: 0; 
 }
 
 .chat-container {
-    height: 70vh;
-    overflow-y: auto;
-}
-
-.chat-box {
-    padding: 15px;
-}
-
-.user-message {
-    text-align: right;
-    background: rgba(255,255,255,0.2);
-    padding: 10px 14px;
-    margin: 8px 0;
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-}
-
-.ai-message {
-    text-align: left;
-    background: rgba(0,0,0,0.3);
-    padding: 10px 14px;
-    margin: 8px 0;
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-}
-
-/* Input area */
-.input-container {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background: rgba(0,0,0,0.5);
-}
-
-.input-field {
-    flex: 1;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-}
-
-.send-btn, .mic-btn {
-    margin-left: 10px;
-    padding: 10px 16px;
-    border-radius: 10px;
-    border: none;
-}
-
-/* Menu */
-.menu-icon {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-.menu-overlay {
-    position: fixed;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0,0,0,0.6);
+    /* GLASSMORPHISM EFFECT */
+    background-color: rgba(46, 26, 71, 0.6); 
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(163, 53, 238, 0.4); 
+    
     width: 100%;
-    height: 100%;
+    height: 100%; 
+    border-radius: 15px; 
+    padding: 15px; 
+    box-sizing: border-box; 
+    display: flex; 
+    flex-direction: column;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.6); 
+    max-height: 85vh; 
+    margin: 0.5rem auto; 
 }
 
-.menu-content {
-    background: white;
-    width: 70%;
-    padding: 20px;
-    border-radius: 12px;
-    color: black;
-}
-
-.close-menu {
-    float: right;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* Loader */
-.loading {
-    display: none;
-}
-
-.spinner {
-    width: 20px;
-    height: 20px;
-    border: 4px solid white;
-    border-top: 4px solid transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-/* Generated Image */
-.generated-img {
-    width: 100%;
-    max-width: 280px;
-    border-radius: 14px;
-    margin-top: 8px;
-    box-shadow: 0 0 12px rgba(255,255,255,0.2);
-}
-
-.footer {
+#modal-header {
+    border-bottom: 1px solid var(--primary-accent); 
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    flex-shrink: 0; 
+    background-color: rgba(0, 0, 0, 0.2); 
+    padding: 15px 0 15px 5px;
+    border-radius: 8px 8px 0 0;
+    margin-top: -15px;
+    margin-left: -15px;
+    margin-right: -15px;
     text-align: center;
+}
+#modal-header h3 { color: var(--primary-accent); font-size: 1.4rem; margin: 0; } 
+#modal-header p { color: #AAAAAA; font-size: 0.85rem; margin: 0; }
+
+/* Chat Box - Needs fixed height for scrolling */
+#chat-box {
+    background-color: rgba(0, 0, 0, 0.3); 
+    flex-grow: 1; 
+    overflow-y: auto;
     padding: 10px;
-    background: rgba(0,0,0,0.6);
+    margin: 0 0 10px 0;
+    max-height: 600px; 
+    border-radius: 8px;
 }
 
-@keyframes spin {
-    100% { transform: rotate(360deg); }
+/* Input/Send Message Area */
+.generator-box {
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--primary-accent);
+    flex-shrink: 0; 
 }
+.generator-box input[type="text"] {
+    background-color: #333333; 
+    border: 1px solid var(--secondary-accent); 
+    color: var(--text-color); 
+    padding: 8px; 
+    border-radius: 8px; 
+    flex-grow: 1; 
+    min-width: 0; 
+}
+
+.primary-btn { 
+    background-color: var(--primary-accent); 
+    color: var(--text-color); 
+    font-weight: bold;
+    padding: 8px 5px; 
+    border: none;
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.primary-btn:hover { background-color: #C87BFF; } 
+
+.generator-box button {
+    width: 90px; 
+    flex-shrink: 0; 
+    padding: 8px 5px; 
+    font-size: 0.8rem; 
+}
+
+/* Message Bubbles - Kept opaque for high readability */
+.message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    m
