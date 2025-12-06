@@ -25,10 +25,29 @@
     <div class="site-wrapper"> 
 
         <header class="main-header">
-          <h1 class="logo">Jeff Space</h1>
+          <h1 class="logo">Jeff Space</hh1>
+
           <button class="menu-toggle" aria-label="Open Menu">
             <i class="fas fa-bars"></i>
           </button>
+
+          <!-- ✅ MUSIC BUTTON (only new UI element) -->
+          <button id="open-music-page" type="button" aria-label="Open Music" 
+            style="margin-left:8px;padding:6px 10px;border-radius:6px;
+            border:1px solid #333;background:#f5f5f5;cursor:pointer;">
+            <i class="fa fa-music"></i> Music
+          </button>
+
+          <script>
+            // Redirects to the standalone music page — does not touch other UI
+            (function(){
+              const btn = document.getElementById('open-music-page');
+              if(btn) btn.addEventListener('click', function(){
+                window.location.href = "music.html";
+              });
+            })();
+          </script>
+          <!-- END MUSIC BUTTON -->
         </header>
 
         <main class="content-area">
@@ -39,7 +58,7 @@
                     <p>Made by Jeff ♥️</p>
                 </div>
                 
-                <!-- New: Chat / Image tabs (keeps everything else untouched) -->
+                <!-- Chat / Image tabs -->
                 <div class="chat-tabs" role="tablist" aria-label="Chat and Image tabs">
                   <button id="tab-chat" class="tab active" aria-selected="true" onclick="switchTab('chat')">Chat</button>
                   <button id="tab-image" class="tab" aria-selected="false" onclick="switchTab('image')">Image</button>
@@ -56,7 +75,6 @@
                 </div>
                 
                 <div class="generator-box">
-                    <!-- single input used for both chat and image; behavior depends on active tab -->
                     <input type="text" id="prompt-input" placeholder="Ask a technical question..." aria-label="Chat input field"/> 
                     <button id="generate-btn" class="primary-btn">Ask</button>
                 </div>
@@ -82,6 +100,7 @@
             </div>
         </footer>
         
-    </div> <script src="script.js"></script>
+    </div> 
+    <script src="script.js"></script>
 </body>
 </html>
