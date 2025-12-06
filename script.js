@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ------------------------------------------------ */
   async function generateImage(prompt) {
     loading.style.display = "block";
-    loading.textContent = "Generating image using Dreamlike Soul... 🎨⏳";
+    loading.textContent = "Generating image using Soul... 🎨⏳";
 
     try {
       const res = await fetch(BYTEZ_ENDPOINT, {
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
       appendImageMessage(imgURL, prompt);
 
     } catch (err) {
-      appendMessage("Error generating image: " + err.message, "assistant");
+      appendMessage("Feature Coming Soon!!!" + err.message, "assistant");
     } finally {
       loading.style.display = "none";
     }
