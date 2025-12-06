@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
       appendImageMessage(imgURL, prompt);
 
     } catch (err) {
-      appendMessage("Feature Coming Soon!!!" + err.message, "assistant");
+      appendMessage("Feature Coming Soon!!!  " + err.message, "Jeff is working on it..");
     } finally {
       loading.style.display = "none";
     }
