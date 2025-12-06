@@ -401,3 +401,165 @@ a:hover {
   color: #fff;
   border-color: rgba(0,0,0,0.1);
 }
+
+/* ---------------------------------------------------------------- */
+/* --- MUSIC-IN-CHAT STYLES (ADDITIONAL) --- */
+/* ---------------------------------------------------------------- */
+/* Visual continuity with your purple theme, minimal and non-invasive. */
+
+/* Track row inside the Music pane */
+.music-track-row {
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.15s ease, transform 0.08s ease;
+}
+.music-track-row:hover {
+  background: rgba(255,255,255,0.02);
+  transform: translateY(-1px);
+}
+
+/* Small cover thumbnails in track list */
+.music-track-row img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #0b0b0b;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+/* Title and info for each track */
+.music-track-row .title {
+  font-weight: 700;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+.music-track-row .small {
+  color: rgba(240,240,240,0.75);
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+/* Buttons inside track rows */
+.music-track-row button {
+  background: linear-gradient(90deg, var(--primary-accent), #C87BFF);
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.08s ease, opacity 0.12s ease;
+}
+.music-track-row button:hover { transform: translateY(-2px); opacity: 0.98; }
+
+/* Player bubble that appears inside the chat */
+#music-player-area .music-bubble {
+  border-radius: 12px;
+  padding: 12px;
+  background: linear-gradient(180deg, rgba(35,10,50,0.95), rgba(20,8,30,0.95));
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  max-width: 100%;
+}
+
+/* Cover inside chat bubble */
+#music-player-area .music-bubble img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* Content area inside bubble (title, audio, license) */
+#music-player-area .music-bubble .content {
+  flex: 1;
+}
+#music-player-area .music-bubble .content .title {
+  font-weight: 700;
+  font-size: 0.98rem;
+  margin-bottom: 6px;
+}
+#music-player-area .music-bubble .content .license {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.75);
+}
+
+/* Style native audio controls to look tidy (broad strokes) */
+#music-player-area audio,
+.music-bubble audio,
+.chat-history audio {
+  width: 100%;
+  outline: none;
+  background: transparent;
+  margin-top: 6px;
+}
+
+/* Music pane layout */
+#music-view {
+  display: block;
+}
+#music-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#music-results {
+  margin-top: 12px;
+  overflow: auto;
+  max-height: 280px;
+  padding-right: 6px;
+}
+
+/* Small action button to insert last played into chat */
+#music-insert-last {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text-color);
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#music-insert-last:hover { background: rgba(255,255,255,0.02); }
+
+/* If JavaScript doesn't hide panes, ensure default visibility rules */
+#image-view, #music-view {
+  display: none;
+}
+
+/* Make chat history bubbles that include music look consistent */
+.music-bubble { 
+  /* fallback in case player is added directly into chatHistory */
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* Tiny responsive tweaks */
+@media (max-width: 640px) {
+  .music-track-row { padding: 8px; }
+  .music-track-row img { width: 48px; height: 48px; }
+  #music-player-area .music-bubble img { width: 56px; height: 56px; }
+  .generator-box input[type="text"] { width: calc(100% - 110px); }
+}
+
+/* Accessibility focus styles */
+.chat-tabs .tab:focus,
+.music-track-row button:focus,
+#music-insert-last:focus,
+.primary-btn:focus,
+.menu-toggle:focus {
+  outline: 3px solid rgba(163,53,238,0.18);
+  outline-offset: 2px;
+}
+
+/* End of file */
