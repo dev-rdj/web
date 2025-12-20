@@ -1,47 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jeff Space</title>
 
-  <!-- Fonts -->
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Core Styles -->
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="theme.css" />
-</head>
+  <!-- Existing styles (KEEP) -->
+  <link rel="stylesheet" href="style.css">
 
+  <!-- New UI layer -->
+  <link rel="stylesheet" href="ui.css">
+</head>
 <body>
 
-  <main class="container">
-
-    <!-- Hero / Intro -->
-    <header class="hero">
+  <!-- LANDING SCREEN -->
+  <section id="landing" class="landing">
+    <div class="landing-inner">
       <h1>Jeff Space</h1>
-      <p class="hero-subtext">Soul here. I’m Jeff’s AI companion — ready to chat, help, and explore ideas with you.</p>
+      <p>Soul here. Your AI space for chat, images, and audio.</p>
+      <button id="enterBtn">Enter Space</button>
+    </div>
+  </section>
 
-      <button id="startChatBtn" class="primary-btn">Start Chat</button>
-    </header>
+  <!-- APP (YOUR ORIGINAL PROJECT) -->
+  <section id="app" class="app hidden">
 
-    <!-- Chat Section (Protected by JS logic, already your code) -->
-    <section id="chatSection" class="app-section hidden">
-      <!-- Your chatbot UI goes here unchanged -->
-      <div id="chatContainer"></div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-      <p>© 2018–2025 Jeff Space</p>
-    </footer>
-
-  </main>
+    <!-- ⬇⬇⬇ PASTE YOUR ORIGINAL APP HTML HERE ⬇⬇⬇ -->
+    <!-- chatbot -->
+    <!-- image generation -->
+    <!-- audio download -->
+    <!-- ALL IDs MUST STAY EXACTLY SAME -->
+    
+  </section>
 
   <script src="script.js"></script>
 </body>
-
 </html>
