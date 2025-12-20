@@ -1,131 +1,87 @@
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("Jeff Creations - AI Chat Assistant Initialized 🚀");
+const CHAT_API = "https://api.sambanova.ai/v1/chat/completions";
+const CHAT_API_KEY = "a7f22572-4f0f-4bc5-b137-782a90e50c5e";
 
-  /* ------------------------------------------------
-     API KEYS & ENDPOINTS
-     !! WARNING: These keys are visible in the browser source code !!
-  ------------------------------------------------ */
+const chatBox = document.getElementById("chat-box");
+const userInput = document.getElementById("user-input");
+const sendBtn = document.getElementById("send-btn");
 
-  // SambaNova (Llama Chat) API
-  const CHAT_API_ENDPOINT = "https://api.sambanova.ai/v1/chat/completions";
-  const CHAT_API_KEY = "a7f22572-4f0f-4bc5-b137-782a90e50c5e";
+const imagePrompt = document.getElementById("image-prompt");
+const generateImageBtn = document.getElementById("generate-image");
+const imageResult = document.getElementById("image-result");
 
-  // Bytez (Image Generation) API
-  const BYTEZ_API_KEY = "dfb37a549a0651d78812dd2e1748103f";
-  const BYTEZ_ENDPOINT =
-    "https://api.bytez.ai/models/v2/dreamlike-art/dreamlike-photoreal-2.0";
+const downloadAudioBtn = document.getElementById("download-audio");
+const audioPlayer = document.getElementById("audio-player");
 
-  /* ------------------------------------------------
-     DOM ELEMENTS
-  ------------------------------------------------ */
-  const chatBox = document.getElementById("chat-box");
-  const userInput = document.getElementById("user-input");
-  const sendBtn = document.getElementById("send-btn");
+function addMessage(role, text) {
+  const div = document.createElement("div");
+  div.className = role;
+  div.textContent = text;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
 
-  const imagePrompt = document.getElementById("image-prompt");
-  const generateImageBtn = document.getElementById("generate-image");
-  const imageResult = document.getElementById("image-result");
+/* REAL AI CHAT */
+sendBtn.addEventListener("click", async () => {
+  const message = userInput.value.trim();
+  if (!message) return;
 
-  const downloadAudioBtn = document.getElementById("download-audio");
-  const audioPlayer = document.getElementById("audio-player");
+  addMessage("user", message);
+  userInput.value = "";
 
-  /* ------------------------------------------------
-     CHAT FUNCTIONS
-  ------------------------------------------------ */
+  addMessage("bot", "Thinking…");
 
-  function addMessage(sender, text) {
-    const msg = document.createElement("div");
-    msg.className = sender;
-    msg.textContent = text;
-    chatBox.appendChild(msg);
-    chatBox.scrollTop = chatBox.scrollHeight;
+  try {
+    const res = await fetch(CHAT_API, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${CHAT_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "Meta-Llama-3-8B-Instruct",
+        messages: [{ role: "user", content: message }]
+      })
+    });
+
+    const data = await res.json();
+    const reply =
+      data?.choices?.[0]?.message?.content ||
+      "I’m here. Try asking again.";
+
+    chatBox.lastChild.textContent = reply;
+
+  } catch (err) {
+    chatBox.lastChild.textContent = "Connection error.";
   }
+});
 
-  async function sendMessage() {
-    const message = userInput.value.trim();
-    if (!message) return;
+userInput.addEventListener("keypress", e => {
+  if (e.key === "Enter") sendBtn.click();
+});
 
-    addMessage("user", message);
-    userInput.value = "";
+/* IMAGE (BROWSER SAFE) */
+generateImageBtn.addEventListener("click", () => {
+  const prompt = imagePrompt.value.trim();
+  if (!prompt) return;
 
-    try {
-      const response = await fetch(CHAT_API_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${CHAT_API_KEY}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "Meta-Llama-3-8B-Instruct",
-          messages: [{ role: "user", content: message }]
-        })
-      });
+  const img = document.createElement("img");
+  img.src = `https://source.unsplash.com/512x512/?${encodeURIComponent(prompt)}`;
 
-      const data = await response.json();
-      const reply =
-        data.choices?.[0]?.message?.content || "No response.";
+  imageResult.innerHTML = "";
+  imageResult.appendChild(img);
+});
 
-      addMessage("bot", reply);
-    } catch (error) {
-      console.error(error);
-      addMessage("bot", "Error connecting to chat service.");
-    }
-  }
+/* AUDIO */
+downloadAudioBtn.addEventListener("click", () => {
+  const url = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
 
-  sendBtn.addEventListener("click", sendMessage);
-  userInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendMessage();
-  });
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "jeff-space-audio.mp3";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 
-  /* ------------------------------------------------
-     IMAGE GENERATION
-  ------------------------------------------------ */
-
-  generateImageBtn.addEventListener("click", async () => {
-    const prompt = imagePrompt.value.trim();
-    if (!prompt) return;
-
-    imageResult.innerHTML = "Generating image...";
-
-    try {
-      const response = await fetch(BYTEZ_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${BYTEZ_API_KEY}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          prompt: prompt,
-          width: 512,
-          height: 512
-        })
-      });
-
-      const data = await response.json();
-
-      if (data?.data?.[0]?.url) {
-        const img = document.createElement("img");
-        img.src = data.data[0].url;
-        img.style.maxWidth = "100%";
-        imageResult.innerHTML = "";
-        imageResult.appendChild(img);
-      } else {
-        imageResult.textContent = "Failed to generate image.";
-      }
-    } catch (err) {
-      console.error(err);
-      imageResult.textContent = "Error generating image.";
-    }
-  });
-
-  /* ------------------------------------------------
-     AUDIO DOWNLOAD
-  ------------------------------------------------ */
-
-  downloadAudioBtn.addEventListener("click", () => {
-    const audio = new Audio("Audio/sample.mp3");
-    audioPlayer.src = audio.src;
-    audio.play();
-  });
-
+  audioPlayer.src = url;
+  audioPlayer.play();
 });
