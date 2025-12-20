@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 1. IMAGE COMMAND (Look for "create", "generate", "image", "draw")
         if (lowInput.includes("create") || lowInput.includes("image") || lowInput.includes("draw")) {
             appendMessage(input, "user");
-            appendMessage("Generating your image... 🎨", "assistant");
+            appendMessage("𝐽𝛥𝑅𝛻𝛪𝑆 is Generating your image... 🎨", "assistant");
             const imgURL = `https://image.pollinations.ai/prompt/${encodeURIComponent(input)}?width=1024&height=1024&nologo=true&seed=${Math.random()}`;
             appendMessage(`<img src="${imgURL}" class="generated-img" style="width:100%; border-radius:10px; margin-top:10px;">`, "assistant", true);
             return;
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 2. MUSIC COMMAND (Look for "play", "music", "song")
         if (lowInput.includes("play") || lowInput.includes("music") || lowInput.includes("song")) {
             appendMessage(input, "user");
-            appendMessage("Searching for music... 🎵", "assistant");
+            appendMessage("𝐽𝛥𝑅𝛻𝛪𝑆 is Searching for music... 🎵", "assistant");
             try {
                 const res = await fetch(`https://api.jamendo.com/v3.0/tracks/?client_id=${JAMENDO_CLIENT_ID}&format=json&limit=1&search=${encodeURIComponent(input)}`);
                 const data = await res.json();
