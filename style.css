@@ -116,6 +116,12 @@ button {
   gap: 10px;
 }
 
+#image-result img {
+  margin-top: 10px;
+  border-radius: 12px;
+  width: 100%;
+}
+
 audio {
   width: 100%;
 }
