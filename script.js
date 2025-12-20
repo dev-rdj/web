@@ -490,4 +490,12 @@ document.addEventListener("DOMContentLoaded", () => {
     insertLastPlayedIntoChat
   };
 
+  const startBtn = document.getElementById("startChatBtn");
+const chatSection = document.getElementById("chatSection");
+
+startBtn.addEventListener("click", () => {
+  chatSection.classList.remove("hidden");
+  startBtn.classList.add("hidden");
+});
+
 })();
