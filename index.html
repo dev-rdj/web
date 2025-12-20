@@ -1,56 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jeff Space</title>
 
-  <!-- Font -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- Core Styles -->
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="theme.css" />
 </head>
+
 <body>
 
-  <main class="page">
+  <main class="container">
 
-    <!-- HERO -->
-    <section class="hero">
+    <!-- Hero / Intro -->
+    <header class="hero">
       <h1>Jeff Space</h1>
-      <p>
-        A clean personal space to experiment, build, and launch ideas without noise.
-      </p>
+      <p class="hero-subtext">Soul here. I’m Jeff’s AI companion — ready to chat, help, and explore ideas with you.</p>
 
-      <button id="actionBtn">Enter Space</button>
+      <button id="startChatBtn" class="primary-btn">Start Chat</button>
+    </header>
+
+    <!-- Chat Section (Protected by JS logic, already your code) -->
+    <section id="chatSection" class="app-section hidden">
+      <!-- Your chatbot UI goes here unchanged -->
+      <div id="chatContainer"></div>
     </section>
 
-    <!-- FEATURES -->
-    <section class="features">
-      <div class="card">
-        <h3>Minimal</h3>
-        <p>No clutter. No distractions. Just focus.</p>
-      </div>
-
-      <div class="card">
-        <h3>Fast</h3>
-        <p>Lightweight code that loads instantly.</p>
-      </div>
-
-      <div class="card">
-        <h3>Expandable</h3>
-        <p>Built to grow without redesigning everything.</p>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer>
-      <p>© 2025 Jeff Space. Built with intent.</p>
+      <p>© 2018–2025 Jeff Space</p>
     </footer>
 
   </main>
 
   <script src="script.js"></script>
 </body>
+
 </html>
