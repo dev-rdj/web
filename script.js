@@ -89,3 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 5000);
     }
 });
+
+if (lowInput.includes("contact") || lowInput.includes("instagram")) {
+    appendMessage("You can find 𝐽𝛯𝐹𝐹 on Instagram @rdj.hu or WhatsApp him at +917090462940! Don't message without any reason or you might be banned from WhatsApp", "assistant");
+    return;
+}
+
