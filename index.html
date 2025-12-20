@@ -1,360 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Developer Jeff</title>
-  
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeff Space</title>
+
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a2e00e9f03.js" crossorigin="anonymous"></script>
-  <style>
-    /* Minimal local styles for music UI only, won't interfere with your global styles */
-    .chat-tabs .tab { padding:8px 12px; margin-right:6px; border-radius:8px; border: none; cursor: pointer; background:transparent; color:inherit; }
-    .chat-tabs .tab.active { background: rgba(255,255,255,0.06); box-shadow: inset 0 -3px 0 rgba(255,255,255,0.06); }
-    #chat-box .pane { padding:12px 8px; }
-    .music-track-row { display:flex; gap:12px; padding:8px; border-bottom:1px solid rgba(255,255,255,0.03); align-items:center; }
-    .music-track-row img { width:56px;height:56px;object-fit:cover;border-radius:6px;background:#111; }
-    #music-player-area .music-bubble { border-radius:10px; padding:12px; background:linear-gradient(180deg,#08202b,#05202a); color:#fff; box-shadow:0 6px 18px rgba(0,0,0,0.4); }
-    /* small responsive tweak */
-    @media (max-width:640px) {
-      .music-track-row img { width:48px;height:48px; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    
-    <div id="background-image-layer">
-        <div class="slide" data-url="https://files.catbox.moe/wkujta.jpeg"></div>
-        <div class="slide" data-url="https://files.catbox.moe/9uu5mx.jpeg"></div>
-        <div class="slide" data-url="https://files.catbox.moe/o309g8.jpg"></div>
-    </div>
 
-    <audio id="introSFX" preload="auto">
-        <source src="/audio/Anya Okay dokey.mp3" type="audio/mpeg">
-    </audio>
+  <main class="page">
 
-    <div class="site-wrapper"> 
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Jeff Space</h1>
+      <p>
+        A clean personal space to experiment, build, and launch ideas without noise.
+      </p>
 
-        <header class="main-header">
-          <h1 class="logo">Jeff Space</h1>
+      <button id="actionBtn">Enter Space</button>
+    </section>
 
-          <button class="menu-toggle" aria-label="Open Menu">
-            <i class="fas fa-bars"></i>
-          </button>
+    <!-- FEATURES -->
+    <section class="features">
+      <div class="card">
+        <h3>Minimal</h3>
+        <p>No clutter. No distractions. Just focus.</p>
+      </div>
 
-          <!-- Music button moved out of header earlier; not needed if you prefer tabs only.
-               Leaving a small music button here is fine, but you asked for the tab inside chat
-               so header-level music is unnecessary. If you want it, uncomment next block. -->
+      <div class="card">
+        <h3>Fast</h3>
+        <p>Lightweight code that loads instantly.</p>
+      </div>
 
-          <!--
-          <button id="open-music-page" type="button" aria-label="Open Music" 
-            style="margin-left:8px;padding:6px 10px;border-radius:6px;
-            border:1px solid #333;background:#f5f5f5;cursor:pointer;">
-            <i class="fa fa-music"></i> Music
-          </button>
-          -->
+      <div class="card">
+        <h3>Expandable</h3>
+        <p>Built to grow without redesigning everything.</p>
+      </div>
+    </section>
 
-        </header>
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2025 Jeff Space. Built with intent.</p>
+    </footer>
 
-        <main class="content-area">
-          <section id="embedded-chat-section" class="embedded-chat-section">
-            <div id="embedded-chat-container" class="chat-container">
-                <div id="modal-header">
-                    <h3>I'm Soul</h3>
-                    <p>Made by Jeff ♥️</p>
-                </div>
-                
-                <!-- Chat / Image / Music tabs (Music added) -->
-                <div class="chat-tabs" role="tablist" aria-label="Chat, Image, Music tabs" style="margin-bottom:10px;">
-                  <button id="tab-chat" class="tab active" aria-selected="true" data-tab="chat" type="button">Chat</button>
-                  <button id="tab-image" class="tab" aria-selected="false" data-tab="image" type="button">Image</button>
-                  <button id="tab-music" class="tab" aria-selected="false" data-tab="music" type="button">Music</button>
-                </div>
+  </main>
 
-                <!-- chat-box now hosts all three views. the JS will switch the inner content -->
-                <div id="chat-box" aria-live="polite" style="min-height:200px;">
-                  <div id="chat-view" class="pane">
-                    <div id="chat-history">
-                        <div class="message assistant-message">
-                            I'm Soul Created by Jeff, and I'm here to help you with information, brainstorming, and conversation.
-                        </div>
-                    </div>
-                    <div id="loading" class="loading" style="display:none;">Soul is thinking... ⏳</div>
-                  </div>
-
-                  <div id="image-view" class="pane" style="display:none">
-                    <!-- Keep this blank or your existing image UI; JS can populate if needed -->
-                    <div id="image-container"></div>
-                  </div>
-
-                  <div id="music-view" class="pane" style="display:none">
-                    <!-- Music UI will be rendered here by JS -->
-                    <div id="music-controls" style="margin-top:6px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-                      <input id="music-q" placeholder="Search songs (e.g., chill, acoustic)" style="min-width:220px; padding:8px;" />
-                      <select id="music-limit" style="padding:8px;">
-                        <option value="6">6</option><option value="10">10</option><option value="20">20</option>
-                      </select>
-                      <button id="music-search" style="padding:8px;">Search</button>
-                      <div style="flex:1"></div>
-                      <button id="music-insert-last" style="padding:8px;">Insert last played into chat</button>
-                    </div>
-
-                    <div id="music-results" style="margin-top:12px; max-height:300px; overflow:auto;"></div>
-
-                    <!-- small area for a currently opened track (appears like a chat bubble) -->
-                    <div id="music-player-area" style="margin-top:12px"></div>
-                  </div>
-                </div>
-                
-                <div class="generator-box" style="margin-top:12px;">
-                    <!-- single input used for both chat and image; behavior depends on active tab -->
-                    <input type="text" id="prompt-input" placeholder="Ask a technical question..." aria-label="Chat input field" style="padding:8px; width:70%"/> 
-                    <button id="generate-btn" class="primary-btn" style="padding:8px 12px;">Ask</button>
-                </div>
-            </div>
-          </section>
-        </main>
-        
-        <div id="menu-overlay" class="menu-overlay">
-          <button class="close-btn" aria-label="Close Menu">&times;</button>
-          <nav class="main-menu">
-            <a href="#portfolio">Portfolio</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">The Unknown Land</a>
-            <a href="#contact">Chill Pill</a>
-            <a href="#value">Absolute Value</a>
-            <a href="#bio">Bio</a>
-          </nav>
-        </div>
-
-        <footer class="main-footer">
-            <div class="copyright">
-                &copy; 2018-25. Powered and secured by <a href="https://dev-rdj.vercel.app/" target="_blank">Dev-Jeff</a>
-            </div>
-        </footer>
-        
-    </div> 
-
-    <!-- keep your main script - we load it first so we don't override existing functions -->
-    <script src="script.js"></script>
-
-    <!-- ===== Music-in-chat JS (paste below, runs after your script.js) ===== -->
-    <script>
-    /* === CONFIG === */
-    const MUSIC_CLIENT_ID = "REPLACE_WITH_YOUR_JAMENDO_CLIENT_ID"; // <-- replace with your Jamendo client_id OR use proxy below
-    const USE_PROXY = false; // set true if you run the optional server proxy (recommended to hide client_id)
-    const PROXY_URL = "/jamendo-proxy"; // e.g., "http://localhost:3000/jamendo-proxy"
-    const JAMENDO_BASE = "https://api.jamendo.com/v3.0";
-
-    /* === SAFE switchTab: only define if not already present to avoid stomping your chatbot code === */
-    if (typeof switchTab !== 'function') {
-      function switchTab(tabName) {
-        // update tab buttons
-        document.querySelectorAll('.chat-tabs .tab').forEach(btn => {
-          const t = btn.dataset.tab;
-          if (t === tabName) {
-            btn.classList.add('active');
-            btn.setAttribute('aria-selected', 'true');
-          } else {
-            btn.classList.remove('active');
-            btn.setAttribute('aria-selected', 'false');
-          }
-        });
-
-        // show/hide panes
-        document.querySelectorAll('#chat-box .pane').forEach(p => p.style.display = 'none');
-        const pane = document.getElementById(tabName + '-view');
-        if (pane) pane.style.display = 'block';
-
-        // If user switches to music, focus the search box
-        if (tabName === 'music') {
-          const q = document.getElementById('music-q');
-          if (q) q.focus();
-        }
-      }
-    }
-
-    /* attach click handlers to tab buttons (works even if onclick attributes exist) */
-    document.addEventListener('click', function(e){
-      const btn = e.target.closest('.chat-tabs .tab');
-      if (btn && btn.dataset.tab) {
-        e.preventDefault();
-        switchTab(btn.dataset.tab);
-      }
-    });
-
-    /* === JAMENDO FETCH HELPERS === */
-    async function jamendoFetchTracks(q, limit=10) {
-      if (USE_PROXY) {
-        const url = new URL(PROXY_URL, window.location.origin);
-        if (q) url.searchParams.set('q', q);
-        url.searchParams.set('limit', String(limit));
-        const r = await fetch(url.toString());
-        if (!r.ok) throw new Error('Proxy error ' + r.status);
-        return (await r.json()).results || [];
-      } else {
-        if (!MUSIC_CLIENT_ID || MUSIC_CLIENT_ID.startsWith('REPLACE')) {
-          throw new Error('Missing Jamendo client id. Put it into MUSIC_CLIENT_ID or enable proxy.');
-        }
-        const params = new URLSearchParams({
-          client_id: MUSIC_CLIENT_ID,
-          format: 'json',
-          limit,
-        });
-        if (q) params.set('search', q);
-        const resp = await fetch(`${JAMENDO_BASE}/tracks/?${params.toString()}`);
-        if (!resp.ok) throw new Error('Jamendo API error ' + resp.status);
-        const json = await resp.json();
-        return json.results || [];
-      }
-    }
-
-    /* small element helper */
-    function createEl(tag, attrs={}, children=[]) {
-      const el = document.createElement(tag);
-      Object.entries(attrs).forEach(([k,v])=>{
-        if (k === 'class') el.className = v;
-        else if (k === 'html') el.innerHTML = v;
-        else el.setAttribute(k, v);
-      });
-      children.forEach(c => el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
-      return el;
-    }
-
-    /* render search results in music pane */
-    function renderMusicResults(tracks) {
-      const results = document.getElementById('music-results');
-      results.innerHTML = '';
-      if (!tracks || tracks.length === 0) {
-        results.appendChild(createEl('div', {class:'small', html:'No results. Try another query.'}));
-        return;
-      }
-      tracks.forEach(track => {
-        const row = createEl('div', {class:'music-track-row'}, []);
-        const cover = createEl('img', {src: track.album_image || track.track_image || '', alt: track.name || 'cover'});
-        const meta = createEl('div', {style:'flex:1'}, []);
-        const title = createEl('div', {class:'title', html:(track.name || 'Untitled') + ' — ' + (track.artist_name || '')});
-        const info = createEl('div', {class:'small', html:`Duration: ${Math.floor((track.duration||0)/60)}:${String((track.duration||0)%60).padStart(2,'0')} • License: ${track.license||'unknown'}`});
-        const btn = createEl('button', {type:'button', style:'margin-top:6px;padding:6px 8px;border-radius:6px'}, ['Play in chat']);
-        btn.addEventListener('click', ()=> openTrackInChat(track));
-        meta.appendChild(title); meta.appendChild(info); meta.appendChild(btn);
-        row.appendChild(cover); row.appendChild(meta);
-        results.appendChild(row);
-      });
-    }
-
-    /* state: keep last played track */
-    let LAST_PLAYED_TRACK = null;
-
-    /* Open the track as a chat-bubble inside the Chat pane (music bubble) */
-    function openTrackInChat(track) {
-      LAST_PLAYED_TRACK = track;
-      // ensure we are in chat view
-      switchTab('chat');
-
-      const chatHistory = document.getElementById('chat-history');
-      if (!chatHistory) return;
-
-      // create bubble container
-      const wrapper = createEl('div', {style:'margin:10px 0; display:flex; flex-direction:row; gap:10px; align-items:flex-start;'}, []);
-      const cover = createEl('img', {src: track.album_image || track.track_image || '', style:'width:64px;height:64px;object-fit:cover;border-radius:8px'}, []);
-      const bubble = createEl('div', {class:'music-bubble'}, []);
-      const title = createEl('div', {style:'font-weight:600; margin-bottom:6px;'}, [document.createTextNode((track.name || 'Untitled') + ' — ' + (track.artist_name || ''))]);
-      const audio = createEl('audio', {controls:'', style:'width:100%'}, []);
-      if (track.audio) audio.src = track.audio;
-      else if (track.audiodownload) audio.src = track.audiodownload;
-      else if (track.streaming) audio.src = track.streaming;
-      else if (track.file) audio.src = track.file;
-
-      const license = createEl('div', {class:'small', style:'margin-top:6px; color:rgba(255,255,255,0.7);'}, [document.createTextNode('License: ' + (track.license || 'unknown'))]);
-
-      bubble.appendChild(title);
-      if (audio.src) bubble.appendChild(audio);
-      else bubble.appendChild(createEl('div', {class:'small', html:'No playable stream available for this track.'}));
-      bubble.appendChild(license);
-
-      wrapper.appendChild(cover);
-      wrapper.appendChild(bubble);
-
-      // append to chat history
-      chatHistory.appendChild(wrapper);
-
-      // scroll chat into view
-      setTimeout(()=> {
-        chatHistory.scrollTop = chatHistory.scrollHeight;
-      }, 80);
-    }
-
-    /* wire up search UI and insert-last button */
-    document.addEventListener('DOMContentLoaded', function(){
-      const searchBtn = document.getElementById('music-search');
-      const qInput = document.getElementById('music-q');
-      const limitSelect = document.getElementById('music-limit');
-      const resultsBox = document.getElementById('music-results');
-      const insertLastBtn = document.getElementById('music-insert-last');
-
-      function showError(msg) {
-        resultsBox.innerHTML = '';
-        resultsBox.appendChild(createEl('div', {class:'small', html: msg}));
-      }
-
-      searchBtn?.addEventListener('click', async function(){
-        const q = (qInput.value || '').trim();
-        const lim = parseInt(limitSelect.value || '6', 10);
-        resultsBox.innerHTML = '';
-        resultsBox.appendChild(createEl('div', {class:'small', html: 'Searching...'}));
-        try {
-          const tracks = await jamendoFetchTracks(q, lim);
-          renderMusicResults(tracks);
-        } catch(err) {
-          showError('Error: ' + err.message);
-        }
-      });
-
-      qInput?.addEventListener('keydown', function(e){ if (e.key === 'Enter') searchBtn.click(); });
-
-      insertLastBtn?.addEventListener('click', function(){
-        if (!LAST_PLAYED_TRACK) {
-          alert('No track has been played yet.');
-          return;
-        }
-        openTrackInChat(LAST_PLAYED_TRACK);
-      });
-    });
-
-    </script>
-
-    <!-- jamendo fetch helper placed last (so it can call fetch) -->
-    <script>
-    async function jamendoFetchTracks(q, limit=10) {
-      // This function mirrors the earlier one but defined in global scope for clarity.
-      // Uses config variables defined in previous script tag (MUSIC_CLIENT_ID, USE_PROXY, etc.)
-      if (typeof USE_PROXY !== 'undefined' && USE_PROXY) {
-        const url = new URL(PROXY_URL, window.location.origin);
-        if (q) url.searchParams.set('q', q);
-        url.searchParams.set('limit', String(limit));
-        const r = await fetch(url.toString());
-        if (!r.ok) throw new Error('Proxy error ' + r.status);
-        return (await r.json()).results || [];
-      } else {
-        if (!MUSIC_CLIENT_ID || MUSIC_CLIENT_ID.startsWith('REPLACE')) {
-          throw new Error('Missing Jamendo client id. Put it into MUSIC_CLIENT_ID or enable proxy.');
-        }
-        const params = new URLSearchParams({
-          client_id: MUSIC_CLIENT_ID,
-          format: 'json',
-          limit,
-        });
-        if (q) params.set('search', q);
-        const resp = await fetch(`${JAMENDO_BASE}/tracks/?${params.toString()}`);
-        if (!resp.ok) throw new Error('Jamendo API error ' + resp.status);
-        const json = await resp.json();
-        return json.results || [];
-      }
-    }
-    </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
