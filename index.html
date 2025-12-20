@@ -3,100 +3,51 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jeff Space - AI Assistant</title>
-  
+  <title>Jeff Space - Soul AI</title>
   <link rel="stylesheet" href="style.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a2e00e9f03.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
     <div id="background-image-layer">
         <div class="slide" data-url="https://files.catbox.moe/wkujta.jpeg"></div>
         <div class="slide" data-url="https://files.catbox.moe/9uu5mx.jpeg"></div>
         <div class="slide" data-url="https://files.catbox.moe/o309g8.jpg"></div>
     </div>
 
-    <audio id="introSFX" preload="auto">
-        <source src="audio/Anya Okay dokey.mp3" type="audio/mpeg">
-    </audio>
-
     <div class="site-wrapper"> 
-
         <header class="main-header">
           <h1 class="logo">Jeff Space</h1>
-          <button class="menu-toggle" aria-label="Open Menu">
-            <i class="fas fa-bars"></i>
-          </button>
         </header>
 
         <main class="content-area">
-          <section id="embedded-chat-section" class="embedded-chat-section">
-            <div id="embedded-chat-container" class="chat-container">
+          <section class="embedded-chat-section">
+            <div class="chat-container">
                 <div id="modal-header">
                     <h3>I'm Soul</h3>
                     <p>Made by Jeff ♥️</p>
                 </div>
-                
-                <div class="chat-tabs" role="tablist">
-                  <button id="tab-chat" class="tab active" data-tab="chat">Chat</button>
-                  <button id="tab-image" class="tab" data-tab="image">Image</button>
-                  <button id="tab-music" class="tab" data-tab="music">Music</button>
-                </div>
 
-                <div id="chat-box" aria-live="polite">
-                  
-                  <div id="chat-view" class="pane">
-                    <div id="chat-history">
+                <div id="chat-box">
+                  <div id="chat-history">
                         <div class="message assistant-message">
-                            I'm Soul Created by Jeff. I can chat, generate images, or play music!
+                            Hi! I'm Soul. You can talk to me normally, or say things like:<br>
+                            • "<b>Create image:</b> a neon city"<br>
+                            • "<b>Play music:</b> chill lofi"
                         </div>
-                    </div>
-                    <div id="loading" class="loading" style="display:none;">Soul is thinking... ⏳</div>
                   </div>
-
-                  <div id="image-view" class="pane" style="display:none">
-                    <div style="text-align:center; margin-top:20px; color:#aaa;">
-                        <p>Describe an image in the bar below.</p>
-                        <div id="image-result-area"></div>
-                    </div>
-                  </div>
-
-                  <div id="music-view" class="pane" style="display:none">
-                    <div style="text-align:center; margin-top:10px; color:#aaa;">
-                        <p>Type a song name in the bar below to search.</p>
-                    </div>
-                    <div id="music-results" style="margin-top:12px; max-height:300px; overflow:auto;"></div>
-                  </div>
-                
+                  <div id="loading" class="loading" style="display:none;">Soul is working... ⏳</div>
                 </div>
                 
-                <div class="generator-box" style="margin-top:12px;">
-                    <input type="text" id="prompt-input" placeholder="Ask a technical question..." /> 
+                <div class="generator-box">
+                    <input type="text" id="prompt-input" placeholder="Ask, create, or play music..." /> 
                     <button id="generate-btn" class="primary-btn">Send</button>
                 </div>
             </div>
           </section>
         </main>
-        
-        <div id="menu-overlay" class="menu-overlay">
-          <button class="close-btn">&times;</button>
-          <nav class="main-menu">
-            <a href="#">Portfolio</a>
-            <a href="#">Skills</a>
-            <a href="#">Contact</a>
-          </nav>
-        </div>
-
-        <footer class="main-footer">
-            <div class="copyright">
-                &copy; 2025 Jeff Space
-            </div>
-        </footer>
-        
     </div> 
-
     <script src="script.js"></script>
 </body>
 </html>
