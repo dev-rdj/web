@@ -5,57 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jeff Space</title>
 
-  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Existing CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-  <!-- ========== LANDING SCREEN ========== -->
-  <section id="landing" class="landing">
-    <div class="landing-inner">
+  <main class="app">
+
+    <header class="app-header">
       <h1>Jeff Space</h1>
-      <p>Soul here. Your AI space for conversation, image creation, and audio tools.</p>
-      <button id="enterBtn">Enter Space</button>
-    </div>
-  </section>
+      <p>Soul · your AI companion</p>
+    </header>
 
-  <!-- ========== APP SECTION (ORIGINAL PROJECT) ========== -->
-  <section id="app" class="app hidden">
+    <section id="chat-box" class="chat-box"></section>
 
-    <!-- ORIGINAL CONTENT FROM YOUR ZIP (UNCHANGED STRUCTURE) -->
-
-    <div class="container">
-      <h2 id="title">Jeff Space</h2>
-      <p id="subtitle">Soul is thinking…</p>
-
-      <!-- Chat Output -->
-      <div id="chat-box"></div>
-
-      <!-- User Input -->
-      <input type="text" id="user-input" placeholder="Type your message..." />
+    <div class="input-area">
+      <input
+        type="text"
+        id="user-input"
+        placeholder="Type your message…"
+      />
       <button id="send-btn">Send</button>
-
-      <!-- Image Generation -->
-      <div id="image-section">
-        <input type="text" id="image-prompt" placeholder="Enter image prompt" />
-        <button id="generate-image">Generate Image</button>
-        <div id="image-result"></div>
-      </div>
-
-      <!-- Audio Section -->
-      <div id="audio-section">
-        <button id="download-audio">Download Audio</button>
-        <audio id="audio-player" controls></audio>
-      </div>
     </div>
 
-  </section>
+    <div class="tools">
+      <input
+        type="text"
+        id="image-prompt"
+        placeholder="Describe an image…"
+      />
+      <button id="generate-image">Generate Image</button>
+
+      <button id="download-audio">Download Audio</button>
+      <audio id="audio-player" controls></audio>
+    </div>
+
+  </main>
 
   <script src="script.js"></script>
 </body>
