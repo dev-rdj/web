@@ -1,131 +1,121 @@
-/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* THEME */
 :root {
   --bg: #f9fafb;
   --card: #ffffff;
   --border: #e5e7eb;
 
   --text-main: #111827;
-  --text-muted: #4b5563;
-  --text-light: #9ca3af;
+  --text-muted: #6b7280;
 
-  --primary: #2563eb;
-  --primary-hover: #1e40af;
+  --user: #2563eb;
+  --bot: #e5e7eb;
 }
 
-/* BASE */
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text-main);
-  line-height: 1.6;
-}
-
-/* LANDING */
-.landing {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 24px;
-}
-
-.landing-inner {
-  max-width: 640px;
-}
-
-.landing h1 {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.landing p {
-  font-size: 18px;
-  color: var(--text-muted);
-  margin-bottom: 28px;
-}
-
-.landing button {
-  padding: 14px 32px;
-  font-size: 16px;
-  font-weight: 600;
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
-}
-
-.landing button:hover {
-  background: var(--primary-hover);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
 }
 
 /* APP */
 .app {
-  padding: 32px;
+  max-width: 420px;
+  margin: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
 }
 
-/* APP CONTAINER */
-.container {
-  max-width: 720px;
-  margin: auto;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
+/* HEADER */
+.app-header {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.app-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.app-header p {
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
 /* CHAT */
-#chat-box {
-  min-height: 200px;
+.chat-box {
+  flex: 1;
+  background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 12px;
-  margin-bottom: 16px;
   overflow-y: auto;
+  margin-bottom: 12px;
 }
 
-/* INPUTS */
-input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
+/* BUBBLES */
+.user,
+.bot {
+  max-width: 80%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.user {
+  background: var(--user);
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.bot {
+  background: var(--bot);
+  color: var(--text-main);
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+}
+
+/* INPUT */
+.input-area {
+  display: flex;
+  gap: 8px;
   margin-bottom: 12px;
+}
+
+input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
   font-size: 14px;
 }
 
 button {
-  padding: 12px 18px;
-  border-radius: 10px;
+  padding: 12px 16px;
+  border-radius: 12px;
   border: none;
-  background: var(--primary);
+  background: var(--user);
   color: white;
   font-weight: 600;
-  cursor: pointer;
+  font-size: 14px;
 }
 
-button:hover {
-  background: var(--primary-hover);
+/* TOOLS */
+.tools {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* SECTIONS */
-#image-section,
-#audio-section {
-  margin-top: 24px;
-}
-
-/* UTIL */
-.hidden {
-  display: none !important;
+audio {
+  width: 100%;
 }
