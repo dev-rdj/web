@@ -5,37 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jeff Space</title>
 
-  <!-- Font -->
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Existing styles (KEEP) -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- New UI layer -->
-  <link rel="stylesheet" href="ui.css">
+  <!-- Existing CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-  <!-- LANDING SCREEN -->
+  <!-- ========== LANDING SCREEN ========== -->
   <section id="landing" class="landing">
     <div class="landing-inner">
       <h1>Jeff Space</h1>
-      <p>Soul here. Your AI space for chat, images, and audio.</p>
+      <p>Soul here. Your AI space for conversation, image creation, and audio tools.</p>
       <button id="enterBtn">Enter Space</button>
     </div>
   </section>
 
-  <!-- APP (YOUR ORIGINAL PROJECT) -->
+  <!-- ========== APP SECTION (ORIGINAL PROJECT) ========== -->
   <section id="app" class="app hidden">
 
-    <!-- ⬇⬇⬇ PASTE YOUR ORIGINAL APP HTML HERE ⬇⬇⬇ -->
-    <!-- chatbot -->
-    <!-- image generation -->
-    <!-- audio download -->
-    <!-- ALL IDs MUST STAY EXACTLY SAME -->
-    
+    <!-- ORIGINAL CONTENT FROM YOUR ZIP (UNCHANGED STRUCTURE) -->
+
+    <div class="container">
+      <h2 id="title">Jeff Space</h2>
+      <p id="subtitle">Soul is thinking…</p>
+
+      <!-- Chat Output -->
+      <div id="chat-box"></div>
+
+      <!-- User Input -->
+      <input type="text" id="user-input" placeholder="Type your message..." />
+      <button id="send-btn">Send</button>
+
+      <!-- Image Generation -->
+      <div id="image-section">
+        <input type="text" id="image-prompt" placeholder="Enter image prompt" />
+        <button id="generate-image">Generate Image</button>
+        <div id="image-result"></div>
+      </div>
+
+      <!-- Audio Section -->
+      <div id="audio-section">
+        <button id="download-audio">Download Audio</button>
+        <audio id="audio-player" controls></audio>
+      </div>
+    </div>
+
   </section>
 
   <script src="script.js"></script>
