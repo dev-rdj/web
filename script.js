@@ -1,3 +1,24 @@
+// LANDING → APP TOGGLE
+const enterBtn = document.getElementById("enterBtn");
+const landing = document.getElementById("landing");
+const app = document.getElementById("app");
+
+if (enterBtn) {
+  enterBtn.addEventListener("click", () => {
+    landing.classList.add("hidden");
+    app.classList.remove("hidden");
+  });
+}
+
+/* ================================
+   PASTE YOUR EXISTING SCRIPT BELOW
+   DO NOT MODIFY FUNCTION NAMES
+   DO NOT RENAME IDs
+================================ */
+
+// your chatbot JS
+// your image generation JS
+// your audio download JS
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Jeff Creations - AI Chat Assistant Initialized 🚀");
 
@@ -489,13 +510,5 @@ document.addEventListener("DOMContentLoaded", () => {
     renderMusicResults,
     insertLastPlayedIntoChat
   };
-
-  const startBtn = document.getElementById("startChatBtn");
-const chatSection = document.getElementById("chatSection");
-
-startBtn.addEventListener("click", () => {
-  chatSection.classList.remove("hidden");
-  startBtn.classList.add("hidden");
-});
 
 })();
