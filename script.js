@@ -62,13 +62,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: { "Authorization": `Bearer ${CHAT_API_KEY}`, "Content-Type": "application/json" },
                 body: JSON.stringify({
                     model: "Meta-Llama-3.1-8B-Instruct",
-                    messages: [{ role: "system", content: "You are 𝐽𝛥𝑅𝛻𝛪𝑆, an AI by Jeff." }, { role: "user", content: input }]
+                    messages: [{ role: "system", content: "You are Jarvis, an AI by Jeff." }, { role: "user", content: input }]
                 })
             });
             const data = await response.json();
             appendMessage(data.choices[0].message.content, "assistant");
         } catch (err) {
-            appendMessage("𝐽𝛥𝑅𝛻𝛪𝑆 is resting. Try again in a second!", "assistant");
+            appendMessage("Jarvis is resting. Try again in a second!", "assistant");
         } finally {
             loading.style.display = "none";
         }
