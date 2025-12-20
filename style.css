@@ -1,0 +1,565 @@
+/* --- Global & Typography Reset --- */
+:root {
+  /* Black & Purple Color Palette */
+  --primary-font: 'Playfair Display', serif; 
+  --secondary-font: 'Outfit', sans-serif; 
+  --text-color: #F0F0F0; /* Light text for readability on dark backgrounds */
+  --bg-color: #181818; /* Dark base color */
+  --purple-electric: #A335EE; /* Vibrant Electric Purple Accent */
+  --purple-indigo: #2E1A47; /* Deep Indigo/Blackish Purple (Secondary) */
+  --primary-accent: var(--purple-electric); 
+  --secondary-accent: var(--purple-indigo); 
+}
+
+/* ---------------------------------------------------------------- */
+/* --- BACKGROUND SLIDESHOW STYLES --- */
+/* ---------------------------------------------------------------- */
+/* 1. SLIDESHOW CONTAINER */
+#background-image-layer {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+    overflow: hidden; 
+    
+    filter: blur(3px);
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.6); 
+}
+
+/* 2. INDIVIDUAL SLIDE STYLING */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0; 
+    transition: opacity 1.5s ease-in-out; 
+}
+
+.slide.active {
+    opacity: 1; 
+}
+
+body {
+  margin: 0;
+  font-family: var(--secondary-font);
+  background: var(--bg-color); 
+  color: var(--text-color);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--text-color); 
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.6;
+}
+
+.site-wrapper {
+  max-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; 
+  position: relative; 
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.85); 
+}
+
+/* ---------------------------------------------------------------- */
+/* --- HEADER AND SOCIAL STYLES --- */
+/* ---------------------------------------------------------------- */
+.top-bar {
+    padding: 0.5rem 1rem;
+    text-align: right; 
+    border-bottom: 1px solid #FFFFFF; 
+}
+
+.social-icons a {
+    color: var(--primary-accent); 
+    font-size: 1.2rem; 
+    margin-left: 1rem; 
+    display: inline-block;
+    transition: color 0.2s ease;
+    text-decoration: none; 
+    opacity: 1; 
+}
+
+.social-icons a:hover {
+    color: #C87BFF; 
+}
+
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem 0.5rem; /* Minimized vertical padding */
+  position: relative; 
+}
+
+.logo {
+  font-family: var(--primary-font);
+  font-size: 1.5rem;
+  font-weight: 700; 
+  margin: 0;
+  color: #FFFFFF; 
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--text-color); 
+}
+
+
+/* --- Main Content Area --- */
+.content-area {
+  flex-grow: 2; /* Maximum vertical growth priority */
+  text-align: center;
+  padding: 0 1rem;
+}
+
+/* 🗑️ REMOVED UNUSED IMAGE/INTRO STYLES TO PREVENT INTERFERENCE 🗑️
+.main-image-container, .main-image, .intro-section, .main-title are no longer needed
+*/
+
+/* --- Menu Overlay Styling --- */
+.menu-overlay {
+    display: none; 
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color); 
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.menu-overlay.open {
+    display: block; 
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 80px;
+    padding-left: 20px;
+}
+
+.main-menu a {
+    font-family: var(--primary-font); 
+    font-size: 1.6rem;
+    padding: 10px 0;
+    display: block;
+    font-weight: 400;
+    color: var(--primary-accent); 
+}
+
+
+/* ---------------------------------------------------------------- */
+/* --- EMBEDDED AI CHAT STYLES (GLASSMORPHISM) --- */
+/* ---------------------------------------------------------------- */
+.embedded-chat-section {
+    padding: 0 1rem;
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    margin-bottom: 0; 
+}
+
+.chat-container {
+    /* GLASSMORPHISM EFFECT */
+    background-color: rgba(46, 26, 71, 0.6); 
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(163, 53, 238, 0.4); 
+    
+    width: 100%;
+    height: 100%; 
+    border-radius: 15px; 
+    padding: 15px; 
+    box-sizing: border-box; 
+    display: flex; 
+    flex-direction: column;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.6); 
+    max-height: 85vh; 
+    margin: 0.5rem auto; 
+}
+
+#modal-header {
+    border-bottom: 1px solid var(--primary-accent); 
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    flex-shrink: 0; 
+    background-color: rgba(0, 0, 0, 0.2); 
+    padding: 15px 0 15px 5px;
+    border-radius: 8px 8px 0 0;
+    margin-top: -15px;
+    margin-left: -15px;
+    margin-right: -15px;
+    text-align: center;
+}
+#modal-header h3 { color: var(--primary-accent); font-size: 1.4rem; margin: 0; } 
+#modal-header p { color: #AAAAAA; font-size: 0.85rem; margin: 0; }
+
+/* Chat Box - Needs fixed height for scrolling */
+#chat-box {
+    background-color: rgba(0, 0, 0, 0.3); 
+    flex-grow: 1; 
+    overflow-y: auto;
+    padding: 10px;
+    margin: 0 0 10px 0;
+    max-height: 600px; 
+    border-radius: 8px;
+}
+
+/* Input/Send Message Area */
+.generator-box {
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--primary-accent);
+    flex-shrink: 0; 
+}
+.generator-box input[type="text"] {
+    background-color: #333333; 
+    border: 1px solid var(--secondary-accent); 
+    color: var(--text-color); 
+    padding: 8px; 
+    border-radius: 8px; 
+    flex-grow: 1; 
+    min-width: 0; 
+}
+
+.primary-btn { 
+    background-color: var(--primary-accent); 
+    color: var(--text-color); 
+    font-weight: bold;
+    padding: 8px 5px; 
+    border: none;
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.primary-btn:hover { background-color: #C87BFF; } 
+
+.generator-box button {
+    width: 90px; 
+    flex-shrink: 0; 
+    padding: 8px 5px; 
+    font-size: 0.8rem; 
+}
+
+/* Message Bubbles - Kept opaque for high readability */
+.message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 85%;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    margin: 5px 0;
+}
+
+.user-message {
+    background-color: var(--primary-accent); 
+    color: #FFFFFF;
+    margin-left: auto; 
+    border-bottom-right-radius: 8px; 
+}
+
+.assistant-message {
+    background-color: var(--secondary-accent); 
+    color: #FFFFFF;
+    margin-right: auto; 
+    border-bottom-left-radius: 8px; 
+}
+
+.loading {
+    color: var(--primary-accent);
+    margin: 10px 0 0 5px;
+    font-size: 0.9rem;
+}
+
+
+/* ---------------------------------------------------------------- */
+/* --- Footer --- */
+/* ---------------------------------------------------------------- */
+.main-footer {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #FFFFFF; 
+    border-top: 1px solid var(--purple-indigo); 
+    background-color: #000000; 
+}
+
+.copyright a {
+    color: var(--primary-accent); 
+    text-decoration: underline;
+}
+
+
+/* --- DESKTOP OVERRIDES --- */
+@media (min-width: 768px) {
+    
+    .main-header {
+        padding: 3rem 2rem; 
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .embedded-chat-section {
+        max-width: 650px;
+        margin: 0 auto;
+    }
+    
+    .chat-container {
+        padding: 30px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5); 
+    }
+    
+    #chat-box {
+        max-height: 450px; 
+    }
+    
+    .generator-box {
+        display: grid;
+        grid-template-columns: 1fr auto;
+    }
+    .generator-box input[type="text"] {
+        padding: 1rem;
+    }
+    .generator-box button {
+        width: 140px;
+        padding: 1rem;
+    }
+    
+    .main-footer {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+}
+
+/* === Puter generated image style (keeps images neat in chat) === */
+.generated-img {
+    width: 100%;
+    max-width: 360px;
+    border-radius: 12px;
+    margin-top: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+/* === Chat / Image tabs styling === */
+.chat-tabs {
+  display: inline-flex;
+  gap: 8px;
+  margin: 8px 0 12px 0;
+  justify-content: center;
+}
+.chat-tabs .tab {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-color);
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 6px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.chat-tabs .tab.active {
+  background: var(--primary-accent);
+  color: #fff;
+  border-color: rgba(0,0,0,0.1);
+}
+
+/* ---------------------------------------------------------------- */
+/* --- MUSIC-IN-CHAT STYLES (ADDITIONAL) --- */
+/* ---------------------------------------------------------------- */
+/* Visual continuity with your purple theme, minimal and non-invasive. */
+
+/* Track row inside the Music pane */
+.music-track-row {
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.15s ease, transform 0.08s ease;
+}
+.music-track-row:hover {
+  background: rgba(255,255,255,0.02);
+  transform: translateY(-1px);
+}
+
+/* Small cover thumbnails in track list */
+.music-track-row img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #0b0b0b;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+/* Title and info for each track */
+.music-track-row .title {
+  font-weight: 700;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+.music-track-row .small {
+  color: rgba(240,240,240,0.75);
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+/* Buttons inside track rows */
+.music-track-row button {
+  background: linear-gradient(90deg, var(--primary-accent), #C87BFF);
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.08s ease, opacity 0.12s ease;
+}
+.music-track-row button:hover { transform: translateY(-2px); opacity: 0.98; }
+
+/* Player bubble that appears inside the chat */
+#music-player-area .music-bubble {
+  border-radius: 12px;
+  padding: 12px;
+  background: linear-gradient(180deg, rgba(35,10,50,0.95), rgba(20,8,30,0.95));
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  max-width: 100%;
+}
+
+/* Cover inside chat bubble */
+#music-player-area .music-bubble img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* Content area inside bubble (title, audio, license) */
+#music-player-area .music-bubble .content {
+  flex: 1;
+}
+#music-player-area .music-bubble .content .title {
+  font-weight: 700;
+  font-size: 0.98rem;
+  margin-bottom: 6px;
+}
+#music-player-area .music-bubble .content .license {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.75);
+}
+
+/* Style native audio controls to look tidy (broad strokes) */
+#music-player-area audio,
+.music-bubble audio,
+.chat-history audio {
+  width: 100%;
+  outline: none;
+  background: transparent;
+  margin-top: 6px;
+}
+
+/* Music pane layout */
+#music-view {
+  display: block;
+}
+#music-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#music-results {
+  margin-top: 12px;
+  overflow: auto;
+  max-height: 280px;
+  padding-right: 6px;
+}
+
+/* Small action button to insert last played into chat */
+#music-insert-last {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text-color);
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#music-insert-last:hover { background: rgba(255,255,255,0.02); }
+
+/* If JavaScript doesn't hide panes, ensure default visibility rules */
+#image-view, #music-view {
+  display: none;
+}
+
+/* Make chat history bubbles that include music look consistent */
+.music-bubble { 
+  /* fallback in case player is added directly into chatHistory */
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* Tiny responsive tweaks */
+@media (max-width: 640px) {
+  .music-track-row { padding: 8px; }
+  .music-track-row img { width: 48px; height: 48px; }
+  #music-player-area .music-bubble img { width: 56px; height: 56px; }
+  .generator-box input[type="text"] { width: calc(100% - 110px); }
+}
+
+/* Accessibility focus styles */
+.chat-tabs .tab:focus,
+.music-track-row button:focus,
+#music-insert-last:focus,
+.primary-btn:focus,
+.menu-toggle:focus {
+  outline: 3px solid rgba(163,53,238,0.18);
+  outline-offset: 2px;
+}
+
+/* End of file */
