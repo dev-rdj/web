@@ -10,59 +10,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const loading = document.getElementById("loading");
 
   /* ===============================
-     🧠 SMART MEMORY (CONTEXT AWARE)
+     🧠 SMART MEMORY (STABLE)
   ================================ */
   let memory = JSON.parse(localStorage.getItem("jarvis_memory")) || [];
 
   const saveMemory = () => {
-    if (memory.length > 14) memory = memory.slice(-14);
+    if (memory.length > 16) memory = memory.slice(-16);
     localStorage.setItem("jarvis_memory", JSON.stringify(memory));
   };
 
   /* ===============================
      MESSAGE UI
   ================================ */
-  const appendMessage = (content, sender, isHTML = false, speak = false) => {
+  const appendMessage = (content, sender, isHTML = false) => {
     const div = document.createElement("div");
     div.classList.add("message", `${sender}-message`);
     isHTML ? div.innerHTML = content : div.textContent = content;
     chatHistory.appendChild(div);
     chatHistory.scrollTop = chatHistory.scrollHeight;
-
-    if (speak && sender === "assistant") speakAsJarvis(div.innerText);
   };
 
   /* ===============================
-     🗣️ JARVIS VOICE (LOCKED)
-  ================================ */
-  let jarvisVoice = null;
-
-  const loadJarvisVoice = () => {
-    const voices = speechSynthesis.getVoices();
-    jarvisVoice =
-      voices.find(v => /daniel|alex|fred|mark|english|male/i.test(v.name)) ||
-      voices.find(v => v.lang === "en-US") ||
-      voices[0];
-  };
-
-  const speakAsJarvis = (text) => {
-    if (!window.speechSynthesis) return;
-    if (!jarvisVoice) loadJarvisVoice();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.voice = jarvisVoice;
-    utterance.rate = 0.92;
-    utterance.pitch = 0.85;
-    utterance.volume = 0.9;
-
-    speechSynthesis.cancel();
-    speechSynthesis.speak(utterance);
-  };
-
-  speechSynthesis.onvoiceschanged = loadJarvisVoice;
-
-  /* ===============================
-     🔧 COMMAND ROUTER
+     COMMAND ROUTER
   ================================ */
   const commands = [
     {
@@ -70,10 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
       handler: (input) => {
         appendMessage(input, "user");
         appendMessage(
-          "I am JARVIS. I was designed and brought to life by Jeff — a creator with vision. I exist to assist, analyze, and create.",
-          "assistant",
-          false,
-          true
+          "I am JARVIS. I was designed and built by Jeff. This environment reflects his vision — clean, focused, and intentional.",
+          "assistant"
         );
       }
     },
@@ -81,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       match: /(create|image|draw)/i,
       handler: (input) => {
         appendMessage(input, "user");
-        appendMessage("Visual generation engaged.", "assistant");
+        appendMessage("Generating visual output…", "assistant");
         const imgURL = `https://image.pollinations.ai/prompt/${encodeURIComponent(input)}?width=1024&height=1024&nologo=true&seed=${Math.random()}`;
         appendMessage(`<img src="${imgURL}" class="generated-img">`, "assistant", true);
       }
@@ -90,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       match: /(play|music|song)/i,
       handler: async (input) => {
         appendMessage(input, "user");
-        appendMessage("Searching audio libraries.", "assistant");
+        appendMessage("Searching audio archives…", "assistant");
         try {
           const res = await fetch(
             `https://api.jamendo.com/v3.0/tracks/?client_id=${JAMENDO_CLIENT_ID}&format=json&limit=1&search=${encodeURIComponent(input)}`
@@ -109,10 +76,10 @@ document.addEventListener("DOMContentLoaded", () => {
               true
             );
           } else {
-            appendMessage("No suitable audio found.", "assistant", false, true);
+            appendMessage("No matching audio found.", "assistant");
           }
         } catch {
-          appendMessage("Music systems are currently unavailable.", "assistant", false, true);
+          appendMessage("Audio system unavailable.", "assistant");
         }
       }
     }
@@ -151,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
             {
               role: "system",
               content:
-                "You are JARVIS, an advanced AI assistant. You think step-by-step internally, but speak clearly and confidently. You are calm, intelligent, concise, and supportive. You never mention being an AI model. You were created by Jeff and remain loyal to that identity."
+                "You are JARVIS, a composed and intelligent assistant. You respond clearly, confidently, and concisely. You maintain a professional tone, think carefully, and never break character. You were created by Jeff."
             },
             ...memory
           ]
@@ -164,10 +131,10 @@ document.addEventListener("DOMContentLoaded", () => {
       memory.push({ role: "assistant", content: reply });
       saveMemory();
 
-      appendMessage(reply, "assistant", false, true);
+      appendMessage(reply, "assistant");
 
     } catch {
-      appendMessage("I am experiencing a temporary connection issue.", "assistant", false, true);
+      appendMessage("Temporary connection issue detected.", "assistant");
     } finally {
       loading.style.display = "none";
     }
