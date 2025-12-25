@@ -1,29 +1,56 @@
+/* ===============================
+   GLOBAL RESET
+=============================== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   font-family: Inter, sans-serif;
-  background: #0b141a;
+  background-color: #0b141a;
   color: #e9edef;
-  height: 100vh;
   overflow: hidden;
 }
 
+/* ===============================
+   APP CONTAINER
+=============================== */
 .app {
-  height: 100vh;
+  height: 100dvh; /* FIXES mobile viewport bug */
   display: flex;
   flex-direction: column;
+  background-color: #0b141a;
 }
 
+/* ===============================
+   TOP BAR
+=============================== */
 .top-bar {
   padding: 10px 14px;
-  background: #1f2933;
+  background-color: #1f2933;
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
+.top-bar .title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.top-bar .subtitle {
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+/* ===============================
+   CHAT AREA
+=============================== */
 #chat-box {
   flex: 1;
   display: flex;
@@ -35,60 +62,111 @@ body {
   flex: 1;
   padding: 10px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
+/* ===============================
+   LOADING TEXT
+=============================== */
 #loading {
   font-size: 0.75rem;
   opacity: 0.6;
   padding: 4px 10px;
 }
 
+/* ===============================
+   MESSAGE BUBBLES
+=============================== */
 .message {
   max-width: 80%;
   padding: 8px 10px;
   font-size: 0.85rem;
+  line-height: 1.4;
   border-radius: 8px;
   margin-bottom: 6px;
+  word-wrap: break-word;
 }
 
 .user-message {
-  background: #005c4b;
+  background-color: #005c4b;
+  color: #ffffff;
   margin-left: auto;
-  color: white;
+  border-bottom-right-radius: 2px;
 }
 
 .assistant-message {
-  background: #1f2c34;
+  background-color: #1f2c34;
+  color: #e9edef;
   margin-right: auto;
+  border-bottom-left-radius: 2px;
 }
 
+/* ===============================
+   INPUT BAR (FIXED & VISIBLE)
+=============================== */
 .input-bar {
   display: flex;
-  padding: 8px;
+  align-items: center;
   gap: 8px;
-  background: #1f2933;
+  padding: 8px;
+  background-color: #1f2933;
+  border-top: 1px solid rgba(255,255,255,0.05);
+
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
 }
 
-.input-bar input {
+/* TEXT INPUT */
+.input-bar input[type="text"] {
   flex: 1;
-  background: #2a3942;
+  background-color: #2a3942;
   border: none;
+  outline: none;
   padding: 8px 12px;
   border-radius: 20px;
-  color: white;
+  color: #ffffff;
+  font-size: 0.85rem;
 }
 
+/* SEND BUTTON */
 .input-bar button {
   width: 38px;
   height: 38px;
   border-radius: 50%;
   border: none;
-  background: #00a884;
-  color: white;
+  background-color: #00a884;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
+.input-bar button:active {
+  transform: scale(0.96);
+}
+
+/* UPLOAD ICON */
+.upload-btn {
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* ===============================
+   GENERATED IMAGES
+=============================== */
 .generated-img {
   max-width: 100%;
   border-radius: 6px;
   margin-top: 6px;
+}
+
+/* ===============================
+   MOBILE SAFETY (IMPORTANT)
+=============================== */
+@supports (height: 100dvh) {
+  body, .app {
+    height: 100dvh;
+  }
 }
