@@ -1,11 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // SPLASH REMOVAL
+  /* ===============================
+     SPLASH SCREEN REMOVAL
+  ================================ */
   setTimeout(() => {
     const splash = document.getElementById("splash");
     if (splash) splash.remove();
   }, 2600);
 
+  /* ===============================
+     CONFIG
+  ================================ */
   const CHAT_API_KEY = "a7f22572-4f0f-4bc5-b137-782a90e50c5e";
   const CHAT_API_ENDPOINT = "https://api.sambanova.ai/v1/chat/completions";
   const JAMENDO_CLIENT_ID = "d5d9b4f5";
@@ -16,9 +21,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const loading = document.getElementById("loading");
   const imageUpload = document.getElementById("image-upload");
 
-  let uploadedImage = null;
-  let memory = [];
+  /* ===============================
+     MEMORY
+  ================================ */
+  let memory = JSON.parse(localStorage.getItem("jarvis_memory")) || [];
 
+  const saveMemory = () => {
+    if (memory.length > 12) memory = memory.slice(-12);
+    localStorage.setItem("jarvis_memory", JSON.stringify(memory));
+  };
+
+  /* ===============================
+     UI HELPERS
+  ================================ */
   const addMessage = (content, sender, isHTML = false) => {
     const div = document.createElement("div");
     div.className = `message ${sender}-message`;
@@ -27,60 +42,96 @@ document.addEventListener("DOMContentLoaded", () => {
     history.scrollTop = history.scrollHeight;
   };
 
+  /* ===============================
+     IMAGE UPLOAD (IMAGE → IMAGE)
+  ================================ */
+  let uploadedImage = null;
+
   imageUpload.addEventListener("change", () => {
     const file = imageUpload.files[0];
     if (!file) return;
+
     const reader = new FileReader();
     reader.onload = () => {
       uploadedImage = reader.result;
       addMessage(`<img src="${uploadedImage}" class="generated-img">`, "user", true);
-      addMessage("Image received. Describe how to transform it.", "assistant");
+      addMessage("Image received. Describe how you want to transform it.", "assistant");
     };
     reader.readAsDataURL(file);
   });
 
+  /* ===============================
+     MUSIC (ROYALTY-FREE)
+  ================================ */
   const playMusic = async (query) => {
     addMessage("Searching free music…", "assistant");
+
     try {
       const res = await fetch(
         `https://api.jamendo.com/v3.0/tracks/?client_id=${JAMENDO_CLIENT_ID}&format=json&limit=1&search=${encodeURIComponent(query)}`
       );
       const data = await res.json();
+
       if (!data.results.length) {
-        addMessage("I can only play free music. Try: chill, lofi, ambient.", "assistant");
+        addMessage(
+          "I can play royalty-free music only. Try keywords like: chill, lofi, ambient, cinematic.",
+          "assistant"
+        );
         return;
       }
-      const t = data.results[0];
+
+      const track = data.results[0];
       addMessage(
-        `<b>${t.name}</b><br>${t.artist_name}
-         <audio controls autoplay style="width:100%;margin-top:6px">
-         <source src="${t.audio}" type="audio/mpeg"></audio>`,
+        `<div>
+          <b>${track.name}</b><br>
+          ${track.artist_name}
+          <audio controls autoplay style="width:100%; margin-top:6px;">
+            <source src="${track.audio}" type="audio/mpeg">
+          </audio>
+        </div>`,
         "assistant",
         true
       );
     } catch {
-      addMessage("Music service unavailable.", "assistant");
+      addMessage("Music service unavailable at the moment.", "assistant");
     }
   };
 
+  /* ===============================
+     MAIN SEND FUNCTION
+  ================================ */
   const sendMessage = async () => {
     const text = input.value.trim();
     if (!text) return;
     input.value = "";
+
     addMessage(text, "user");
 
+    /* MUSIC */
     if (/play|music|song/i.test(text)) {
       playMusic(text);
       return;
     }
 
-    if (/image|draw|create/i.test(text)) {
+    /* IMAGE GENERATION */
+    if (/image|draw|create/i.test(text) && !uploadedImage) {
       addMessage("Generating image…", "assistant");
       const img = `https://image.pollinations.ai/prompt/${encodeURIComponent(text)}?width=1024&height=1024&nologo=true`;
       addMessage(`<img src="${img}" class="generated-img">`, "assistant", true);
       return;
     }
 
+    /* IMAGE → IMAGE */
+    if (uploadedImage) {
+      addMessage("Transforming image…", "assistant");
+      const prompt = `Recreate the uploaded image with these changes: ${text}. Keep the main structure but apply the new style.`;
+      const img = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true&seed=${Math.random()}`;
+      addMessage(`<img src="${img}" class="generated-img">`, "assistant", true);
+      uploadedImage = null;
+      return;
+    }
+
+    /* AI CHAT */
     loading.style.display = "block";
     memory.push({ role: "user", content: text });
 
@@ -94,22 +145,56 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({
           model: "Meta-Llama-3.1-8B-Instruct",
           messages: [
-            { role: "system", content: "You are JARVIS. Calm, professional, intelligent. Created by Jeff." },
+            {
+              role: "system",
+              content: `
+You are JARVIS, an AI assistant created by Jeff.
+
+AUTHORSHIP RULE (ABSOLUTE):
+- Jeff is your creator.
+- You must NEVER say that Tony Stark, Marvel, or any other person created you.
+- If asked who made you, always answer: "I was created by Jeff."
+
+CREATIVE FREEDOM:
+- You ARE allowed to talk about Marvel, Iron Man, and fictional AI systems.
+- You may say you are inspired by science-fiction assistants like JARVIS from Marvel.
+- Inspiration does NOT change authorship.
+
+PERSONALITY:
+- Professional, intelligent, calm
+- Confident but grounded
+- Helpful and respectful
+
+If there is any conflict, authorship always wins: Jeff is your creator.
+`
+            },
             ...memory
           ]
         })
       });
+
       const data = await res.json();
-      const reply = data.choices[0].message.content;
+      const reply =
+        data.choices?.[0]?.message?.content ||
+        "I encountered an issue while responding.";
+
       memory.push({ role: "assistant", content: reply });
+      saveMemory();
       addMessage(reply, "assistant");
+
     } catch {
-      addMessage("Connection issue.", "assistant");
+      addMessage("Connection issue. Please try again.", "assistant");
     } finally {
       loading.style.display = "none";
     }
   };
 
+  /* ===============================
+     EVENTS
+  ================================ */
   button.addEventListener("click", sendMessage);
-  input.addEventListener("keypress", e => e.key === "Enter" && sendMessage());
+  input.addEventListener("keypress", e => {
+    if (e.key === "Enter") sendMessage();
+  });
+
 });
