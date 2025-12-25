@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ===============================
      CONFIG
   ================================ */
-  const CHAT_API_KEY = "a7f22572-4f0f-4bc5-b137-782a90e50c5e";
+  const CHAT_API_KEY = "cf2c894f-6ff9-4f52-980f-1e41982e43e9";
   const CHAT_API_ENDPOINT = "https://api.sambanova.ai/v1/chat/completions";
   const JAMENDO_CLIENT_ID = "d5d9b4f5";
 
