@@ -1,60 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>𝐽𝛯𝐹𝐹 𝑆𝛲𝛥𝐶𝛯 - 𝐽𝛥𝑅𝛻𝛪𝑆</title>
+  <title>JARVIS</title>
   <link rel="stylesheet" href="style.css"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a2e00e9f03.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="background-image-layer">
-        <div class="slide" data-url="https://files.catbox.moe/wkujta.jpeg"></div>
-        <div class="slide" data-url="https://files.catbox.moe/9uu5mx.jpeg"></div>
-        <div class="slide" data-url="https://files.catbox.moe/o309g8.jpg"></div>
+
+<div class="app">
+
+  <header class="top-bar">
+    <div class="title">JARVIS</div>
+    <div class="subtitle">AI Assistant</div>
+  </header>
+
+  <main id="chat-box">
+    <div id="chat-history">
+      <div class="message assistant-message">
+        Hello. You can chat with me, generate images, or upload an image to transform it.
+      </div>
     </div>
+    <div id="loading">JARVIS is thinking…</div>
+  </main>
 
-    <div class="site-wrapper"> 
-        <header class="main-header" style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
-          <h1 class="logo">𝐽𝛥𝑅𝛻𝛪𝑆</h1>
-          <div class="creator-tag" style="font-family: var(--secondary-font); color: var(--purple-electric); font-weight: bold; border: 1px solid var(--purple-electric); padding: 5px 15px; border-radius: 20px; letter-spacing: 1px;">
-            By Developer Jeff♥️
-          </div>
-        </header>
+  <footer class="input-bar">
+    <label class="upload-btn">
+      📷
+      <input type="file" id="image-upload" accept="image/*" hidden>
+    </label>
 
-        <main class="content-area">
-          <section class="embedded-chat-section">
-            <div class="chat-container">
-                <div id="modal-header">
-                    <h3>𝐽𝛥𝑅𝛻𝛪𝑆</h3>
-                    <p>Powered by <b>Jeff</b> ♥️</p>
-                </div>
+    <input
+      type="text"
+      id="prompt-input"
+      placeholder="Type a message or describe how to change the image"
+    />
+    <button id="generate-btn">➤</button>
+  </footer>
 
-                <div id="chat-box">
-                  <div id="chat-history">
-                        <div class="message assistant-message">
-                            Hi! I'm 𝐽𝛥𝑅𝛻𝛪𝑆. You can talk to me anything, or say things like:<br>
-                            • "<b>Create image:</b> a neon city"<br>
-                            • "<b>Play music:</b> chill lofi"
-                        </div>
-                  </div>
-                  <div id="loading" class="loading" style="display:none;">𝐽𝛥𝑅𝛻𝛪𝑆 is processing... ⏳</div>
-                </div>
-                
-                <div class="generator-box">
-                    <input type="text" id="prompt-input" placeholder="Give 𝐽𝛥𝑅𝛻𝛪𝑆 a command..." /> 
-                    <button id="generate-btn" class="primary-btn">Send</button>
-                </div>
-            </div>
-          </section>
-        </main>
-        
-        <footer class="main-footer">
-            <p>Designed & Developed by <b>Jeff</b> | 2025</p>
-        </footer>
-    </div> 
-    <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
