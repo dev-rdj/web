@@ -4,16 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>JARVIS</title>
+
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="app">
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <div class="splash-content">
+    <h1>JARVIS</h1>
+    <p class="tagline">Your imagination begins here</p>
+    <div class="init">
+      Initializing<span class="dots"></span>
+    </div>
+    <div class="spinner"></div>
+    <p class="credit">Made by Jeff ❤️</p>
+  </div>
+</div>
 
+<!-- APP -->
+<div class="app">
   <header class="top-bar">
     <div class="title">JARVIS</div>
-    <div class="subtitle">Made by Jeff❤️</div>
+    <div class="subtitle">Made by Jeff ❤️</div>
   </header>
 
   <main id="chat-box">
@@ -22,7 +36,7 @@
         Hello. You can chat with me, generate images, or upload an image to transform it.
       </div>
     </div>
-    <div id="loading"></div>
+    <div id="loading">JARVIS is thinking…</div>
   </main>
 
   <footer class="input-bar">
@@ -35,10 +49,10 @@
       type="text"
       id="prompt-input"
       placeholder="Type a message or describe how to change the image"
+      autocomplete="off"
     />
     <button id="generate-btn">➤</button>
   </footer>
-
 </div>
 
 <script src="script.js"></script>
