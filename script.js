@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ===============================
-     SPLASH SCREEN REMOVAL
+     SPLASH SCREEN
   ================================ */
   setTimeout(() => {
     const splash = document.getElementById("splash");
@@ -11,8 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ===============================
      CONFIG
   ================================ */
-  const CHAT_API_KEY = "cf2c894f-6ff9-4f52-980f-1e41982e43e9";
-  const CHAT_API_ENDPOINT = "https://api.sambanova.ai/v1/chat/completions";
   const JAMENDO_CLIENT_ID = "d5d9b4f5";
 
   const input = document.getElementById("prompt-input");
@@ -47,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ================================ */
   let uploadedImage = null;
 
-  imageUpload.addEventListener("change", () => {
+  imageUpload?.addEventListener("change", () => {
     const file = imageUpload.files[0];
     if (!file) return;
 
@@ -61,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ===============================
-     MUSIC (ROYALTY-FREE)
+     MUSIC (ROYALTY FREE)
   ================================ */
   const playMusic = async (query) => {
     addMessage("Searching free music…", "assistant");
@@ -74,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!data.results.length) {
         addMessage(
-          "I can play royalty-free music only. Try keywords like: chill, lofi, ambient, cinematic.",
+          "I can play royalty-free music only. Try keywords like chill, lofi, ambient.",
           "assistant"
         );
         return;
@@ -93,7 +91,32 @@ document.addEventListener("DOMContentLoaded", () => {
         true
       );
     } catch {
-      addMessage("Music service unavailable at the moment.", "assistant");
+      addMessage("Music service unavailable.", "assistant");
+    }
+  };
+
+  /* ===============================
+     IMAGE GENERATION (BYTEZ)
+  ================================ */
+  const generateImage = async (prompt) => {
+    addMessage("Generating image… 🎨", "assistant");
+
+    try {
+      const res = await fetch("/api/image", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+
+      const data = await res.json();
+
+      if (data.image) {
+        addMessage(`<img src="${data.image}" class="generated-img">`, "assistant", true);
+      } else {
+        addMessage("Image generation failed.", "assistant");
+      }
+    } catch {
+      addMessage("Image service unavailable.", "assistant");
     }
   };
 
@@ -115,68 +138,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* IMAGE GENERATION */
     if (/image|draw|create/i.test(text) && !uploadedImage) {
-      addMessage("Generating image…", "assistant");
-      const img = `https://image.pollinations.ai/prompt/${encodeURIComponent(text)}?width=1024&height=1024&nologo=true`;
-      addMessage(`<img src="${img}" class="generated-img">`, "assistant", true);
+      generateImage(text);
       return;
     }
 
-    /* IMAGE → IMAGE */
+    /* IMAGE → IMAGE (SIMPLIFIED) */
     if (uploadedImage) {
-      addMessage("Transforming image…", "assistant");
-      const prompt = `Recreate the uploaded image with these changes: ${text}. Keep the main structure but apply the new style.`;
-      const img = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true&seed=${Math.random()}`;
-      addMessage(`<img src="${img}" class="generated-img">`, "assistant", true);
+      const prompt = `Transform this image: ${text}`;
       uploadedImage = null;
+      generateImage(prompt);
       return;
     }
 
-    /* AI CHAT */
+    /* CHAT AI (SAMBANOVA) */
     loading.style.display = "block";
     memory.push({ role: "user", content: text });
 
     try {
-      const res = await fetch(CHAT_API_ENDPOINT, {
+      const res = await fetch("/api/chat", {
         method: "POST",
-        headers: {
-          "Authorization": `Bearer ${CHAT_API_KEY}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "Meta-Llama-3.1-8B-Instruct",
-          messages: [
-            {
-              role: "system",
-              content: `
-You are JARVIS, an AI assistant created by Jeff.
-
-AUTHORSHIP RULE (ABSOLUTE):
-- Jeff is your creator.
-- You must NEVER say that Tony Stark, Marvel, or any other person created you.
-- If asked who made you, always answer: "I was created by Jeff."
-
-CREATIVE FREEDOM:
-- You ARE allowed to talk about Marvel, Iron Man, and fictional AI systems.
-- You may say you are inspired by science-fiction assistants like JARVIS from Marvel.
-- Inspiration does NOT change authorship.
-
-PERSONALITY:
-- Professional, intelligent, calm
-- Confident but grounded
-- Helpful and respectful
-
-If there is any conflict, authorship always wins: Jeff is your creator.
-`
-            },
-            ...memory
-          ]
-        })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text })
       });
 
       const data = await res.json();
-      const reply =
-        data.choices?.[0]?.message?.content ||
-        "I encountered an issue while responding.";
+      const reply = data.reply || "I had trouble responding.";
 
       memory.push({ role: "assistant", content: reply });
       saveMemory();
