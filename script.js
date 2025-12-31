@@ -1,17 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ===============================
-     SPLASH SCREEN
+     CONFIG (FRONTEND DEMO MODE)
   ================================ */
-  setTimeout(() => {
-    const splash = document.getElementById("splash");
-    if (splash) splash.remove();
-  }, 2600);
 
-  /* ===============================
-     CONFIG
-  ================================ */
+  // ⚠️ THESE ARE VISIBLE IN BROWSER
+  const SAMBANOVA_API_KEY = "cf2c894f-6ff9-4f52-980f-1e41982e43e9";
+  const BYTEZ_API_KEY = "dfb37a549a0651d78812dd2e1748103f";
   const JAMENDO_CLIENT_ID = "d5d9b4f5";
+
+  const CHAT_ENDPOINT = "https://api.sambanova.ai/v1/chat/completions";
 
   const input = document.getElementById("prompt-input");
   const button = document.getElementById("generate-btn");
@@ -41,19 +39,19 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /* ===============================
-     IMAGE UPLOAD (IMAGE → IMAGE)
+     IMAGE UPLOAD (PREVIEW ONLY)
   ================================ */
-  let uploadedImage = null;
-
   imageUpload?.addEventListener("change", () => {
     const file = imageUpload.files[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onload = () => {
-      uploadedImage = reader.result;
-      addMessage(`<img src="${uploadedImage}" class="generated-img">`, "user", true);
-      addMessage("Image received. Describe how you want to transform it.", "assistant");
+      addMessage(`<img src="${reader.result}" class="generated-img">`, "user", true);
+      addMessage(
+        "Image upload received. Image-to-image is coming soon. For now, I can generate new images from text.",
+        "assistant"
+      );
     };
     reader.readAsDataURL(file);
   });
@@ -72,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!data.results.length) {
         addMessage(
-          "I can play royalty-free music only. Try keywords like chill, lofi, ambient.",
+          "I can play royalty-free music only. Try chill, lofi, ambient.",
           "assistant"
         );
         return;
@@ -96,73 +94,75 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /* ===============================
-     IMAGE GENERATION (BYTEZ)
+     IMAGE GENERATION (BYTEZ - TEXT ONLY)
   ================================ */
   const generateImage = async (prompt) => {
     addMessage("Generating image… 🎨", "assistant");
 
     try {
-      const res = await fetch("/api/image", {
+      const res = await fetch("https://api.bytez.com/run", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt })
+        headers: {
+          "Authorization": `Bearer ${BYTEZ_API_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "stabilityai/stable-diffusion-xl-base-1.0",
+          input: prompt
+        })
       });
 
       const data = await res.json();
 
-      if (data.image) {
-        addMessage(`<img src="${data.image}" class="generated-img">`, "assistant", true);
+      if (data.output && data.output[0]) {
+        addMessage(`<img src="${data.output[0]}" class="generated-img">`, "assistant", true);
       } else {
         addMessage("Image generation failed.", "assistant");
       }
+
     } catch {
       addMessage("Image service unavailable.", "assistant");
     }
   };
 
   /* ===============================
-     MAIN SEND FUNCTION
+     CHAT (SAMBANOVA)
   ================================ */
-  const sendMessage = async () => {
-    const text = input.value.trim();
-    if (!text) return;
-    input.value = "";
-
-    addMessage(text, "user");
-
-    /* MUSIC */
-    if (/play|music|song/i.test(text)) {
-      playMusic(text);
-      return;
-    }
-
-    /* IMAGE GENERATION */
-    if (/image|draw|create/i.test(text) && !uploadedImage) {
-      generateImage(text);
-      return;
-    }
-
-    /* IMAGE → IMAGE (SIMPLIFIED) */
-    if (uploadedImage) {
-      const prompt = `Transform this image: ${text}`;
-      uploadedImage = null;
-      generateImage(prompt);
-      return;
-    }
-
-    /* CHAT AI (SAMBANOVA) */
+  const chatAI = async (text) => {
     loading.style.display = "block";
     memory.push({ role: "user", content: text });
 
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch(CHAT_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text })
+        headers: {
+          "Authorization": `Bearer ${SAMBANOVA_API_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "Meta-Llama-3.1-8B-Instruct",
+          messages: [
+            {
+              role: "system",
+              content: `
+You are JARVIS, an AI assistant created by Jeff.
+
+RULES:
+- Jeff is your creator. Always.
+- Never say anyone else created you.
+- You may reference Marvel as inspiration only.
+
+Tone:
+Professional, calm, intelligent.
+`
+            },
+            ...memory
+          ]
+        })
       });
 
       const data = await res.json();
-      const reply = data.reply || "I had trouble responding.";
+      const reply = data.choices?.[0]?.message?.content || "I had trouble responding.";
 
       memory.push({ role: "assistant", content: reply });
       saveMemory();
@@ -173,6 +173,29 @@ document.addEventListener("DOMContentLoaded", () => {
     } finally {
       loading.style.display = "none";
     }
+  };
+
+  /* ===============================
+     MAIN SEND
+  ================================ */
+  const sendMessage = () => {
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = "";
+
+    addMessage(text, "user");
+
+    if (/play|music|song/i.test(text)) {
+      playMusic(text);
+      return;
+    }
+
+    if (/image|draw|create/i.test(text)) {
+      generateImage(text);
+      return;
+    }
+
+    chatAI(text);
   };
 
   /* ===============================
